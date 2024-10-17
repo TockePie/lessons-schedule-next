@@ -1,0 +1,31 @@
+'use client'
+
+import { FC, Key, useContext } from 'react'
+
+import { Tabs, Tab } from '@nextui-org/tabs'
+
+import { WeekParityContext } from '@/common/providers/weekParity'
+
+const evenText = 'Парні'
+const oddText = 'Непарні'
+
+const WeekTab: FC = () => {
+  const weekParityContext = useContext(WeekParityContext)
+  if (!weekParityContext) throw new Error('WeekParityContext is not provided')
+  const { weekParity, setWeekParity } = weekParityContext
+
+  return (
+    <Tabs
+      aria-label="even-odd-selector"
+      onSelectionChange={(key: Key) => {
+        setWeekParity(key as 'even' | 'odd')
+      }}
+      selectedKey={weekParity}
+    >
+      <Tab key="even" title={evenText} />
+      <Tab key="odd" title={oddText} />
+    </Tabs>
+  )
+}
+
+export default WeekTab
