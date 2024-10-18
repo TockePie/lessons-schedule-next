@@ -6,6 +6,7 @@ import clsx from 'clsx'
 import { Providers } from './providers'
 
 import { fontSans } from '@/config/fonts'
+import ThemeSetter from '@/common/utils/ThemeSetter'
 import NavbarComponent from '@/components/Navbar/Navbar'
 
 export const metadata: Metadata = {
@@ -40,7 +41,8 @@ export default function RootLayout({
           fontSans.variable
         )}
       >
-        <Providers themeProps={{ attribute: 'class', defaultTheme: 'dark' }}>
+        <Providers>
+          <ThemeSetter />
           <div className="relative flex flex-col h-screen">
             <NavbarComponent />
             <main className="container mx-auto max-w-7xl pt-16 px-6 flex-grow">

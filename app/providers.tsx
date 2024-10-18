@@ -18,7 +18,11 @@ export function Providers({ children, themeProps }: ProvidersProps) {
 
   return (
     <NextUIProvider navigate={router.push}>
-      <NextThemesProvider {...themeProps}>
+      <NextThemesProvider
+        attribute="class"
+        defaultTheme='system'
+        {...themeProps}
+      >
         <WeekParityProvider>{children}</WeekParityProvider>
       </NextThemesProvider>
     </NextUIProvider>

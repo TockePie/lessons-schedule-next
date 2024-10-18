@@ -1,12 +1,12 @@
 import { FC } from 'react'
-import Link from 'next/link'
 import { isMobile } from 'react-device-detect'
+import Link from 'next/link'
 
 import { Navbar, NavbarBrand } from '@nextui-org/navbar'
 import { Image } from '@nextui-org/image'
 
-import defaultLogo from './assets/default-logo.png'
 import WeekTab from './components/WeekTab/WeekTab'
+import defaultLogo from './assets/default-logo.png'
 
 const schedule = 'Розклад'
 
