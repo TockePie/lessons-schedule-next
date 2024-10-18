@@ -6,8 +6,8 @@ import { Tabs, Tab } from '@nextui-org/tabs'
 
 import { WeekParityContext } from '@/common/providers/weekParity'
 
-const evenText = 'Парні'
-const oddText = 'Непарні'
+const evenText = 'Парний тиждень'
+const oddText = 'Непарний тиждень'
 
 const WeekTab: FC = () => {
   const weekParityContext = useContext(WeekParityContext)

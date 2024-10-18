@@ -1,25 +1,37 @@
+'use client'
+
 import { FC } from 'react'
-import { isMobile } from 'react-device-detect'
+import { isMobile, isMobileOnly } from 'react-device-detect'
 import Link from 'next/link'
 
-import { Navbar, NavbarBrand } from '@nextui-org/navbar'
+import { Navbar, NavbarBrand, NavbarContent } from '@nextui-org/navbar'
 import { Image } from '@nextui-org/image'
+import { Button } from '@nextui-org/button'
+import { Menu } from 'lucide-react'
 
-import WeekTab from './components/WeekTab/WeekTab'
-import defaultLogo from './assets/default-logo.png'
+import GroupDropdownMenu from './components/DropdownMenu/DropdownMenu'
+
+import { useGroup } from '@/common/providers/group'
 
 const schedule = 'Розклад'
 
 const NavbarComponent: FC = () => {
+  const { logo } = useGroup();
+
   return (
-    <Navbar isBordered={isMobile} shouldHideOnScroll={isMobile}>
+    <Navbar isBordered={isMobile} shouldHideOnScroll={isMobileOnly}>
       <NavbarBrand>
         <Link href="/">
-          <Image src={defaultLogo.src} alt="Logo" width={50} />
+          <Image src={logo} alt="Logo" width={50} />
         </Link>
-        <b className="p-3 text-2xl">{schedule}</b>
-        <WeekTab />
+        {!isMobileOnly && <b className="p-3 text-2xl">{schedule}</b>}
       </NavbarBrand>
+      <NavbarContent justify="end">
+        <GroupDropdownMenu />
+        <Button isIconOnly color="primary" variant="faded">
+          <Menu />
+        </Button>
+      </NavbarContent>
     </Navbar>
   )
 }

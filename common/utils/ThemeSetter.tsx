@@ -1,19 +1,25 @@
 'use client'
 
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useTheme } from 'next-themes'
 
 const ThemeSetter = () => {
   const { setTheme } = useTheme()
-  const theme = window.matchMedia('(prefers-color-scheme: dark)')
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => setMounted(true), [])
 
   useEffect(() => {
+    if (!mounted) return
+
+    const theme = window.matchMedia('(prefers-color-scheme: dark)')
+
     const systemTheme = theme.matches ? 'dark' : 'light'
     document.body.classList.remove('light', 'dark')
     document.body.classList.add(systemTheme)
 
     setTheme(systemTheme)
-  }, [theme])
+  }, [mounted])
 
   return null
 }

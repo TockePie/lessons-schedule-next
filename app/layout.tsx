@@ -1,6 +1,7 @@
 import '@/styles/globals.css'
 import { Metadata, Viewport } from 'next'
 import { Link } from '@nextui-org/link'
+import { Analytics } from '@vercel/analytics/react'
 import clsx from 'clsx'
 
 import { Providers } from './providers'
@@ -41,6 +42,7 @@ export default function RootLayout({
           fontSans.variable
         )}
       >
+        <Analytics />
         <Providers>
           <ThemeSetter />
           <div className="relative flex flex-col h-screen">

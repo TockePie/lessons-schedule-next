@@ -7,6 +7,7 @@ import { ThemeProvider as NextThemesProvider } from 'next-themes'
 import { ThemeProviderProps } from 'next-themes/dist/types'
 
 import { WeekParityProvider } from '@/common/providers/weekParity'
+import { GroupProvider } from '@/common/providers/group'
 
 export interface ProvidersProps {
   children: React.ReactNode
@@ -20,10 +21,12 @@ export function Providers({ children, themeProps }: ProvidersProps) {
     <NextUIProvider navigate={router.push}>
       <NextThemesProvider
         attribute="class"
-        defaultTheme='system'
+        defaultTheme="system"
         {...themeProps}
       >
-        <WeekParityProvider>{children}</WeekParityProvider>
+        <WeekParityProvider>
+          <GroupProvider>{children}</GroupProvider>
+        </WeekParityProvider>
       </NextThemesProvider>
     </NextUIProvider>
   )
