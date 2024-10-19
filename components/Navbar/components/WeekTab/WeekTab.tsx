@@ -1,5 +1,3 @@
-'use client'
-
 import { FC, Key, useContext } from 'react'
 
 import { Tabs, Tab } from '@nextui-org/tabs'

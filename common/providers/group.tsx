@@ -13,8 +13,9 @@ import defaultLogo from '@/components/Navbar/assets/default-logo.png'
 
 interface GroupContextProps {
   group: string | null
+  groupId: string | null
   logo: string
-  setGroup: (group: string | null) => void
+  setGroupId: (group: string | null) => void
 }
 
 const GroupContext = createContext<GroupContextProps | undefined>(undefined)
@@ -24,18 +25,22 @@ interface GroupProviderProps {
 }
 
 const GroupProvider: React.FC<GroupProviderProps> = ({ children }) => {
+  const [groupId, setGroupId] = useState<string | null>(
+    localStorage.getItem('groupId') || null
+  )
   const [group, setGroup] = useState<string | null>(
-    localStorage.getItem('group')
+    groupDataList.find((e) => e.data.id === groupId)?.group || null
   )
   const [logo, setLogo] = useState<string>(defaultLogo.src)
 
   useEffect(() => {
-    const groupData = groupDataList.find((e) => e.group === group)
+    const groupData = groupDataList.find((e) => e.data.id === groupId)
     setLogo(groupData ? groupData.logo.src : defaultLogo.src)
-  }, [group])
+    setGroup(groupData ? groupData.group : null)
+  }, [groupId])
 
   return (
-    <GroupContext.Provider value={{ group, logo, setGroup }}>
+    <GroupContext.Provider value={{ group, groupId, logo, setGroupId }}>
       {children}
     </GroupContext.Provider>
   )
@@ -49,4 +54,4 @@ const useGroup = (): GroupContextProps => {
   return context
 }
 
-export { GroupProvider, useGroup}
+export { GroupProvider, useGroup }
