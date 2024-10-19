@@ -1,5 +1,3 @@
-'use client'
-
 import { Key } from 'react'
 import {
   Dropdown,

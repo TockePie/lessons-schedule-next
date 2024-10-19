@@ -47,7 +47,7 @@ export default function RootLayout({
           <ThemeSetter />
           <div className="relative flex flex-col h-screen">
             <NavbarComponent />
-            <main className="container mx-auto max-w-7xl pt-16 px-6 flex-grow">
+            <main className="container mx-auto max-w-7xl px-6 flex-grow">
               {children}
             </main>
             <footer className="w-full flex items-center justify-center py-3">
