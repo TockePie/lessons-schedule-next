@@ -11,6 +11,7 @@ const emptyLesson = {
 
 const groupData = {
   group: 'ІО-32',
+  id: 'a7e6',
   allowPwaZoom: true,
   allowSelectives: true,
   lessons: {
