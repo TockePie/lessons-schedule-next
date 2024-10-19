@@ -13,22 +13,26 @@ import { useGroup } from '@/common/providers/group'
 const chooseGroup = 'Оберіть групу'
 
 const GroupDropdownMenu = () => {
-  const { group, setGroup } = useGroup()
+  const { group, groupId, setGroupId } = useGroup()
 
   return (
     <Dropdown closeOnSelect>
       <DropdownTrigger>
-        <Button variant="bordered">{group ? group : chooseGroup}</Button>
+        <Button variant="bordered">
+          {groupId
+            ? group
+            : chooseGroup}
+        </Button>
       </DropdownTrigger>
       <DropdownMenu
         aria-label="Static Actions"
         onAction={(key: Key) => {
-          localStorage.setItem('group', key.toString())
-          setGroup(key.toString())
+          localStorage.setItem('groupId', key.toString())
+          setGroupId(key.toString())
         }}
       >
         {groupDataList.map((item) => (
-          <DropdownItem key={item.group}>{item.group}</DropdownItem>
+          <DropdownItem key={item.data.id}>{item.group}</DropdownItem>
         ))}
       </DropdownMenu>
     </Dropdown>
