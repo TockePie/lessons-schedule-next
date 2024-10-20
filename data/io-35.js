@@ -10,8 +10,8 @@ const emptyLesson = {
 }
 
 const groupData = {
-  group: 'ІО-32',
-  id: 'a7e6',
+  group: 'ІО-35',
+  id: 'd27f',
   allowSelectives: true,
   lessons: {
     evenLessons: {
@@ -37,21 +37,21 @@ const groupData = {
           lessonName: 'Філософія',
           lessonType: 'lecture',
           teacher: 'Руденко Т.',
-          url: 'https://zoom.us/j/9358038101?pwd=d0pwUHRDY0dxbngrU09PYll6UXpNZz09',
+          url: 'https://zoom.us/j/9358038101?pwd=d0pwUHRDY0dxbngrU09PYll6UXpNZz09'
         },
         {
           dayOfWeek: 'thu',
           lessonName: 'Іноземна мова',
           lessonType: 'practice',
           teacher: 'Гаєва П.',
-          url: 'https://us04web.zoom.us/j/2114671234?pwd=UnZCd1VvRmVsSDJGVTBuc3JMUDI1UT09',
+          url: 'https://us04web.zoom.us/j/2114671234?pwd=UnZCd1VvRmVsSDJGVTBuc3JMUDI1UT09'
         },
         {
           dayOfWeek: 'fri',
           lessonName: "Комп'ютерна електроніка",
           lessonType: 'lecture',
           teacher: 'Шимкович В.',
-          url: 'https://us04web.zoom.us/j/3428560060?pwd=YTZ4Vm8xVTYzTGhzQk5ONGpTcmVSZz09',
+          url: 'https://us04web.zoom.us/j/3428560060?pwd=YTZ4Vm8xVTYzTGhzQk5ONGpTcmVSZz09'
         },
         {
           dayOfWeek: 'sat',
@@ -72,28 +72,28 @@ const groupData = {
           lessonName: 'Вища математика',
           lessonType: 'practice',
           teacher: 'Поліщук А.',
-          url: 'https://us05web.zoom.us/j/2530562585?pwd=YzRiakdnWlJvSzJPRGFlQnZRRmd3UT09',
+          url: 'https://us05web.zoom.us/j/2530562585?pwd=YzRiakdnWlJvSzJPRGFlQnZRRmd3UT09'
         },
         {
           dayOfWeek: 'wed',
           lessonName: 'Інженерія ПЗ',
           lessonType: 'lecture',
           teacher: 'Васильєва М.',
-          url: 'https://meet.google.com/fsn-gdmj-auu',
+          url: 'https://meet.google.com/fsn-gdmj-auu'
         },
         {
           dayOfWeek: 'thu',
           lessonName: "Комп'ютерна електроніка",
           lessonType: 'lab',
           teacher: 'Шимкович В.',
-          url: 'https://us04web.zoom.us/j/3428560060?pwd=YTZ4Vm8xVTYzTGhzQk5ONGpTcmVSZz09',
+          url: 'https://us04web.zoom.us/j/3428560060?pwd=YTZ4Vm8xVTYzTGhzQk5ONGpTcmVSZz09'
         },
         {
           dayOfWeek: 'fri',
           lessonName: 'Linux',
           lessonType: 'lecture',
           teacher: 'Роковий О.',
-          url: 'https://bbb.comsys.kpi.ua/rooms/fjc-gl5-nzk-dfy',
+          url: 'https://bbb.comsys.kpi.ua/rooms/fjc-gl5-nzk-dfy'
         },
         {
           dayOfWeek: 'sat',
@@ -112,21 +112,21 @@ const groupData = {
           lessonName: 'Теорія електрокіл',
           lessonType: 'practice',
           teacher: 'Лободзинський В.',
-          url: 'https://meet.google.com/pou-dnak-dnb',
+          url: 'https://meet.google.com/pou-dnak-dnb'
         },
         {
           dayOfWeek: 'wed',
           lessonName: 'Теорія електрокіл',
           lessonType: 'lecture',
           teacher: 'Лободзинський В.',
-          url: 'https://meet.google.com/pou-dnak-dnb',
+          url: 'https://meet.google.com/pou-dnak-dnb'
         },
         {
           dayOfWeek: 'thu',
           lessonName: 'Інженерія ПЗ',
           lessonType: 'practice',
           teacher: 'Васильєва М.',
-          url: 'https://meet.google.com/fsn-gdmj-auu',
+          url: 'https://meet.google.com/fsn-gdmj-auu'
         },
         {
           dayOfWeek: 'fri',
@@ -138,7 +138,7 @@ const groupData = {
             url: 'https://us02web.zoom.us/j/8067850314',
             needDialog: true,
             textInDialog: 'Після відкриття посилання вставте пароль'
-          },
+          }
         },
         {
           dayOfWeek: 'sat',
@@ -155,7 +155,7 @@ const groupData = {
           lessonName: 'Філософія',
           lessonType: 'practice',
           teacher: 'Руденко Т.',
-          url: 'https://zoom.us/j/9358038101?pwd=d0pwUHRDY0dxbngrU09PYll6UXpNZz09',
+          url: 'https://zoom.us/j/9358038101?pwd=d0pwUHRDY0dxbngrU09PYll6UXpNZz09'
         },
         {
           dayOfWeek: 'wed',
@@ -198,21 +198,21 @@ const groupData = {
           lessonName: 'Інженерія ПЗ',
           lessonType: 'lecture',
           teacher: 'Васильєва М.',
-          url: 'https://meet.google.com/fsn-gdmj-auu',
+          url: 'https://meet.google.com/fsn-gdmj-auu'
         },
         {
           dayOfWeek: 'thu',
           lessonName: 'Іноземна мова',
           lessonType: 'practice',
           teacher: 'Гаєва П.',
-          url: 'https://us04web.zoom.us/j/2114671234?pwd=UnZCd1VvRmVsSDJGVTBuc3JMUDI1UT09',
+          url: 'https://us04web.zoom.us/j/2114671234?pwd=UnZCd1VvRmVsSDJGVTBuc3JMUDI1UT09'
         },
         {
           dayOfWeek: 'fri',
           lessonName: "Комп'ютерна електроніка",
           lessonType: 'lecture',
           teacher: 'Шимкович В.',
-          url: 'https://us04web.zoom.us/j/3428560060?pwd=YTZ4Vm8xVTYzTGhzQk5ONGpTcmVSZz09',
+          url: 'https://us04web.zoom.us/j/3428560060?pwd=YTZ4Vm8xVTYzTGhzQk5ONGpTcmVSZz09'
         },
         {
           dayOfWeek: 'sat',
@@ -233,28 +233,28 @@ const groupData = {
           lessonName: 'Вища математика',
           lessonType: 'practice',
           teacher: 'Поліщук А.',
-          url: 'https://us05web.zoom.us/j/2530562585?pwd=YzRiakdnWlJvSzJPRGFlQnZRRmd3UT09',
+          url: 'https://us05web.zoom.us/j/2530562585?pwd=YzRiakdnWlJvSzJPRGFlQnZRRmd3UT09'
         },
         {
           dayOfWeek: 'wed',
           lessonName: 'Інженерія ПЗ',
           lessonType: 'lecture',
           teacher: 'Васильєва М.',
-          url: 'https://meet.google.com/fsn-gdmj-auu',
+          url: 'https://meet.google.com/fsn-gdmj-auu'
         },
         {
           dayOfWeek: 'thu',
           lessonName: "Комп'ютерна електроніка",
           lessonType: 'lab',
           teacher: 'Шимкович В.',
-          url: 'https://us04web.zoom.us/j/3428560060?pwd=YTZ4Vm8xVTYzTGhzQk5ONGpTcmVSZz09',
+          url: 'https://us04web.zoom.us/j/3428560060?pwd=YTZ4Vm8xVTYzTGhzQk5ONGpTcmVSZz09'
         },
         {
           dayOfWeek: 'fri',
           lessonName: 'Linux',
           lessonType: 'lecture',
           teacher: 'Роковий О.',
-          url: 'https://bbb.comsys.kpi.ua/rooms/fjc-gl5-nzk-dfy',
+          url: 'https://bbb.comsys.kpi.ua/rooms/fjc-gl5-nzk-dfy'
         },
         {
           dayOfWeek: 'sat',
@@ -275,14 +275,14 @@ const groupData = {
           lessonName: 'Теорія електрокіл',
           lessonType: 'lab',
           teacher: 'Лободзинський В.',
-          url: 'https://meet.google.com/pou-dnak-dnb',
+          url: 'https://meet.google.com/pou-dnak-dnb'
         },
         {
           dayOfWeek: 'wed',
           lessonName: 'Теорія електрокіл',
           lessonType: 'lecture',
           teacher: 'Лободзинський В.',
-          url: 'https://meet.google.com/pou-dnak-dnb',
+          url: 'https://meet.google.com/pou-dnak-dnb'
         },
         {
           dayOfWeek: 'thu',
@@ -298,7 +298,7 @@ const groupData = {
             url: 'https://us02web.zoom.us/j/8067850314',
             needDialog: true,
             textInDialog: 'Після відкриття посилання вставте пароль'
-          },
+          }
         },
         {
           dayOfWeek: 'sat',
@@ -315,7 +315,7 @@ const groupData = {
           lessonName: 'Філософія',
           lessonType: 'practice',
           teacher: 'Руденко Т.',
-          url: 'https://zoom.us/j/9358038101?pwd=d0pwUHRDY0dxbngrU09PYll6UXpNZz09',
+          url: 'https://zoom.us/j/9358038101?pwd=d0pwUHRDY0dxbngrU09PYll6UXpNZz09'
         },
         {
           dayOfWeek: 'wed',
