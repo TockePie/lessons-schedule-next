@@ -1,4 +1,6 @@
-import WeekTab from '@/components/Navbar/components/WeekTab/WeekTab'
+'use client'
+
+import WeekTab from './components/WeekTab'
 import TableComponent from '@/components/Table/TableComponent'
 
 export default function Home() {

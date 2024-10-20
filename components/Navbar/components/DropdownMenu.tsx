@@ -9,10 +9,12 @@ import { Button } from '@nextui-org/button'
 
 import { groupDataList } from '@/data/groupData'
 import { useGroup } from '@/common/providers/group'
+import { useRouter } from 'next/navigation'
 
 const chooseGroup = 'Оберіть групу'
 
 const GroupDropdownMenu = () => {
+  const router = useRouter()
   const { group, groupId, setGroupId } = useGroup()
 
   return (
@@ -29,6 +31,7 @@ const GroupDropdownMenu = () => {
         onAction={(key: Key) => {
           localStorage.setItem('groupId', key.toString())
           setGroupId(key.toString())
+          router.push(`/${key}`)
         }}
       >
         {groupDataList.map((item) => (

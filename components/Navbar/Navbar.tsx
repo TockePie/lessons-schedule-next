@@ -9,7 +9,7 @@ import { Image } from '@nextui-org/image'
 import { Button } from '@nextui-org/button'
 import { Menu } from 'lucide-react'
 
-import GroupDropdownMenu from './components/DropdownMenu/DropdownMenu'
+import GroupDropdownMenu from './components/DropdownMenu'
 
 import { useGroup } from '@/common/providers/group'
 
