@@ -243,11 +243,11 @@ const groupData = {
           url: 'https://meet.google.com/fsn-gdmj-auu',
         },
         {
-          dayOfWeek: 'thu',
-          lessonName: "Комп'ютерна електроніка",
-          lessonType: 'lab',
-          teacher: 'Шимкович В.',
-          url: 'https://us04web.zoom.us/j/3428560060?pwd=YTZ4Vm8xVTYzTGhzQk5ONGpTcmVSZz09',
+          dayOfWeek: "thu",
+          lessonName: "Linux",
+          lessonType: "lab",
+          teacher: "Алєнін О.",
+          url: "https://us04web.zoom.us/j/4122071690?pwd=Qd3m5bDNCT7ywK2qEyLa4bZWPfofyS.1",
         },
         {
           dayOfWeek: 'fri',
@@ -312,10 +312,7 @@ const groupData = {
         },
         {
           dayOfWeek: 'tue',
-          lessonName: 'Філософія',
-          lessonType: 'practice',
-          teacher: 'Руденко Т.',
-          url: 'https://zoom.us/j/9358038101?pwd=d0pwUHRDY0dxbngrU09PYll6UXpNZz09',
+          ...emptyLesson
         },
         {
           dayOfWeek: 'wed',
