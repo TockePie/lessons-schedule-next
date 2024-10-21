@@ -1,6 +1,5 @@
 import '@/styles/globals.css'
 import { Metadata, Viewport } from 'next'
-import { Link } from '@nextui-org/link'
 import { Analytics } from '@vercel/analytics/react'
 import clsx from 'clsx'
 
@@ -12,10 +11,10 @@ import NavbarComponent from '@/components/Navbar/Navbar'
 
 export const metadata: Metadata = {
   title: {
-    default: 'Next.js + NextUI',
-    template: `%s - Next.js + NextUI`
+    default: 'Lessons Schedule',
+    template: `%s - Lessons Schedule`
   },
-  description: 'Make beautiful websites regardless of your design experience.',
+  description: `Schedule of lessons for students of the Faculty of Information Technology and Computer Engineering of the National Technical University of Ukraine "Igor Sikorsky Kyiv Polytechnic Institute`,
   icons: {
     icon: '/favicon.ico'
   }
@@ -47,20 +46,7 @@ export default function RootLayout({
           <ThemeSetter />
           <div className="relative flex flex-col h-screen">
             <NavbarComponent />
-            <main className="container mx-auto px-6 flex-grow">
-              {children}
-            </main>
-            <footer className="w-full flex items-center justify-center py-3">
-              <Link
-                isExternal
-                className="flex items-center gap-1 text-current"
-                href="https://nextui-docs-v2.vercel.app?utm_source=next-app-template"
-                title="nextui.org homepage"
-              >
-                <span className="text-default-600">Powered by</span>
-                <p className="text-primary">NextUI</p>
-              </Link>
-            </footer>
+            <main className="container mx-auto px-6 flex-grow">{children}</main>
           </div>
         </Providers>
       </body>
