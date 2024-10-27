@@ -1,11 +1,12 @@
 import { Key } from 'react'
+
 import {
+  Button,
   Dropdown,
   DropdownTrigger,
   DropdownMenu,
   DropdownItem
-} from '@nextui-org/dropdown'
-import { Button } from '@nextui-org/button'
+} from '@nextui-org/react'
 
 import { groupDataList } from '@/data/groupData'
 import { useGroup } from '@/common/providers/group'
@@ -16,6 +17,12 @@ const chooseGroup = 'Оберіть групу'
 const GroupDropdownMenu = () => {
   const router = useRouter()
   const { group, groupId, setGroupId } = useGroup()
+
+  const handleChoose = (key: Key) => {
+    localStorage.setItem('groupId', key.toString())
+    setGroupId(key.toString())
+    router.push(`/${key}`)
+  }
 
   return (
     <Dropdown closeOnSelect>
@@ -28,11 +35,7 @@ const GroupDropdownMenu = () => {
       </DropdownTrigger>
       <DropdownMenu
         aria-label="Static Actions"
-        onAction={(key: Key) => {
-          localStorage.setItem('groupId', key.toString())
-          setGroupId(key.toString())
-          router.push(`/${key}`)
-        }}
+        onAction={handleChoose}
       >
         {groupDataList.map((item) => (
           <DropdownItem key={item.data.id}>{item.group}</DropdownItem>

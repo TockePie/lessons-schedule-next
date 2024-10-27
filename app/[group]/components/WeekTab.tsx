@@ -1,6 +1,6 @@
 import { FC, Key, useContext } from 'react'
 
-import { Tabs, Tab } from '@nextui-org/tabs'
+import { Tabs, Tab } from '@nextui-org/react'
 
 import { WeekParityContext } from '@/common/providers/weekParity'
 

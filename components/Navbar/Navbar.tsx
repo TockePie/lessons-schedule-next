@@ -4,9 +4,13 @@ import { FC } from 'react'
 import { isMobile, isMobileOnly } from 'react-device-detect'
 import Link from 'next/link'
 
-import { Navbar, NavbarBrand, NavbarContent } from '@nextui-org/navbar'
-import { Image } from '@nextui-org/image'
-import { Button } from '@nextui-org/button'
+import {
+  Navbar,
+  NavbarBrand,
+  NavbarContent,
+  Image,
+  Button
+} from '@nextui-org/react'
 import { Menu } from 'lucide-react'
 
 import GroupDropdownMenu from './components/DropdownMenu'
@@ -16,7 +20,7 @@ import { useGroup } from '@/common/providers/group'
 const schedule = 'Розклад'
 
 const NavbarComponent: FC = () => {
-  const { logo } = useGroup();
+  const { logo } = useGroup()
 
   return (
     <Navbar isBordered={isMobile} shouldHideOnScroll={isMobileOnly}>

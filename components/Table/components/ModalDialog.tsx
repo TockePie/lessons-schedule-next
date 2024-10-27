@@ -5,10 +5,22 @@ import {
   ModalBody,
   ModalFooter,
   Button,
-  Snippet,
-} from "@nextui-org/react";
+  Snippet
+} from '@nextui-org/react'
 
-export default function ModalDialog({ isOpen, onClose, data }) {
+interface ModalDataProps {
+  textInDialog: string
+  password: string
+  url: string
+}
+
+interface DisclosureProps {
+  isOpen: boolean
+  onClose: () => void
+  data: ModalDataProps
+}
+
+const ModalDialog = ({ isOpen, onClose, data }: DisclosureProps) => {
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalContent>
@@ -22,12 +34,14 @@ export default function ModalDialog({ isOpen, onClose, data }) {
         <ModalFooter>
           <Button
             color="primary"
-            onPress={() => window.open(data.url, "_blank")}
+            onPress={() => window.open(data.url, '_blank')}
           >
             Відкрити
           </Button>
         </ModalFooter>
       </ModalContent>
     </Modal>
-  );
+  )
 }
+
+export default ModalDialog

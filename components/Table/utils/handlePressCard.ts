@@ -26,7 +26,15 @@ const openLesson = (lesson: Lesson) => {
   }
 }
 
-const handlePress = (lesson: Lesson, setModalData, onOpen) => {
+const handlePress = (
+  lesson: Lesson,
+  setModalData: (data: {
+    textInDialog: string
+    password: string
+    url: string
+  }) => void,
+  onOpen: () => void
+) => {
   const opening = openLesson(lesson)
   if (opening) {
     setModalData(opening)

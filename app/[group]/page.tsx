@@ -1,13 +1,17 @@
 'use client'
 
-import WeekTab from './components/WeekTab'
 import TableComponent from '@/components/Table/TableComponent'
 
-export default function Home() {
+import WeekTab from './components/WeekTab'
+import styles from '../page.module.scss'
+
+const Home = () => {
   return (
-    <section className="flex flex-col items-center justify-center gap-4 py-4 md:py-6">
+    <section className={styles.section}>
       <WeekTab />
       <TableComponent />
     </section>
   )
 }
+
+export default Home
