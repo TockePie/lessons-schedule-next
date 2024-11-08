@@ -4799,6 +4799,11 @@ react-dom@19.0.0-rc-66855b96-20241106:
   dependencies:
     scheduler "0.25.0-rc-66855b96-20241106"
 
+react-hook-screen-orientation@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/react-hook-screen-orientation/-/react-hook-screen-orientation-1.0.4.tgz#db50d14a0bd3481ba2b603007bc5f29ff957a3e5"
+  integrity sha512-Bfxw+UVgQr0vMndAe1c+zvAICXbTwNuVdA/2Ms0tBcWymPeeJHTFmj0n9BgiY1cwfsZavfPPGBnxPzWAnk/8PA==
+
 react-is@^16.13.1:
   version "16.13.1"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"

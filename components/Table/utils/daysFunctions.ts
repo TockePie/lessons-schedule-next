@@ -1,15 +1,17 @@
 interface DaysProps {
   key: string
   label: string
+  short: string
 }
 
 const allDays: DaysProps[] = [
-  { key: 'mon', label: 'Понеділок' },
-  { key: 'tue', label: 'Вівторок' },
-  { key: 'wed', label: 'Середа' },
-  { key: 'thu', label: 'Четвер' },
-  { key: 'fri', label: "П'ятниця" },
-  { key: 'sat', label: 'Субота' }
+  { key: 'mon', label: 'Понеділок', short: 'ПН' },
+  { key: 'tue', label: 'Вівторок', short: 'ВТ' },
+  { key: 'wed', label: 'Середа', short: 'СР' },
+  { key: 'thu', label: 'Четвер', short: 'ЧТ' },
+  { key: 'fri', label: "П'ятниця", short: 'ПТ' },
+  { key: 'sat', label: 'Субота', short: 'СБ' },
+  { key: 'sun', label: 'Неділя', short: 'НД' }
 ]
 
 const getCurrentDay = (): [string, string] | undefined => {

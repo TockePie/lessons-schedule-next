@@ -2,11 +2,9 @@
 // @ts-nocheck
 'use client'
 
-import { FC } from 'react'
-import { redirect } from 'next/navigation'
+import { FC, Dispatch, ReactNode, SetStateAction } from 'react'
 
 import {
-  Button,
   Card,
   CardBody,
   Table,
@@ -14,8 +12,7 @@ import {
   TableColumn,
   TableBody,
   TableRow,
-  TableCell,
-  Divider
+  TableCell
 } from '@nextui-org/react'
 
 import ModalDialog from './ModalDialog'
@@ -26,9 +23,6 @@ import rowIndices, { TimeRange } from '../common/constants'
 import styles from '../Table.module.scss'
 
 const lessons = 'Пари'
-const emptyLesson = 'Розклад відсутній. Оберіть групу, щоб побачити заняття.'
-const helpMessage = 'Вперше на сайті? Ознайомтесь із функціоналом!'
-const help = 'Допомога'
 
 interface LessonUrl {
   url: string
@@ -62,8 +56,9 @@ interface TableComponentProps {
     password: string
     url: string | (() => void) | LessonUrl
   }
-  setModalData: React.Dispatch<
-    React.SetStateAction<{
+  emptyContent: ReactNode
+  setModalData: Dispatch<
+    SetStateAction<{
       textInDialog: string
       password: string
       url: string | LessonUrl | (() => void)
@@ -73,7 +68,7 @@ interface TableComponentProps {
   lessonsData: LessonsData
   isOpen: boolean
   onClose: () => void
-  pathname: string;
+  pathname: string
 }
 
 const TableComponent: FC<TableComponentProps> = (props) => {
@@ -92,23 +87,6 @@ const TableComponent: FC<TableComponentProps> = (props) => {
     )
   })
 
-  const EmptyContent = () => (
-    <div className="flex flex-col justify-center items-center gap-y-5 h-64">
-      <b>{emptyLesson}</b>
-      <Divider className='lg:w-1/2' />
-      <div className="flex flex-col gap-4 items-center">
-        <p>{helpMessage}</p>
-        <Button
-          color="default"
-          variant="flat"
-          onClick={async () => redirect('/help')}
-        >
-          {help}
-        </Button>
-      </div>
-    </div>
-  )
-
   return (
     <>
       <Table aria-label="Example static collection table">
@@ -118,7 +96,7 @@ const TableComponent: FC<TableComponentProps> = (props) => {
           </TableColumn>
           <>{HeaderDays}</>
         </TableHeader>
-        <TableBody emptyContent={<EmptyContent />}>
+        <TableBody emptyContent={props.emptyContent}>
           {rowIndices
             .map(([rowName, time]: [string, TimeRange], i: number) => {
               if (!props.lessonsData[rowName]) return null

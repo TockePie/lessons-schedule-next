@@ -1,7 +1,176 @@
-const MobileTable = () => {
+import {
+  FC,
+  ReactNode,
+  SetStateAction,
+  Dispatch,
+  Fragment,
+  useState
+} from 'react'
+
+import getLessonColor, { LessonType } from '../utils/getLessonColor'
+import {
+  Card,
+  CardBody,
+  Tab,
+  Table,
+  TableBody,
+  TableCell,
+  TableColumn,
+  TableHeader,
+  TableRow,
+  Tabs
+} from '@nextui-org/react'
+import ModalDialog from './ModalDialog'
+import { allDays, getCurrentDay } from '../utils/daysFunctions'
+import rowIndices, { TimeRange } from '../common/constants'
+import handlePress from '../utils/handlePressCard'
+import styles from '../Table.module.scss'
+
+interface LessonUrl {
+  url: string
+  password?: string
+  needDialog?: boolean
+  textInDialog?: string
+}
+
+interface Lesson {
+  lessonName: string | null
+  lessonType: LessonType | null
+  teacher: string | null
+  url:
+    | string
+    | {
+        needDialog: boolean
+        textInDialog: string
+        password: string
+        url: string
+      }
+  dayOfWeek: string
+}
+
+interface LessonsData {
+  [key: string]: Lesson[]
+}
+
+interface TableComponentProps {
+  modalData: {
+    textInDialog: string
+    password: string
+    url: string | (() => void) | LessonUrl
+  }
+  emptyContent: ReactNode
+  setModalData: Dispatch<
+    SetStateAction<{
+      textInDialog: string
+      password: string
+      url: string | LessonUrl | (() => void)
+    }>
+  >
+  onOpen: () => void
+  lessonsData: LessonsData
+  isOpen: boolean
+  onClose: () => void
+  pathname: string
+}
+
+const MobileTable: FC<TableComponentProps> = (props) => {
+  const [selectedDay, setSelectedDay] = useState(getCurrentDay()?.[0] || allDays[0].key)
+
+  const trimmedRowIndices = rowIndices.filter(
+    ([rowName]) => rowName in props.lessonsData
+  )
+
+  const handleDayChange = (dayKey: string) => {
+    setSelectedDay(dayKey)
+  }
+
   return (
-    <div>
-      <h1>Mobile Table</h1>
+    <div className="flex flex-col items-center gap-y-5 my-2">
+      <Tabs
+        aria-label="Days of the week"
+        selectedKey={selectedDay}
+        onSelectionChange={(key) => handleDayChange(key as string)}
+      >
+        {allDays.map((day) => (
+          <Tab key={day.key} title={day.short} />
+        ))}
+      </Tabs>
+
+      <Table aria-label="Lessons Table">
+        <TableHeader>
+          <TableColumn key="lessons">
+            <div className="flex justify-center">Пари</div>
+          </TableColumn>
+          <TableColumn>
+            <div className="flex justify-center">
+              {allDays.find((d) => d.key === selectedDay)?.label}
+            </div>
+          </TableColumn>
+        </TableHeader>
+        <TableBody emptyContent={props.emptyContent}>
+          {trimmedRowIndices.map(
+            ([rowName, time]: [string, TimeRange], i: number) => {
+              const lessonRow =
+                props.lessonsData[rowName]?.filter(
+                  (lesson) => lesson.dayOfWeek === selectedDay
+                ) || []
+
+              return (
+                <TableRow key={i}>
+                  <TableCell className="min-w-16 h-[17vh]">
+                    <Card
+                      aria-label="Time Card"
+                      className={`text-nowrap noselect h-full`}
+                    >
+                      <CardBody>
+                        <CardBody className="flex items-center justify-between px-2 overflow-y-hidden">
+                          <p>{time.start}</p>
+                          <b className="text-large">{i + 1} пара</b>
+                          <p>{time.end}</p>
+                        </CardBody>
+                      </CardBody>
+                    </Card>
+                  </TableCell>
+                  <TableCell className="min-w-44 max-w-64">
+                    {lessonRow.map((lesson, idx) => (
+                      <Fragment key={`lesson-${idx}`}>
+                        {lesson.lessonType != null && (
+                          <Card
+                            aria-label="Lesson Card"
+                            className={`noselect h-full ${
+                              lesson.lessonType
+                                ? getLessonColor(lesson.lessonType)
+                                : ''
+                            } ${styles.lessons}`}
+                            isPressable
+                            onPress={() =>
+                              handlePress(
+                                lesson,
+                                props.setModalData,
+                                props.onOpen
+                              )
+                            }
+                          >
+                            <CardBody className={styles.body}>
+                              <b>{lesson.lessonName}</b>
+                              <a>{lesson.teacher}</a>
+                            </CardBody>
+                          </Card>
+                        )}
+                      </Fragment>
+                    ))}
+                  </TableCell>
+                </TableRow>
+              )
+            }
+          )}
+        </TableBody>
+      </Table>
+      <ModalDialog
+        isOpen={props.isOpen}
+        onClose={props.onClose}
+        data={props.modalData}
+      />
     </div>
   )
 }
