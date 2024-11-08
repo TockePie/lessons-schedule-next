@@ -1,5 +1,3 @@
-'use client'
-
 import TableComponent from '@/components/Table/TableComponent'
 
 import WeekTab from './components/WeekTab'

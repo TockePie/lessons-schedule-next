@@ -1,15 +1,15 @@
-import '@/styles/globals.css'
 import { Metadata, Viewport } from 'next'
 import { Analytics } from '@vercel/analytics/react'
 import clsx from 'clsx'
 
-import { Providers } from './providers'
-
 import { fontSans } from '@/config/fonts'
-import ThemeSetter from '@/common/utils/ThemeSetter'
 import NavbarComponent from '@/components/Navbar/Navbar'
 
-export const metadata: Metadata = {
+import { Providers } from './providers'
+import styles from '@/app/layout.module.scss'
+import '@/styles/globals.css'
+
+const metadata: Metadata = {
   title: {
     default: 'Lessons Schedule',
     template: `%s - Lessons Schedule`
@@ -20,36 +20,29 @@ export const metadata: Metadata = {
   }
 }
 
-export const viewport: Viewport = {
+const viewport: Viewport = {
   themeColor: [
     { media: '(prefers-color-scheme: light)', color: 'white' },
     { media: '(prefers-color-scheme: dark)', color: 'black' }
   ]
 }
 
-export default function RootLayout({
-  children
-}: {
-  children: React.ReactNode
-}) {
+const RootLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <html suppressHydrationWarning lang="en">
       <head />
-      <body
-        className={clsx(
-          'min-h-screen bg-background font-sans antialiased',
-          fontSans.variable
-        )}
-      >
+      <body className={clsx(styles.body, fontSans.variable)}>
         <Analytics />
         <Providers>
-          <ThemeSetter />
-          <div className="relative flex flex-col h-screen">
+          <div className={styles.content}>
             <NavbarComponent />
-            <main className="container mx-auto px-6 flex-grow">{children}</main>
+            <main>{children}</main>
           </div>
         </Providers>
       </body>
     </html>
   )
 }
+
+export default RootLayout
+export { viewport, metadata }

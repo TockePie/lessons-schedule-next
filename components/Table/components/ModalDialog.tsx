@@ -8,16 +8,21 @@ import {
   Snippet
 } from '@nextui-org/react'
 
-interface ModalDataProps {
-  textInDialog: string
-  password: string
+interface LessonUrl {
   url: string
+  password?: string
+  needDialog?: boolean
+  textInDialog?: string
 }
 
 interface DisclosureProps {
   isOpen: boolean
   onClose: () => void
-  data: ModalDataProps
+  data: {
+    textInDialog: string
+    password: string
+    url: string | (() => void) | LessonUrl
+  }
 }
 
 const ModalDialog = ({ isOpen, onClose, data }: DisclosureProps) => {
@@ -34,7 +39,13 @@ const ModalDialog = ({ isOpen, onClose, data }: DisclosureProps) => {
         <ModalFooter>
           <Button
             color="primary"
-            onPress={() => window.open(data.url, '_blank')}
+            onPress={() => {
+              if (typeof data.url === 'string') {
+                window.open(data.url, '_blank')
+              } else if (typeof data.url === 'object' && 'url' in data.url) {
+                window.open(data.url.url, '_blank')
+              }
+            }}
           >
             Відкрити
           </Button>

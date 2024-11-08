@@ -12,8 +12,19 @@ import { groupDataList } from '@/data/groupData'
 import DesktopTable from './components/DesktopTable'
 import MobileTable from './components/MobileTable'
 
+interface LessonUrl {
+  url: string
+  password?: string
+  needDialog?: boolean
+  textInDialog?: string
+}
+
 const TableComponent = () => {
-  const [modalData, setModalData] = useState({
+  const [modalData, setModalData] = useState<{
+    textInDialog: string;
+    password: string;
+    url: string | LessonUrl | (() => void);
+  }>({
     textInDialog: '',
     password: '',
     url: ''

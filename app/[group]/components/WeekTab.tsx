@@ -1,3 +1,5 @@
+'use client'
+
 import { FC, Key, useContext } from 'react'
 
 import { Tabs, Tab } from '@nextui-org/react'
@@ -15,9 +17,7 @@ const WeekTab: FC = () => {
   return (
     <Tabs
       aria-label="even-odd-selector"
-      onSelectionChange={(key: Key) => {
-        setWeekParity(key as 'even' | 'odd')
-      }}
+      onSelectionChange={(key: Key) => setWeekParity(key as 'even' | 'odd')}
       selectedKey={weekParity}
     >
       <Tab key="even" title={evenText} />

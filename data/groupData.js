@@ -1,3 +1,5 @@
+'use client'
+
 import GROUP32 from './io-32'
 import GROUP35 from './io-35'
 import GROUP42 from './io-42'

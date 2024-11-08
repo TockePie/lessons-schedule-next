@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 'use client'
 
@@ -13,7 +14,8 @@ import {
   TableColumn,
   TableBody,
   TableRow,
-  TableCell
+  TableCell,
+  Divider
 } from '@nextui-org/react'
 
 import ModalDialog from './ModalDialog'
@@ -39,7 +41,14 @@ interface Lesson {
   lessonName: string | null
   lessonType: LessonType | null
   teacher: string | null
-  url: string | (() => void) | LessonUrl | null
+  url:
+    | string
+    | {
+        needDialog: boolean
+        textInDialog: string
+        password: string
+        url: string
+      }
   dayOfWeek: string
 }
 
@@ -48,13 +57,24 @@ interface LessonsData {
 }
 
 interface TableComponentProps {
-  modalData: any
-  setModalData: (data: any) => void
+  modalData: {
+    textInDialog: string
+    password: string
+    url: string | (() => void) | LessonUrl
+  }
+  setModalData: React.Dispatch<
+    React.SetStateAction<{
+      textInDialog: string
+      password: string
+      url: string | LessonUrl | (() => void)
+    }>
+  >
   onOpen: () => void
   lessonsData: LessonsData
   router: ReturnType<typeof useRouter>
   isOpen: boolean
   onClose: () => void
+  pathname: string;
 }
 
 const TableComponent: FC<TableComponentProps> = (props) => {
@@ -74,9 +94,10 @@ const TableComponent: FC<TableComponentProps> = (props) => {
   })
 
   const EmptyContent = () => (
-    <div className="flex flex-col justify-center gap-y-5">
+    <div className="flex flex-col justify-center items-center gap-y-5 h-64">
       <b>{emptyLesson}</b>
-      <div className="flex flex-col gap-2 items-center">
+      <Divider className='lg:w-1/2' />
+      <div className="flex flex-col gap-4 items-center">
         <p>{helpMessage}</p>
         <Button
           color="default"
