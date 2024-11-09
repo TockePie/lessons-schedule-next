@@ -1,6 +1,6 @@
-import { selectives } from './selectives'
+// import { selectives } from './selectives'
 
-const selective = JSON.parse(localStorage.getItem('selectedValue'))
+// const selective = JSON.parse(localStorage.getItem('selectedValue'))
 
 const emptyLesson = {
   lessonName: null,
@@ -18,19 +18,21 @@ const groupData = {
       firstLessonsRow: [
         {
           dayOfWeek: 'mon',
-          ...(selective === 'religion'
-            ? selectives.religion.lecture
-            : selective === 'cities'
-            ? selectives.cities.lecture
-            : emptyLesson)
+          // ...(selective === 'religion'
+          //   ? selectives.religion.lecture
+          //   : selective === 'cities'
+          //   ? selectives.cities.lecture
+          //   : emptyLesson)
+          ...emptyLesson
         },
         {
           dayOfWeek: 'tue',
-          ...(selective === 'psychology'
-            ? selectives.psychology.lecture
-            : selective === 'psychologyConflict'
-            ? selectives.psychologyConflict.practice
-            : emptyLesson)
+          // ...(selective === 'psychology'
+          //   ? selectives.psychology.lecture
+          //   : selective === 'psychologyConflict'
+          //   ? selectives.psychologyConflict.practice
+          //   : emptyLesson)
+          ...emptyLesson
         },
         {
           dayOfWeek: 'wed',
@@ -61,11 +63,12 @@ const groupData = {
       secondLessonsRow: [
         {
           dayOfWeek: 'mon',
-          ...(selective === 'psychologyMent'
-            ? selectives.psychologyMent.lecture
-            : selective === 'digitalTransformation'
-            ? selectives.digitalTransformation.lecture
-            : emptyLesson)
+          // ...(selective === 'psychologyMent'
+          //   ? selectives.psychologyMent.lecture
+          //   : selective === 'digitalTransformation'
+          //   ? selectives.digitalTransformation.lecture
+          //   : emptyLesson)
+          ...emptyLesson
         },
         {
           dayOfWeek: 'tue',
@@ -103,9 +106,10 @@ const groupData = {
       thirdLessonsRow: [
         {
           dayOfWeek: 'mon',
-          ...(selective === 'citizensResponsibility'
-            ? selectives.citizensResponsibility.lecture
-            : emptyLesson)
+          // ...(selective === 'citizensResponsibility'
+          //   ? selectives.citizensResponsibility.lecture
+          //   : emptyLesson)
+          ...emptyLesson
         },
         {
           dayOfWeek: 'tue',
@@ -179,19 +183,21 @@ const groupData = {
       firstLessonsRow: [
         {
           dayOfWeek: 'mon',
-          ...(selective === 'religion'
-            ? selectives.religion.practice
-            : selective === 'cities'
-            ? selectives.cities.practice
-            : emptyLesson)
+          // ...(selective === 'religion'
+          //   ? selectives.religion.practice
+          //   : selective === 'cities'
+          //   ? selectives.cities.practice
+          //   : emptyLesson)
+          ...emptyLesson
         },
         {
           dayOfWeek: 'tue',
-          ...(selective === 'psychology'
-            ? selectives.psychology.practice
-            : selective === 'psychologyConflict'
-            ? selectives.psychologyConflict.lecture
-            : emptyLesson)
+          // ...(selective === 'psychology'
+          //   ? selectives.psychology.practice
+          //   : selective === 'psychologyConflict'
+          //   ? selectives.psychologyConflict.lecture
+          //   : emptyLesson)
+          ...emptyLesson
         },
         {
           dayOfWeek: 'wed',
@@ -222,11 +228,12 @@ const groupData = {
       secondLessonsRow: [
         {
           dayOfWeek: 'mon',
-          ...(selective === 'psychologyMent'
-            ? selectives.psychologyMent.lecture
-            : selective === 'digitalTransformation'
-            ? selectives.digitalTransformation.lecture
-            : emptyLesson)
+          // ...(selective === 'psychologyMent'
+          //   ? selectives.psychologyMent.lecture
+          //   : selective === 'digitalTransformation'
+          //   ? selectives.digitalTransformation.lecture
+          //   : emptyLesson)
+          ...emptyLesson
         },
         {
           dayOfWeek: 'tue',
@@ -264,11 +271,12 @@ const groupData = {
       thirdLessonsRow: [
         {
           dayOfWeek: 'mon',
-          ...(selective === 'citizensResponsibility'
-            ? selectives.citizensResponsibility.practice
-            : selective === 'psychologyMent'
-            ? selectives.psychologyMent.practice
-            : emptyLesson)
+          // ...(selective === 'citizensResponsibility'
+          //   ? selectives.citizensResponsibility.practice
+          //   : selective === 'psychologyMent'
+          //   ? selectives.psychologyMent.practice
+          //   : emptyLesson)
+          ...emptyLesson
         },
         {
           dayOfWeek: 'tue',
