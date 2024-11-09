@@ -2,19 +2,20 @@ import { Metadata, Viewport } from 'next'
 import { Analytics } from '@vercel/analytics/react'
 import clsx from 'clsx'
 
-import { fontSans } from '@/config/fonts'
 import NavbarComponent from '@/components/Navbar/Navbar'
+import { fontSans } from '@/config/fonts'
+import { Providers } from '@/app/providers'
+import { LAYOUT_TEXTS } from '@/common/constants/texts'
 
-import { Providers } from './providers'
-import styles from '@/app/layout.module.scss'
+import styles from '@/styles/app/layout.module.scss'
 import '@/styles/globals.css'
 
 const metadata: Metadata = {
   title: {
-    default: 'Lessons Schedule',
-    template: `%s - Lessons Schedule`
+    default: LAYOUT_TEXTS.title.default,
+    template: LAYOUT_TEXTS.title.template
   },
-  description: `Schedule of lessons for students of the Faculty of Information Technology and Computer Engineering of the National Technical University of Ukraine "Igor Sikorsky Kyiv Polytechnic Institute`,
+  description: LAYOUT_TEXTS.description,
   icons: {
     icon: '/favicon.ico'
   }

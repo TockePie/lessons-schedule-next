@@ -3,7 +3,7 @@
 'use client'
 
 import { FC } from 'react'
-import { useRouter } from 'next/navigation'
+import { redirect } from 'next/navigation'
 
 import {
   Button,
@@ -71,7 +71,6 @@ interface TableComponentProps {
   >
   onOpen: () => void
   lessonsData: LessonsData
-  router: ReturnType<typeof useRouter>
   isOpen: boolean
   onClose: () => void
   pathname: string;
@@ -102,7 +101,7 @@ const TableComponent: FC<TableComponentProps> = (props) => {
         <Button
           color="default"
           variant="flat"
-          onClick={() => props.router.push('/help')}
+          onClick={async () => redirect('/help')}
         >
           {help}
         </Button>

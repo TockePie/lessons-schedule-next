@@ -1,25 +1,22 @@
-'use client'
-
 import * as React from 'react'
 import { NextUIProvider } from '@nextui-org/system'
-import { useRouter } from 'next/navigation'
 import { ThemeProvider as NextThemesProvider } from 'next-themes'
+import { cookies } from 'next/headers'
 
 import { WeekParityProvider } from '@/common/providers/weekParity'
 import { GroupProvider } from '@/common/providers/group'
 
-interface ProvidersProps {
-  children: React.ReactNode
-}
-
-const Providers = ({ children }: ProvidersProps) => {
-  const router = useRouter()
+const Providers = async ({ children }: { children: React.ReactNode }) => {
+  const cookieStore = await cookies()
+  const initialGroupId = cookieStore.get('groupId')?.value || null
 
   return (
     <NextThemesProvider attribute="class" defaultTheme="system">
-      <NextUIProvider navigate={router.push}>
+      <NextUIProvider>
         <WeekParityProvider>
-          <GroupProvider>{children}</GroupProvider>
+          <GroupProvider initialGroupId={initialGroupId}>
+            {children}
+          </GroupProvider>
         </WeekParityProvider>
       </NextUIProvider>
     </NextThemesProvider>
@@ -27,4 +24,3 @@ const Providers = ({ children }: ProvidersProps) => {
 }
 
 export { Providers }
-export type { ProvidersProps }

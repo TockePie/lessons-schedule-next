@@ -1,20 +1,17 @@
-'use client'
-
-import { useEffect } from 'react'
-import { useRouter } from 'next/navigation'
+import { cookies } from 'next/headers'
+import { redirect } from 'next/navigation'
 
 import TableComponent from '@/components/Table/TableComponent'
 
-import styles from './page.module.scss'
+import styles from '@/styles/app/page.module.scss'
 
-const Home = () => {
-  const router = useRouter()
+const Home = async () => {
+  const cookieStore = await cookies()
+  const groupId = cookieStore.get('groupId')?.value
 
-  useEffect(() => {
-    if (localStorage != undefined && localStorage.getItem('groupId')) {
-      router.push(`/${localStorage.getItem('groupId')}`)
-    }
-  }, [router])
+  if (groupId) {
+    redirect(`/${groupId}`)
+  }
 
   return (
     <section className={styles.section}>

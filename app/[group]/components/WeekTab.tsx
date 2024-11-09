@@ -1,18 +1,14 @@
 'use client'
 
-import { FC, Key, useContext } from 'react'
+import { Key } from 'react'
 
 import { Tabs, Tab } from '@nextui-org/react'
 
-import { WeekParityContext } from '@/common/providers/weekParity'
+import useWeekParity from '@/common/providers/weekParity'
+import { WEEKTAB_TEXTS } from '@/common/constants/texts'
 
-const evenText = 'Парний тиждень'
-const oddText = 'Непарний тиждень'
-
-const WeekTab: FC = () => {
-  const weekParityContext = useContext(WeekParityContext)
-  if (!weekParityContext) throw new Error('WeekParityContext is not provided')
-  const { weekParity, setWeekParity } = weekParityContext
+const WeekTab = () => {
+  const { weekParity, setWeekParity } = useWeekParity()
 
   return (
     <Tabs
@@ -20,8 +16,8 @@ const WeekTab: FC = () => {
       onSelectionChange={(key: Key) => setWeekParity(key as 'even' | 'odd')}
       selectedKey={weekParity}
     >
-      <Tab key="even" title={evenText} />
-      <Tab key="odd" title={oddText} />
+      <Tab key="even" title={WEEKTAB_TEXTS.evenText} />
+      <Tab key="odd" title={WEEKTAB_TEXTS.oddText} />
     </Tabs>
   )
 }

@@ -1,6 +1,7 @@
 'use client'
 
 import { Key } from 'react'
+import Cookies from 'js-cookie';
 
 import {
   Button,
@@ -12,18 +13,21 @@ import {
 
 import { groupDataList } from '@/data/groupData'
 import { useGroup } from '@/common/providers/group'
-import { useRouter } from 'next/navigation'
+import { redirect } from 'next/navigation'
 
 const chooseGroup = 'Оберіть групу'
 
+const handleGroup = async (key: Key) => {
+  Cookies.set('groupId', key.toString())
+  redirect(`/${key}`)
+}
+
 const GroupDropdownMenu = () => {
-  const router = useRouter()
   const { group, groupId, setGroupId } = useGroup()
 
   const handleChoose = (key: Key) => {
-    localStorage.setItem('groupId', key.toString())
     setGroupId(key.toString())
-    router.push(`/${key}`)
+    handleGroup(key)
   }
 
   return (

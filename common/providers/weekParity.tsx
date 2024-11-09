@@ -5,6 +5,7 @@ import {
   Dispatch,
   FC,
   ReactNode,
+  useContext,
   useState,
   SetStateAction
 } from 'react'
@@ -30,4 +31,11 @@ const WeekParityProvider: FC<{ children: ReactNode }> = ({ children }) => {
   )
 }
 
-export { WeekParityContext, WeekParityProvider }
+const useWeekParity = () => {
+  const context = useContext(WeekParityContext)
+  if (!context) throw new Error('WeekParityContext is not provided')
+  return context
+}
+
+export default useWeekParity
+export { WeekParityProvider }

@@ -1,12 +1,12 @@
 'use client'
 
-import { useState, useContext } from 'react'
-import { usePathname, useRouter } from 'next/navigation'
+import { useState } from 'react'
+import { usePathname } from 'next/navigation'
 import { isDesktop, isMobileOnly } from 'react-device-detect'
 
 import { useDisclosure } from '@nextui-org/react'
 
-import { WeekParityContext } from '@/common/providers/weekParity'
+import useWeekParity from '@/common/providers/weekParity'
 import { groupDataList } from '@/data/groupData'
 
 import DesktopTable from './components/DesktopTable'
@@ -21,9 +21,9 @@ interface LessonUrl {
 
 const TableComponent = () => {
   const [modalData, setModalData] = useState<{
-    textInDialog: string;
-    password: string;
-    url: string | LessonUrl | (() => void);
+    textInDialog: string
+    password: string
+    url: string | LessonUrl | (() => void)
   }>({
     textInDialog: '',
     password: '',
@@ -31,30 +31,30 @@ const TableComponent = () => {
   })
   const { isOpen, onOpen, onClose } = useDisclosure()
 
-  const router = useRouter()
   const pathname = usePathname().split('/')[1]
 
-  const weekParityContext = useContext(WeekParityContext)
-  if (!weekParityContext) throw new Error('WeekParityContext is not provided')
-  const { weekParity } = weekParityContext
+  const { weekParity } = useWeekParity()
 
   const getLessonsData = () => {
-    return groupDataList.find((group) => group.data.id === pathname)?.data.lessons[
-      weekParity === 'even' ? 'evenLessons' : 'oddLessons'
-    ] || {}
+    return (
+      groupDataList.find((group) => group.data.id === pathname)?.data.lessons[
+        weekParity === 'even' ? 'evenLessons' : 'oddLessons'
+      ] || {}
+    )
   }
 
   if (isDesktop) {
-    return <DesktopTable 
-      modalData={modalData}
-      setModalData={setModalData}
-      isOpen={isOpen}
-      onOpen={onOpen}
-      onClose={onClose}
-      lessonsData={getLessonsData()}
-      router={router}
-      pathname={pathname}
-     />
+    return (
+      <DesktopTable
+        modalData={modalData}
+        setModalData={setModalData}
+        isOpen={isOpen}
+        onOpen={onOpen}
+        onClose={onClose}
+        lessonsData={getLessonsData()}
+        pathname={pathname}
+      />
+    )
   }
 
   if (isMobileOnly) {
