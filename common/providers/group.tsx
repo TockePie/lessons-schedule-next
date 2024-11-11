@@ -2,6 +2,7 @@
 
 import React, {
   createContext,
+  FC,
   useContext,
   useState,
   useEffect,
@@ -25,7 +26,7 @@ interface GroupProviderProps {
 
 const GroupContext = createContext<GroupContextProps | undefined>(undefined)
 
-const GroupProvider: React.FC<GroupProviderProps> = ({
+const GroupProvider: FC<GroupProviderProps> = ({
   children,
   initialGroupId
 }) => {
@@ -54,10 +55,9 @@ const GroupProvider: React.FC<GroupProviderProps> = ({
 
 const useGroup = (): GroupContextProps => {
   const context = useContext(GroupContext)
-  if (!context) {
-    throw new Error('useGroup must be used within a GroupProvider')
-  }
+  if (!context) throw new Error('useGroup must be used within a GroupProvider')
   return context
 }
 
-export { GroupProvider, useGroup }
+export default useGroup
+export { GroupProvider }

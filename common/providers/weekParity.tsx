@@ -11,17 +11,19 @@ import {
 } from 'react'
 import { getISOWeek } from 'date-fns'
 
-const WeekParityContext = createContext<
-  | {
-      weekParity: 'even' | 'odd'
-      setWeekParity: Dispatch<SetStateAction<'even' | 'odd'>>
-    }
-  | undefined
->(undefined)
+interface ContextProps {
+  weekParity: 'even' | 'odd'
+  setWeekParity: Dispatch<SetStateAction<'even' | 'odd'>>
+}
+
+const WeekParityContext = createContext<ContextProps | undefined>(undefined)
 
 const WeekParityProvider: FC<{ children: ReactNode }> = ({ children }) => {
+  const date = new Date()
+  const numberOfWeek = getISOWeek(date)
+
   const [weekParity, setWeekParity] = useState<'even' | 'odd'>(
-    getISOWeek(new Date()) % 2 === 0 ? 'even' : 'odd'
+    numberOfWeek % 2 === 0 ? 'even' : 'odd'
   )
 
   return (

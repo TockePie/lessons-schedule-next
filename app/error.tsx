@@ -1,13 +1,20 @@
 'use client'
 
-import { useEffect } from 'react'
+import { FC, useEffect } from 'react'
 import { Button, Textarea } from '@nextui-org/react'
 
 import { ERROR_TEXTS } from '@/common/constants/texts'
-import styles from '@/styles/app/error.module.scss'
+import styles from '@/styles/app/errorLoading.module.scss'
 
-const Error = ({ error, reset }: { error: Error; reset: () => void }) => {
+interface ErrorProps {
+  error: Error
+  reset: () => void
+}
+
+const Error: FC<ErrorProps> = ({ error, reset }) => {
   useEffect(() => console.error(error), [error])
+
+  const copyToClipboard = () => navigator.clipboard.writeText(error.message)
 
   return (
     <section className={styles.section}>
@@ -21,9 +28,7 @@ const Error = ({ error, reset }: { error: Error; reset: () => void }) => {
         className={styles.textarea}
       />
       <div className={styles.buttons}>
-        <Button onClick={() => navigator.clipboard.writeText(error.message)}>
-          {ERROR_TEXTS.copyButton}
-        </Button>
+        <Button onClick={copyToClipboard}>{ERROR_TEXTS.copyButton}</Button>
         <Button color="primary" onClick={() => reset()}>
           {ERROR_TEXTS.retryButton}
         </Button>

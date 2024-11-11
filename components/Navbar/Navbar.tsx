@@ -1,9 +1,7 @@
 'use client'
 
-import { FC } from 'react'
 import { isMobile, isMobileOnly } from 'react-device-detect'
 import Link from 'next/link'
-
 import {
   Navbar,
   NavbarBrand,
@@ -18,16 +16,14 @@ import {
 import { Menu } from 'lucide-react'
 
 import GroupDropdownMenu from './components/DropdownMenu'
-
-import { useGroup } from '@/common/providers/group'
-
-const schedule = 'Розклад'
+import useGroup from '@/common/providers/group'
+import { NAVBAR_TEXTS } from '@/common/constants/texts'
 
 const NotWorkingPopover = () => {
   return <PopoverContent>Поки що не працює, але скоро виправимо 😊</PopoverContent>
 }
 
-const NavbarComponent: FC = () => {
+const NavbarComponent = () => {
   const { logo } = useGroup()
 
   return (
@@ -36,7 +32,7 @@ const NavbarComponent: FC = () => {
         <Link href="/">
           <Image src={logo} alt="Logo" width={50} />
         </Link>
-        {!isMobileOnly && <b className="p-3 text-2xl">{schedule}</b>}
+        {!isMobileOnly && <b className="p-3 text-2xl">{NAVBAR_TEXTS.schedule}</b>}
         <Chip color="warning" size="md">Beta</Chip>
       </NavbarBrand>
       <NavbarContent justify="end">

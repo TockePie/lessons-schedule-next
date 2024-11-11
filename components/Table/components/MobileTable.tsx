@@ -1,13 +1,4 @@
-import {
-  FC,
-  ReactNode,
-  SetStateAction,
-  Dispatch,
-  Fragment,
-  useState
-} from 'react'
-
-import getLessonColor, { LessonType } from '../utils/getLessonColor'
+import { FC, Fragment, Key, useState } from 'react'
 import {
   Card,
   CardBody,
@@ -20,61 +11,19 @@ import {
   TableRow,
   Tabs
 } from '@nextui-org/react'
+
+import { TableComponentProps } from '@/types/table'
 import ModalDialog from './ModalDialog'
+import getLessonColor from '../utils/getLessonColor'
 import { allDays, getCurrentDay } from '../utils/daysFunctions'
-import rowIndices, { TimeRange } from '../common/constants'
 import handlePress from '../utils/handlePressCard'
+import rowIndices, { TimeRange } from '../common/constants'
 import styles from '../Table.module.scss'
 
-interface LessonUrl {
-  url: string
-  password?: string
-  needDialog?: boolean
-  textInDialog?: string
-}
-
-interface Lesson {
-  lessonName: string | null
-  lessonType: LessonType | null
-  teacher: string | null
-  url:
-    | string
-    | {
-        needDialog: boolean
-        textInDialog: string
-        password: string
-        url: string
-      }
-  dayOfWeek: string
-}
-
-interface LessonsData {
-  [key: string]: Lesson[]
-}
-
-interface TableComponentProps {
-  modalData: {
-    textInDialog: string
-    password: string
-    url: string | (() => void) | LessonUrl
-  }
-  emptyContent: ReactNode
-  setModalData: Dispatch<
-    SetStateAction<{
-      textInDialog: string
-      password: string
-      url: string | LessonUrl | (() => void)
-    }>
-  >
-  onOpen: () => void
-  lessonsData: LessonsData
-  isOpen: boolean
-  onClose: () => void
-  pathname: string
-}
-
 const MobileTable: FC<TableComponentProps> = (props) => {
-  const [selectedDay, setSelectedDay] = useState(getCurrentDay()?.[0] || allDays[0].key)
+  const [selectedDay, setSelectedDay] = useState(
+    getCurrentDay()?.[0] || allDays[0].key
+  )
 
   const trimmedRowIndices = rowIndices.filter(
     ([rowName]) => rowName in props.lessonsData
@@ -85,11 +34,11 @@ const MobileTable: FC<TableComponentProps> = (props) => {
   }
 
   return (
-    <div className="flex flex-col items-center gap-y-5 my-2">
+    <div className={styles.mobileTable}>
       <Tabs
         aria-label="Days of the week"
         selectedKey={selectedDay}
-        onSelectionChange={(key) => handleDayChange(key as string)}
+        onSelectionChange={(key: Key) => handleDayChange(key as string)}
       >
         {allDays.map((day) => (
           <Tab key={day.key} title={day.short} />

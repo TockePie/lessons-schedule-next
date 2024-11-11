@@ -11,7 +11,6 @@ const allDays: DaysProps[] = [
   { key: 'thu', label: 'Четвер', short: 'ЧТ' },
   { key: 'fri', label: "П'ятниця", short: 'ПТ' },
   { key: 'sat', label: 'Субота', short: 'СБ' },
-  { key: 'sun', label: 'Неділя', short: 'НД' }
 ]
 
 const getCurrentDay = (): [string, string] | undefined => {

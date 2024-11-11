@@ -1,8 +1,8 @@
 'use client'
 
 import { Key } from 'react'
-import Cookies from 'js-cookie';
-
+import { redirect } from 'next/navigation'
+import Cookies from 'js-cookie'
 import {
   Button,
   Dropdown,
@@ -12,10 +12,8 @@ import {
 } from '@nextui-org/react'
 
 import { groupDataList } from '@/data/groupData'
-import { useGroup } from '@/common/providers/group'
-import { redirect } from 'next/navigation'
-
-const chooseGroup = 'Оберіть групу'
+import useGroup from '@/common/providers/group'
+import { NAVBAR_TEXTS } from '@/common/constants/texts'
 
 const handleGroup = async (key: Key) => {
   Cookies.set('groupId', key.toString())
@@ -34,15 +32,10 @@ const GroupDropdownMenu = () => {
     <Dropdown closeOnSelect>
       <DropdownTrigger>
         <Button variant="bordered">
-          {groupId
-            ? group
-            : chooseGroup}
+          {groupId ? group : NAVBAR_TEXTS.chooseGroup}
         </Button>
       </DropdownTrigger>
-      <DropdownMenu
-        aria-label="Static Actions"
-        onAction={handleChoose}
-      >
+      <DropdownMenu aria-label="Static Actions" onAction={handleChoose}>
         {groupDataList.map((item) => (
           <DropdownItem key={item.data.id}>{item.group}</DropdownItem>
         ))}

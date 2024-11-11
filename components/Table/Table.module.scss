@@ -1,3 +1,19 @@
+.emptyContent {
+  @apply flex 
+  flex-col 
+  justify-center 
+  items-center 
+  gap-y-5 
+  h-64;
+}
+
+.helpBox {
+  @apply flex 
+  flex-col 
+  gap-4 
+  items-center;
+}
+
 .time {
   @apply text-nowrap 
     h-[7.8rem] 
@@ -28,4 +44,18 @@
   items-center 
   justify-center 
   overflow-hidden;
+}
+
+.tableColumn {
+  @apply max-w-10;
+
+  div {
+    @apply flex 
+    justify-center 
+    text-sm;
+  }
+}
+
+.mobileTable {
+  @apply flex flex-col items-center gap-y-4 my-1;
 }

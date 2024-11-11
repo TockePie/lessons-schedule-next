@@ -2,8 +2,7 @@
 // @ts-nocheck
 'use client'
 
-import { FC, Dispatch, ReactNode, SetStateAction } from 'react'
-
+import { FC } from 'react'
 import {
   Card,
   CardBody,
@@ -15,61 +14,14 @@ import {
   TableCell
 } from '@nextui-org/react'
 
+import { TableComponentProps } from '@/types/table'
 import ModalDialog from './ModalDialog'
 import { allDays, getCurrentDay } from '../utils/daysFunctions'
-import getLessonColor, { LessonType } from '../utils/getLessonColor'
+import getLessonColor from '../utils/getLessonColor'
 import handlePress from '../utils/handlePressCard'
 import rowIndices, { TimeRange } from '../common/constants'
 import styles from '../Table.module.scss'
-
-const lessons = 'Пари'
-
-interface LessonUrl {
-  url: string
-  password?: string
-  needDialog?: boolean
-  textInDialog?: string
-}
-
-interface Lesson {
-  lessonName: string | null
-  lessonType: LessonType | null
-  teacher: string | null
-  url:
-    | string
-    | {
-        needDialog: boolean
-        textInDialog: string
-        password: string
-        url: string
-      }
-  dayOfWeek: string
-}
-
-interface LessonsData {
-  [key: string]: Lesson[]
-}
-
-interface TableComponentProps {
-  modalData: {
-    textInDialog: string
-    password: string
-    url: string | (() => void) | LessonUrl
-  }
-  emptyContent: ReactNode
-  setModalData: Dispatch<
-    SetStateAction<{
-      textInDialog: string
-      password: string
-      url: string | LessonUrl | (() => void)
-    }>
-  >
-  onOpen: () => void
-  lessonsData: LessonsData
-  isOpen: boolean
-  onClose: () => void
-  pathname: string
-}
+import { TABLE_TEXTS } from '@/common/constants/texts'
 
 const TableComponent: FC<TableComponentProps> = (props) => {
   const HeaderDays = allDays.map((day) => {
@@ -91,8 +43,8 @@ const TableComponent: FC<TableComponentProps> = (props) => {
     <>
       <Table aria-label="Example static collection table">
         <TableHeader>
-          <TableColumn key="lessons" className="max-w-10">
-            <div className="flex justify-center text-sm">{lessons}</div>
+          <TableColumn key="lessons" className={styles.tableColumn}>
+            <div>{TABLE_TEXTS.lessons}</div>
           </TableColumn>
           <>{HeaderDays}</>
         </TableHeader>

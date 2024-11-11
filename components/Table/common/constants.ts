@@ -11,10 +11,12 @@ const rowIndices: [string, TimeRange][] = [
 ]
 
 const rowIndicesMap: { [key: string]: string } = {}
-rowIndices.forEach(([rowName, timeRange]: [string, TimeRange]) => {
+
+for (let i = 0; i < rowIndices.length; i++) {
+  const [rowName, timeRange]: [string, TimeRange] = rowIndices[i]
   const rangeKey = `${timeRange.start}-${timeRange.end}`
   rowIndicesMap[rangeKey] = rowName
-})
+}
 
 export type { TimeRange }
 export default rowIndices

@@ -3,32 +3,19 @@
 import { useState } from 'react'
 import { redirect, usePathname } from 'next/navigation'
 import { isDesktop, isMobileOnly } from 'react-device-detect'
-
 import { Button, Divider, useDisclosure } from '@nextui-org/react'
 
 import useWeekParity from '@/common/providers/weekParity'
+import { TABLE_TEXTS } from '@/common/constants/texts'
+import { ModalData } from '@/types/table'
 import { groupDataList } from '@/data/groupData'
 
 import DesktopTable from './components/DesktopTable'
 import MobileTable from './components/MobileTable'
-
-const emptyLesson = 'Розклад відсутній. Оберіть групу, щоб побачити заняття.'
-const helpMessage = 'Вперше на сайті? Ознайомтесь із функціоналом!'
-const help = 'Допомога'
-
-interface LessonUrl {
-  url: string
-  password?: string
-  needDialog?: boolean
-  textInDialog?: string
-}
+import styles from './Table.module.scss'
 
 const TableComponent = () => {
-  const [modalData, setModalData] = useState<{
-    textInDialog: string
-    password: string
-    url: string | LessonUrl | (() => void)
-  }>({
+  const [modalData, setModalData] = useState<ModalData>({
     textInDialog: '',
     password: '',
     url: ''
@@ -47,17 +34,17 @@ const TableComponent = () => {
   }
 
   const EmptyContent = () => (
-    <div className="flex flex-col justify-center items-center gap-y-5 h-64">
-      <b>{emptyLesson}</b>
+    <div className={styles.emptyContent}>
+      <b>{TABLE_TEXTS.emptyLesson}</b>
       <Divider className="lg:w-1/2" />
-      <div className="flex flex-col gap-4 items-center">
-        <p>{helpMessage}</p>
+      <div className={styles.helpBox}>
+        <p>{TABLE_TEXTS.helpMessage}</p>
         <Button
           color="default"
           variant="flat"
           onClick={async () => redirect('/help')}
         >
-          {help}
+          {TABLE_TEXTS.help}
         </Button>
       </div>
     </div>

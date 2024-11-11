@@ -17,9 +17,28 @@ const LOADING_TEXTS = {
   title: 'Завантаження'
 }
 
+const NAVBAR_TEXTS = {
+  schedule: 'Розклад',
+  chooseGroup: 'Оберіть групу'
+}
+
 const WEEKTAB_TEXTS = {
   evenText: 'Парний тиждень',
   oddText: 'Непарний тиждень'
 }
 
-export { LAYOUT_TEXTS, ERROR_TEXTS, LOADING_TEXTS, WEEKTAB_TEXTS }
+const TABLE_TEXTS = {
+  emptyLesson: 'Розклад відсутній. Оберіть групу, щоб побачити заняття.',
+  helpMessage: 'Вперше на сайті? Ознайомтесь із функціоналом!',
+  help: 'Допомога',
+  lessons: 'Пари'
+}
+
+export {
+  LAYOUT_TEXTS,
+  ERROR_TEXTS,
+  LOADING_TEXTS,
+  NAVBAR_TEXTS,
+  WEEKTAB_TEXTS,
+  TABLE_TEXTS
+}

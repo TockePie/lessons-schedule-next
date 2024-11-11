@@ -10,10 +10,12 @@ import { WEEKTAB_TEXTS } from '@/common/constants/texts'
 const WeekTab = () => {
   const { weekParity, setWeekParity } = useWeekParity()
 
+  const handleNewTab = (key: Key) => setWeekParity(key as 'even' | 'odd')
+
   return (
     <Tabs
       aria-label="even-odd-selector"
-      onSelectionChange={(key: Key) => setWeekParity(key as 'even' | 'odd')}
+      onSelectionChange={handleNewTab}
       selectedKey={weekParity}
     >
       <Tab key="even" title={WEEKTAB_TEXTS.evenText} />
