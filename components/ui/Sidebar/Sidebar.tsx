@@ -1,14 +1,38 @@
 'use client'
 
-// import { useState } from 'react'
+import { FC, ReactNode } from 'react'
 
-const Sidebar = () => {
-  // const [open, setOpen] = useState(false)
+import styles from './Sidebar.module.scss'
+import { useHotkeys } from 'react-hotkeys-hook'
+import { isDesktop } from 'react-device-detect'
+import { Button, Kbd } from '@nextui-org/react'
 
-  return <>{<div>Sidebar content</div>}</>
-  //TODO: Add sidebar
-  //TODO: Sidebar Options: groupdropdown, settingsmodalpage, helppage, aboutpage
-  //TODO: SettingPage: change selectives, PWA ZOOM, change theme, card styles
+interface SidebarProps {
+  children: ReactNode
+  isOpen: boolean
+  onClose: () => void
 }
 
-export default Sidebar
+const Sidebar: FC<SidebarProps> = ({ children, isOpen, onClose }) => {
+  //TODO: Add sidebar
+  //TODO: Sidebar Options: settingsmodalpage, helppage, aboutpage
+  //TODO: SettingPage: change selectives, PWA ZOOM, change theme, card styles
+
+  useHotkeys('esc', onClose)
+
+  if (!isOpen) return null
+
+  return (
+    <div className={styles.sidebar}>
+      <div className={styles.content}>
+        {children}
+        <Button size="lg" color="primary" variant="faded" onClick={onClose}>
+          Закрити
+          {isDesktop && <Kbd>Esc</Kbd>}
+        </Button>
+      </div>
+    </div>
+  )
+}
+
+export { Sidebar }
