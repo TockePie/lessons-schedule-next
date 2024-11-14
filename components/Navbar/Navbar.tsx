@@ -1,6 +1,6 @@
 'use client'
 
-import { isDesktop, isMobile, isMobileOnly } from 'react-device-detect'
+import { isMobile, isMobileOnly } from 'react-device-detect'
 import { useDisclosure } from '@dwarvesf/react-hooks'
 import Link from 'next/link'
 import {
@@ -10,7 +10,9 @@ import {
   Image,
   Button,
   Chip,
-  Kbd
+  Divider,
+  Card,
+  CardBody
 } from '@nextui-org/react'
 import { Menu } from 'lucide-react'
 
@@ -18,8 +20,11 @@ import GroupDropdownMenu from './components/DropdownMenu'
 import useGroup from '@/common/providers/group'
 import { NAVBAR_TEXTS } from '@/common/constants/texts'
 import { Sidebar } from '@/components/ui/Sidebar/Sidebar'
+import Settings from '../Settings'
+import { useRouter } from 'next/navigation'
 
 const NavbarComponent = () => {
+  const router = useRouter()
   const { logo } = useGroup()
   const { isOpen, onOpen, onClose } = useDisclosure()
 
@@ -45,7 +50,18 @@ const NavbarComponent = () => {
         </NavbarContent>
       </Navbar>
       <Sidebar onClose={onClose} isOpen={isOpen}>
-          <h2 className='text-2xl font-bold'>Налаштування</h2>
+        <Settings />
+        <Divider className="my-4" />
+        <Card
+          isPressable
+          onPress={() => {
+            router.push('/help')
+            onClose()
+          }}
+          className='cursor-pointer w-full h-24'
+        >
+          <CardBody className='text-center text-xl justify-center'>Допомога</CardBody>
+        </Card>
       </Sidebar>
     </>
   )

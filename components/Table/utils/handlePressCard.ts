@@ -26,6 +26,19 @@ const openLesson = (lesson: Lesson) => {
   }
 }
 
+const transformUrl = (url: string) => {
+  const urlPattern = /https:\/\/(\w+)\.zoom\.us\/j\/(\d+)\?pwd=([^&#]+)/
+  const match = url.match(urlPattern)
+
+  if (match) {
+    const [, , meetingId, password] = match
+    return `https://app.zoom.us/wc/${meetingId}/join?pwd=${password}&fromPWA=1`
+  } else {
+    console.error('Invalid Zoom URL:', url)
+    return url
+  }
+}
+
 const handlePress = (
   lesson: Lesson,
   setModalData: (data: {
@@ -35,7 +48,24 @@ const handlePress = (
   }) => void,
   onOpen: () => void
 ) => {
-  const opening = openLesson(lesson)
+  let urlToUse
+
+  if (localStorage.getItem('enabledPwaZoom') === 'true') {
+    if (typeof lesson.url === 'string') {
+      urlToUse = transformUrl(lesson.url)
+    } else if (lesson.url && typeof lesson.url === 'object') {
+      urlToUse = {
+        ...lesson.url,
+        url: transformUrl(lesson.url.url)
+      }
+    }
+  } else {
+    urlToUse = lesson.url
+  }
+
+  const openingData = { ...lesson, url: urlToUse ?? '' }
+  const opening = openLesson(openingData)
+
   if (opening) {
     setModalData(opening)
     onOpen()
