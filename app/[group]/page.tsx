@@ -1,7 +1,7 @@
 import TableComponent from '@/components/Table/TableComponent'
 import WeekTab from './components/WeekTab'
 
-import styles from '@/styles/app/page.module.scss'
+import styles from '@/app/page.module.scss'
 
 const Home = () => {
   return (

@@ -3,7 +3,7 @@ import { redirect } from 'next/navigation'
 
 import TableComponent from '@/components/Table/TableComponent'
 
-import styles from '@/styles/app/page.module.scss'
+import styles from '@/app/page.module.scss'
 
 const Home = async () => {
   const cookieStore = await cookies()

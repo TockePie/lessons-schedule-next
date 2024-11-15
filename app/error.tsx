@@ -4,7 +4,7 @@ import { FC, useEffect } from 'react'
 import { Button, Textarea } from '@nextui-org/react'
 
 import { ERROR_TEXTS } from '@/common/constants/texts'
-import styles from '@/styles/app/errorLoading.module.scss'
+import styles from '@/app/errorLoading.module.scss'
 
 interface ErrorProps {
   error: Error

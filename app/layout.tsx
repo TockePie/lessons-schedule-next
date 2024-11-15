@@ -7,7 +7,7 @@ import { fontSans } from '@/config/fonts'
 import { Providers } from '@/app/providers'
 import { LAYOUT_TEXTS } from '@/common/constants/texts'
 
-import styles from '@/styles/app/layout.module.scss'
+import styles from '@/app/layout.module.scss'
 import '@/styles/globals.css'
 
 const metadata: Metadata = {

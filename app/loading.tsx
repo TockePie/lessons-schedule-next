@@ -1,7 +1,7 @@
 import { Spinner } from '@nextui-org/react'
 
 import { LOADING_TEXTS } from '@/common/constants/texts'
-import styles from '@/styles/app/errorLoading.module.scss'
+import styles from '@/app/errorLoading.module.scss'
 
 const Loading = () => {
   return (

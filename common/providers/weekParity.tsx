@@ -21,10 +21,10 @@ const WeekParityContext = createContext<ContextProps | undefined>(undefined)
 const WeekParityProvider: FC<{ children: ReactNode }> = ({ children }) => {
   const date = new Date()
   const numberOfWeek = getISOWeek(date)
+  const weekParityState = numberOfWeek % 2 === 0 ? 'even' : 'odd'
 
-  const [weekParity, setWeekParity] = useState<'even' | 'odd'>(
-    numberOfWeek % 2 === 0 ? 'even' : 'odd'
-  )
+  const [weekParity, setWeekParity] =
+    useState<ContextProps['weekParity']>(weekParityState)
 
   return (
     <WeekParityContext.Provider value={{ weekParity, setWeekParity }}>
