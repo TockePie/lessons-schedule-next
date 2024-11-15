@@ -19,15 +19,15 @@ const Sidebar: FC<SidebarProps> = ({ children, isOpen, onClose }) => {
   //TODO: Sidebar Options: settingsmodalpage, helppage, aboutpage
   //TODO: SettingPage: change selectives, PWA ZOOM, change theme, card styles
 
-  const wrapperRef = useRef(null)
-  useOutside(wrapperRef, onClose)
+  const sidebarRef = useRef(null)
+  useOutside(sidebarRef, onClose)
 
   useHotkeys('esc', onClose)
 
   if (!isOpen) return null
 
   return (
-    <div className={styles.sidebar} ref={wrapperRef}>
+    <div className={styles.sidebar} ref={sidebarRef}>
       <div className={styles.content}>
         <div>{children}</div>
         <Button size="lg" color="primary" variant="faded" onClick={onClose}>

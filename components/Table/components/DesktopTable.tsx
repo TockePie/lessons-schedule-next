@@ -11,10 +11,11 @@ import {
   TableColumn,
   TableBody,
   TableRow,
-  TableCell
+  TableCell,
+  Chip
 } from '@nextui-org/react'
 
-import { TableComponentProps } from '@/types/table'
+import { TableComponentProps } from '@/components/Table/types/table'
 import ModalDialog from './ModalDialog'
 import { allDays, getCurrentDay } from '../utils/daysFunctions'
 import getLessonColor from '../utils/getLessonColor'
@@ -38,6 +39,68 @@ const TableComponent: FC<TableComponentProps> = (props) => {
       </TableColumn>
     )
   })
+
+  const RenderCard = (lesson) => {
+    const lessonType = lesson.lessonType
+    const lessonsUa = {
+      lecture: 'Лекція',
+      practice: 'Практика',
+      lab: 'Лабораторна'
+    }
+    const lessonColor = {
+      lecture: 'primary',
+      practice: 'danger',
+      lab: 'warning'
+    }
+
+    if (lesson.lessonType != null) {
+      if (localStorage.getItem('lessonTypeStyle') === 'border') {
+        return (
+          <Card
+            aria-label="Lesson Card"
+            className={`noselect h-36 ${styles.lessons} ${getLessonColor(
+              lessonType
+            )}`}
+            isPressable
+            onPress={() =>
+              handlePress(lesson, props.setModalData, props.onOpen)
+            }
+          >
+            <CardBody className={styles.body}>
+              <b>{lesson.lessonName}</b>
+              <a>{lesson.teacher}</a>
+            </CardBody>
+          </Card>
+        )
+      } else {
+        return (
+          <Card
+            aria-label="Lesson Card"
+            className={`noselect h-36 ${styles.lessons}`}
+            isPressable
+            onPress={() =>
+              handlePress(lesson, props.setModalData, props.onOpen)
+            }
+          >
+            <CardBody className={styles.body}>
+              <Chip
+                variant="flat"
+                size="sm"
+                radius="sm"
+                color={lessonColor[lessonType]}
+              >
+                {lessonsUa[lessonType]}
+              </Chip>
+              <b>{lesson.lessonName}</b>
+              <a>{lesson.teacher}</a>
+            </CardBody>
+          </Card>
+        )
+      }
+    }
+
+    return null
+  }
 
   return (
     <>
@@ -74,29 +137,7 @@ const TableComponent: FC<TableComponentProps> = (props) => {
                       key={`${rowName}-${j}`}
                       className="min-w-48 max-w-48"
                     >
-                      {lesson.lessonType != null && (
-                        <Card
-                          aria-label="Lesson Card"
-                          className={`noselect ${
-                            lesson.lessonType
-                              ? getLessonColor(lesson.lessonType)
-                              : ''
-                          } ${styles.lessons}`}
-                          isPressable
-                          onPress={() =>
-                            handlePress(
-                              lesson,
-                              props.setModalData,
-                              props.onOpen
-                            )
-                          }
-                        >
-                          <CardBody className={styles.body}>
-                            <b>{lesson.lessonName}</b>
-                            <a>{lesson.teacher}</a>
-                          </CardBody>
-                        </Card>
-                      )}
+                      <RenderCard {...lesson} />
                     </TableCell>
                   ))}
                 </TableRow>

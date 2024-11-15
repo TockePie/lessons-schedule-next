@@ -8,7 +8,7 @@ import {
   Snippet
 } from '@nextui-org/react'
 
-import { LessonUrl } from '@/types/table'
+import { LessonUrl } from '@/components/Table/types/table'
 
 interface DisclosureProps {
   isOpen: boolean

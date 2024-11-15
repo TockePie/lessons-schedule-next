@@ -2,6 +2,8 @@
 
 import { isMobile, isMobileOnly } from 'react-device-detect'
 import { useDisclosure } from '@dwarvesf/react-hooks'
+import { useRouter } from 'next/navigation'
+import dynamic from 'next/dynamic'
 import Link from 'next/link'
 import {
   Navbar,
@@ -20,13 +22,18 @@ import GroupDropdownMenu from './components/DropdownMenu'
 import useGroup from '@/common/providers/group'
 import { NAVBAR_TEXTS } from '@/common/constants/texts'
 import { Sidebar } from '@/components/ui/Sidebar/Sidebar'
-import Settings from '../Settings'
-import { useRouter } from 'next/navigation'
+
+const Settings = dynamic(() => import('../Settings/Settings'), { ssr: false });
 
 const NavbarComponent = () => {
   const router = useRouter()
   const { logo } = useGroup()
   const { isOpen, onOpen, onClose } = useDisclosure()
+
+  const handleHelpPress = () => {
+    router.push('/help')
+    onClose()
+  }
 
   return (
     <>
@@ -49,18 +56,18 @@ const NavbarComponent = () => {
           </Button>
         </NavbarContent>
       </Navbar>
+      
       <Sidebar onClose={onClose} isOpen={isOpen}>
         <Settings />
         <Divider className="my-4" />
         <Card
           isPressable
-          onPress={() => {
-            router.push('/help')
-            onClose()
-          }}
-          className='cursor-pointer w-full h-24'
+          onPress={handleHelpPress}
+          className="cursor-pointer w-full h-24"
         >
-          <CardBody className='text-center text-xl justify-center'>Допомога</CardBody>
+          <CardBody className="text-center text-xl justify-center">
+            Допомога
+          </CardBody>
         </Card>
       </Sidebar>
     </>

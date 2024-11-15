@@ -12,7 +12,7 @@ import {
   Tabs
 } from '@nextui-org/react'
 
-import { TableComponentProps } from '@/types/table'
+import { TableComponentProps } from '@/components/Table/types/table'
 import ModalDialog from './ModalDialog'
 import getLessonColor from '../utils/getLessonColor'
 import { allDays, getCurrentDay } from '../utils/daysFunctions'

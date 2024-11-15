@@ -14,7 +14,7 @@ const useOutside = (ref: React.RefObject<HTMLElement>, onClose: () => void) => {
     document.addEventListener('mousedown', handleClickOutside)
 
     return () => document.removeEventListener('mousedown', handleClickOutside)
-  }, [ref, handleClickOutside])
+  }, [handleClickOutside])
 }
 
 export default useOutside

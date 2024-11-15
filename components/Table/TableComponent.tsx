@@ -7,7 +7,7 @@ import { Button, Divider, useDisclosure } from '@nextui-org/react'
 
 import useWeekParity from '@/common/providers/weekParity'
 import { TABLE_TEXTS } from '@/common/constants/texts'
-import { ModalData } from '@/types/table'
+import { ModalData } from '@/components/Table/types/table'
 import { groupDataList } from '@/data/groupData'
 
 import DesktopTable from './components/DesktopTable'
