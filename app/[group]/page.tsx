@@ -1,11 +1,9 @@
 import TableComponent from '@/components/Table/TableComponent'
 import WeekTab from './components/WeekTab'
 
-import styles from '@/app/page.module.scss'
-
 const Home = () => {
   return (
-    <section className={styles.section}>
+    <section className="flex flex-col items-center justify-center gap-4 py-4 md:py-6">
       <WeekTab />
       <TableComponent />
     </section>

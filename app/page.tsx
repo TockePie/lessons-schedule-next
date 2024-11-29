@@ -3,8 +3,6 @@ import { redirect } from 'next/navigation'
 
 import TableComponent from '@/components/Table/TableComponent'
 
-import styles from '@/app/page.module.scss'
-
 const Home = async () => {
   const cookieStore = await cookies()
   const groupId = cookieStore.get('groupId')?.value
@@ -14,7 +12,7 @@ const Home = async () => {
   }
 
   return (
-    <section className={styles.section}>
+    <section className="flex flex-col items-center justify-center gap-4 py-4 md:py-6">
       <TableComponent />
     </section>
   )

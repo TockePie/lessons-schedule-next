@@ -7,7 +7,6 @@ import { fontSans } from '@/config/fonts'
 import { Providers } from '@/app/providers'
 import { LAYOUT_TEXTS } from '@/common/constants/texts'
 
-import styles from '@/app/layout.module.scss'
 import '@/styles/globals.css'
 
 const metadata: Metadata = {
@@ -32,12 +31,17 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <html suppressHydrationWarning lang="en">
       <head />
-      <body className={clsx(styles.body, fontSans.variable)}>
+      <body
+        className={clsx(
+          'min-h-screen bg-background font-sans antialiased',
+          fontSans.variable
+        )}
+      >
         <Analytics />
         <Providers>
-          <div className={styles.content}>
+          <div className="relative flex h-screen flex-col">
             <NavbarComponent />
-            <main>{children}</main>
+            <main className="container mx-auto flex-grow px-6">{children}</main>
           </div>
         </Providers>
       </body>
