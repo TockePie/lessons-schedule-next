@@ -1,4 +1,5 @@
 import TableComponent from '@/components/Table/TableComponent'
+
 import WeekTab from './components/WeekTab'
 
 const Home = () => {

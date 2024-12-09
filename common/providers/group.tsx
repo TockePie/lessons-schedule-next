@@ -3,14 +3,14 @@
 import React, {
   createContext,
   FC,
+  ReactNode,
   useContext,
-  useState,
   useEffect,
-  ReactNode
+  useState
 } from 'react'
-import { groupDataList } from '@/data/groupData'
 
 import defaultLogo from '@/components/Navbar/assets/default-logo.png'
+import { groupDataList } from '@/data/groupData'
 
 interface GroupContextProps {
   group: string | null

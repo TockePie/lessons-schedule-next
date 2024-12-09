@@ -1,19 +1,19 @@
 'use client'
 
 import { Key } from 'react'
-import { redirect } from 'next/navigation'
-import Cookies from 'js-cookie'
 import {
   Button,
   Dropdown,
-  DropdownTrigger,
+  DropdownItem,
   DropdownMenu,
-  DropdownItem
+  DropdownTrigger
 } from '@nextui-org/react'
+import Cookies from 'js-cookie'
+import { redirect } from 'next/navigation'
 
-import { groupDataList } from '@/data/groupData'
-import useGroup from '@/common/providers/group'
 import { NAVBAR_TEXTS } from '@/common/constants/texts'
+import useGroup from '@/common/providers/group'
+import { groupDataList } from '@/data/groupData'
 
 const handleGroup = async (key: Key) => {
   Cookies.set('groupId', key.toString())

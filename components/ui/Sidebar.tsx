@@ -1,8 +1,8 @@
 'use client'
 
 import { FC, ReactNode, useRef } from 'react'
-import { useHotkeys } from 'react-hotkeys-hook'
 import { isDesktop } from 'react-device-detect'
+import { useHotkeys } from 'react-hotkeys-hook'
 import { Button, Kbd } from '@nextui-org/react'
 
 import useOutside from '@/hooks/use-outside'

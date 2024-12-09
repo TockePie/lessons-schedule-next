@@ -1,11 +1,10 @@
 'use client'
 
 import { Key } from 'react'
+import { Tab, Tabs } from '@nextui-org/react'
 
-import { Tabs, Tab } from '@nextui-org/react'
-
-import useWeekParity from '@/common/providers/weekParity'
 import { WEEKTAB_TEXTS } from '@/common/constants/texts'
+import useWeekParity from '@/common/providers/weekParity'
 
 const WeekTab = () => {
   const { weekParity, setWeekParity } = useWeekParity()

@@ -1,12 +1,11 @@
 'use client'
 
-import GROUP32 from './io-32'
-// import GROUP35 from './io-35'
-import GROUP42 from './io-42'
-
 import LOGO32 from './chat_logo_io-32.jpg'
 // import LOGO35 from './chat_logo_io-35.jpg'
 import LOGO42 from './chat_logo_io-42.jpg'
+import GROUP32 from './io-32'
+// import GROUP35 from './io-35'
+import GROUP42 from './io-42'
 
 const groupDataList = [
   {

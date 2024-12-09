@@ -1,10 +1,10 @@
 import * as React from 'react'
 import { NextUIProvider } from '@nextui-org/system'
-import { ThemeProvider as NextThemesProvider } from 'next-themes'
 import { cookies } from 'next/headers'
+import { ThemeProvider as NextThemesProvider } from 'next-themes'
 
-import { WeekParityProvider } from '@/common/providers/weekParity'
 import { GroupProvider } from '@/common/providers/group'
+import { WeekParityProvider } from '@/common/providers/weekParity'
 
 const Providers = async ({ children }: { children: React.ReactNode }) => {
   const cookieStore = await cookies()

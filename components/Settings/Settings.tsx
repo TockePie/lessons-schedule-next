@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { isMobileOnly } from 'react-device-detect'
 import {
   Chip,
@@ -33,7 +33,7 @@ const Settings = () => {
   return (
     <>
       <h2 className="text-2xl font-bold">Налаштування</h2>
-      <div className="flex flex-col justify-start pt-5 p-3 gap-y-4">
+      <div className="flex flex-col justify-start gap-y-4 p-3 pt-5">
         <Select
           isDisabled
           label="Вибірковий предмет"

@@ -1,28 +1,29 @@
 'use client'
 
+import { useEffect, useState } from 'react'
+import { isMobile, isMobileOnly } from 'react-device-detect'
+import { useDisclosure } from '@dwarvesf/react-hooks'
+import {
+  Button,
+  Card,
+  CardBody,
+  Chip,
+  Divider,
+  Image,
+  Navbar,
+  NavbarBrand,
+  NavbarContent
+} from '@nextui-org/react'
+import { Menu } from 'lucide-react'
 import dynamic from 'next/dynamic'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { useDisclosure } from '@dwarvesf/react-hooks'
-import { isMobile, isMobileOnly } from 'react-device-detect'
-import {
-  Navbar,
-  NavbarBrand,
-  NavbarContent,
-  Image,
-  Button,
-  Chip,
-  Divider,
-  Card,
-  CardBody
-} from '@nextui-org/react'
-import { Menu } from 'lucide-react'
+
+import { NAVBAR_TEXTS } from '@/common/constants/texts'
+import useGroup from '@/common/providers/group'
+import { Sidebar } from '@/components/ui/Sidebar'
 
 import GroupDropdownMenu from './components/DropdownMenu'
-import useGroup from '@/common/providers/group'
-import { NAVBAR_TEXTS } from '@/common/constants/texts'
-import { Sidebar } from '@/components/ui/Sidebar'
-import { useEffect, useState } from 'react'
 
 const Settings = dynamic(() => import('../Settings/Settings'), { ssr: false })
 
@@ -31,12 +32,12 @@ const NavbarComponent = () => {
   const [isClient, setIsClient] = useState(false)
   const router = useRouter()
   const { logo } = useGroup()
-  
+
   const handleHelpPress = () => {
     router.push('/help')
     onClose()
   }
-  
+
   useEffect(() => setIsClient(true), [])
 
   const isBordered = isClient ? isMobile : false
@@ -52,7 +53,7 @@ const NavbarComponent = () => {
           <b className="hidden p-3 text-2xl md:inline">
             {NAVBAR_TEXTS.schedule}
           </b>
-          <Chip color="warning" size="md">
+          <Chip color="warning" size="md" className="mx-2">
             Beta
           </Chip>
         </NavbarBrand>

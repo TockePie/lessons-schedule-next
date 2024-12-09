@@ -5,9 +5,9 @@ import {
   Dispatch,
   FC,
   ReactNode,
+  SetStateAction,
   useContext,
-  useState,
-  SetStateAction
+  useState
 } from 'react'
 import { getISOWeek } from 'date-fns'
 

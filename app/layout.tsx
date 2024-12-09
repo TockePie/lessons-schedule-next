@@ -1,11 +1,11 @@
-import { Metadata, Viewport } from 'next'
 import { Analytics } from '@vercel/analytics/react'
 import clsx from 'clsx'
+import { Metadata, Viewport } from 'next'
 
-import NavbarComponent from '@/components/Navbar/Navbar'
-import { fontSans } from '@/config/fonts'
 import { Providers } from '@/app/providers'
 import { LAYOUT_TEXTS } from '@/common/constants/texts'
+import NavbarComponent from '@/components/Navbar/Navbar'
+import { fontSans } from '@/config/fonts'
 
 import '@/styles/globals.css'
 
@@ -50,4 +50,4 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
 }
 
 export default RootLayout
-export { viewport, metadata }
+export { metadata, viewport }

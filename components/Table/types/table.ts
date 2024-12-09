@@ -1,5 +1,6 @@
-import { LessonType } from '@/components/Table/utils/getLessonColor'
 import { Dispatch, ReactNode, SetStateAction } from 'react'
+
+import { LessonType } from '@/components/Table/utils/getLessonColor'
 
 interface LessonUrl {
   url: string
@@ -54,4 +55,4 @@ interface TableComponentProps {
   pathname: string
 }
 
-export type { LessonUrl, ModalData, Lesson, LessonsData, TableComponentProps }
+export type { Lesson, LessonsData, LessonUrl, ModalData, TableComponentProps }

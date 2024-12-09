@@ -1,17 +1,18 @@
 'use client'
 
 import { useState } from 'react'
-import { redirect, usePathname } from 'next/navigation'
 import { isDesktop, isMobileOnly } from 'react-device-detect'
 import { Button, Divider, useDisclosure } from '@nextui-org/react'
+import { redirect, usePathname } from 'next/navigation'
 
-import useWeekParity from '@/common/providers/weekParity'
 import { TABLE_TEXTS } from '@/common/constants/texts'
+import useWeekParity from '@/common/providers/weekParity'
 import { ModalData } from '@/components/Table/types/table'
 import { groupDataList } from '@/data/groupData'
 
 import DesktopTable from './components/DesktopTable'
 import MobileTable from './components/MobileTable'
+
 import styles from './Table.module.scss'
 
 const TableComponent = () => {

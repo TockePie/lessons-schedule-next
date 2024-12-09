@@ -10,7 +10,7 @@ const allDays: DaysProps[] = [
   { key: 'wed', label: 'Середа', short: 'СР' },
   { key: 'thu', label: 'Четвер', short: 'ЧТ' },
   { key: 'fri', label: "П'ятниця", short: 'ПТ' },
-  { key: 'sat', label: 'Субота', short: 'СБ' },
+  { key: 'sat', label: 'Субота', short: 'СБ' }
 ]
 
 const getCurrentDay = (): [string, string] | undefined => {
