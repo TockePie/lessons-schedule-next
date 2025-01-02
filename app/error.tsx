@@ -1,7 +1,8 @@
 'use client'
 
-import { FC, useEffect } from 'react'
+import { FC, ReactNode, useEffect, useState } from 'react'
 import { Button, Textarea } from '@nextui-org/react'
+import { Check } from 'lucide-react'
 
 import { ERROR_TEXTS } from '@/common/constants/texts'
 
@@ -11,9 +12,14 @@ interface ErrorProps {
 }
 
 const Error: FC<ErrorProps> = ({ error, reset }) => {
+  const [copyText, setCopyText] = useState<ReactNode>(ERROR_TEXTS.copyButton)
   useEffect(() => console.error(error), [error])
 
-  const copyToClipboard = () => navigator.clipboard.writeText(error.message)
+  const copyToClipboard = () => {
+    navigator.clipboard.writeText(error.message)
+    setCopyText(<Check />)
+    setTimeout(() => setCopyText(ERROR_TEXTS.copyButton), 2000)
+  }
 
   return (
     <section className="flex flex-col items-center justify-center gap-4 py-4 md:gap-8 md:py-6">
@@ -21,14 +27,14 @@ const Error: FC<ErrorProps> = ({ error, reset }) => {
       <Textarea
         isReadOnly
         variant="bordered"
-        label={ERROR_TEXTS.textareaLabel}
         labelPlacement="outside"
+        label={ERROR_TEXTS.textareaLabel}
         defaultValue={error.message}
         className="md:w-1/2"
       />
       <div className="flex gap-4">
-        <Button onClick={copyToClipboard}>{ERROR_TEXTS.copyButton}</Button>
-        <Button color="primary" onClick={() => reset()}>
+        <Button onPress={copyToClipboard}>{copyText}</Button>
+        <Button color="primary" onPress={() => reset()}>
           {ERROR_TEXTS.retryButton}
         </Button>
       </div>
