@@ -14,10 +14,10 @@ import Link from 'next/link'
 import { NAVBAR_TEXTS } from '@/common/constants/texts'
 import useGroup from '@/common/providers/group'
 
-import DrawerComp from './components/Drawer'
-import GroupDropdownMenu from './components/DropdownMenu'
+import DrawerComp from './components/drawer'
+import GroupDropdownMenu from './components/dropdown-menu'
 
-const NavbarComponent = () => {
+function NavbarComponent() {
   const [isClient, setIsClient] = useState(false)
   const { logo } = useGroup()
 
@@ -37,6 +37,7 @@ const NavbarComponent = () => {
           Beta
         </Chip>
       </NavbarBrand>
+
       <NavbarContent justify="end">
         <GroupDropdownMenu />
         <DrawerComp />

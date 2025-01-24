@@ -20,7 +20,7 @@ const handleGroup = async (key: Key) => {
   redirect(`/${key}`)
 }
 
-const GroupDropdownMenu = () => {
+function GroupDropdownMenu() {
   const { group, groupId, setGroupId } = useGroup()
 
   const handleChoose = (key: Key) => {
@@ -35,6 +35,7 @@ const GroupDropdownMenu = () => {
           {groupId ? group : NAVBAR_TEXTS.chooseGroup}
         </Button>
       </DropdownTrigger>
+
       <DropdownMenu aria-label="Static Actions" onAction={handleChoose}>
         {groupDataList.map((item) => (
           <DropdownItem key={item.data.id}>{item.group}</DropdownItem>

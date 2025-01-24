@@ -3,7 +3,7 @@ import { redirect } from 'next/navigation'
 
 import TableComponent from '@/components/Table/TableComponent'
 
-const Home = async () => {
+async function Home() {
   const cookieStore = await cookies()
   const groupId = cookieStore.get('groupId')?.value
 

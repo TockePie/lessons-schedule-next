@@ -21,7 +21,7 @@ import {
 import { LifeBuoy, Menu } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 
-const DrawerComp = () => {
+function DrawerComp() {
   const { isOpen, onOpen, onOpenChange } = useDisclosure()
   const [isPwa, setIsPwa] = useState(false)
   const router = useRouter()
@@ -38,7 +38,7 @@ const DrawerComp = () => {
 
   return (
     <>
-      <Button isIconOnly color="primary" variant="faded" onClick={onOpen}>
+      <Button isIconOnly color="primary" variant="faded" onPress={onOpen}>
         <Menu />
       </Button>
       <Drawer
@@ -93,7 +93,7 @@ const DrawerComp = () => {
                   size="lg"
                   color="primary"
                   variant="faded"
-                  onClick={onClose}
+                  onPress={onClose}
                   className="w-full"
                 >
                   Закрити

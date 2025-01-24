@@ -9,8 +9,8 @@ import React, {
   useState
 } from 'react'
 
-import defaultLogo from '@/components/Navbar/assets/default-logo.png'
 import { groupDataList } from '@/data/groupData'
+import defaultLogo from '@/public/default-logo.png'
 
 interface GroupContextProps {
   group: string | null

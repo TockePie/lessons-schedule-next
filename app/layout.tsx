@@ -1,10 +1,11 @@
+import { ReactNode } from 'react'
 import { Analytics } from '@vercel/analytics/react'
 import clsx from 'clsx'
 import { Metadata, Viewport } from 'next'
 
+import NavbarComponent from '@/app/components/navbar/navbar'
 import { Providers } from '@/app/providers'
 import { LAYOUT_TEXTS } from '@/common/constants/texts'
-import NavbarComponent from '@/components/Navbar/Navbar'
 import { fontSans } from '@/config/fonts'
 
 import '@/styles/globals.css'
@@ -27,7 +28,7 @@ const viewport: Viewport = {
   ]
 }
 
-const RootLayout = ({ children }: { children: React.ReactNode }) => {
+function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html suppressHydrationWarning lang="en">
       <head />

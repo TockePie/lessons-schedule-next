@@ -33,7 +33,7 @@ const WeekParityProvider: FC<{ children: ReactNode }> = ({ children }) => {
   )
 }
 
-const useWeekParity = () => {
+function useWeekParity() {
   const context = useContext(WeekParityContext)
   if (!context) throw new Error('WeekParityContext is not provided')
   return context

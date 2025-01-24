@@ -1,4 +1,4 @@
-const HelpPage = () => {
+function HelpPage() {
   //TODO: Add content
 
   return (
