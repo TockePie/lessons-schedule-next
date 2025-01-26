@@ -1,10 +1,12 @@
 'use client'
 
-import { FC, ReactNode, useEffect, useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 import { Button, Textarea } from '@nextui-org/react'
-import { Check } from 'lucide-react'
 
 import { ERROR_TEXTS } from '@/common/constants/texts'
+
+import CopiedAlert from './components/error/copied-alert'
+import { AlertColor } from './components/error/types/alert-props'
 
 interface ErrorProps {
   error: Error
@@ -12,13 +14,34 @@ interface ErrorProps {
 }
 
 const Error: FC<ErrorProps> = ({ error, reset }) => {
-  const [copyText, setCopyText] = useState<ReactNode>(ERROR_TEXTS.copyButton)
+  const [showAlert, setShowAlert] = useState({
+    isVisible: false,
+    title: '',
+    description: '',
+    color: AlertColor.DEFAULT
+  })
+
   useEffect(() => console.error(error), [error])
 
   const copyToClipboard = () => {
-    navigator.clipboard.writeText(error.message)
-    setCopyText(<Check />)
-    setTimeout(() => setCopyText(ERROR_TEXTS.copyButton), 2000)
+    navigator.clipboard.writeText(error.message).then(
+      () => {
+        setShowAlert({
+          isVisible: true,
+          title: 'Copied to clipboard',
+          description: '',
+          color: AlertColor.SUCCESS
+        })
+      },
+      () => {
+        setShowAlert({
+          isVisible: true,
+          title: 'Failed to copy to clipboard',
+          description: "Maybe your browser doesn\'t support this function",
+          color: AlertColor.DANGER
+        })
+      }
+    )
   }
 
   return (
@@ -33,11 +56,12 @@ const Error: FC<ErrorProps> = ({ error, reset }) => {
         className="md:w-1/2"
       />
       <div className="flex gap-4">
-        <Button onPress={copyToClipboard}>{copyText}</Button>
+        <Button onPress={copyToClipboard}>{ERROR_TEXTS.copyButton}</Button>
         <Button color="primary" onPress={() => reset()}>
           {ERROR_TEXTS.retryButton}
         </Button>
       </div>
+      <CopiedAlert showAlert={showAlert} setShowAlert={setShowAlert} />
     </section>
   )
 }

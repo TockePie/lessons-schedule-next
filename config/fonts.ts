@@ -10,4 +10,4 @@ const fontMono = FontMono({
   variable: '--font-mono'
 })
 
-export { fontSans, fontMono }
+export { fontMono, fontSans }
