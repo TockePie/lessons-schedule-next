@@ -4,7 +4,7 @@ import { redirect } from 'next/navigation'
 
 export default async function Home() {
   const cookieStore = await cookies()
-  const groupId = cookieStore.get('group_id')?.value
+  const groupId = cookieStore.get('groupId')?.value
 
   if (groupId) {
     redirect(`/${groupId}`)
