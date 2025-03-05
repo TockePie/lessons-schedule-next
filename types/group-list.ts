@@ -1,5 +1,7 @@
+import { UUID } from 'crypto'
+
 interface GroupsListProps {
-  group_id: string
+  group_id: UUID
   name: string
 }
 

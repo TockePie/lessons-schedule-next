@@ -1,4 +1,7 @@
+import { UUID } from 'crypto'
 import { URL } from 'url'
+
+import { GroupProps } from '@/types/group'
 
 let url: URL
 const env = process.env.NODE_ENV
@@ -10,17 +13,33 @@ if (env == 'development') {
 }
 
 export const getGroupsList = async () => {
-  const res = await fetch(`${url}group`)
+  try {
+    const res = await fetch(`${url}group`)
+    const data = await res.json()
 
-  console.log(url)
-  const data = await res.json()
-
-  return data
+    return data as GroupProps[]
+  } catch (error) {
+    return {
+      error: {
+        status: 500,
+        message: (error as any).message
+      }
+    }
+  }
 }
 
-export const getGroupById = async (id: string) => {
-  const res = await fetch(`${url}group/${id}`)
-  const data = await res.json()
+export const getGroupById = async (id: UUID) => {
+  try {
+    const res = await fetch(`${url}group/${id}`)
+    const data = await res.json()
 
-  return data
+    return data as GroupProps
+  } catch (error) {
+    return {
+      error: {
+        status: 500,
+        message: (error as any).message
+      }
+    }
+  }
 }

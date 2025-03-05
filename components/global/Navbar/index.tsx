@@ -1,4 +1,5 @@
 import React from 'react'
+import { UUID } from 'crypto'
 import { cookies } from 'next/headers'
 
 import GroupList from '@/components/GroupList'
@@ -7,9 +8,13 @@ import { getGroupById } from '@/lib/api'
 
 export default async function Navbar() {
   const cookieStore = await cookies()
-  const groupId = cookieStore.get('groupId')?.value
+  const groupId = cookieStore.get('groupId')?.value as UUID
   const groupData = groupId ? await getGroupById(groupId) : undefined
-  const logo = groupData?.photo || '/default-logo.png'
+
+  const logo =
+    groupData && 'photo' in groupData
+      ? String(groupData.photo)
+      : '/default-logo.png'
 
   return (
     <nav className="border-b px-4 py-2 md:px-8 lg:px-16 dark:bg-neutral-950">
