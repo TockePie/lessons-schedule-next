@@ -14,9 +14,11 @@ import { GroupsListProps } from '@/types/group-list'
 import Choose from './Choose'
 
 export default async function GroupList({
-  groupData
+  groupData,
+  className
 }: {
-  groupData: GroupsListProps
+  groupData?: GroupsListProps
+  className?: string
 }) {
   const groupsList = await getGroupsList()
 
@@ -25,7 +27,9 @@ export default async function GroupList({
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline">{groupData?.name || 'Оберіть групу'}</Button>
+        <Button variant="outline" className={className}>
+          {groupData?.name || 'Оберіть групу'}
+        </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
         <DropdownMenuRadioGroup value={groupData?.group_id || ''}>

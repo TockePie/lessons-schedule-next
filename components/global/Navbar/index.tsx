@@ -1,10 +1,9 @@
 import React from 'react'
 import { cookies } from 'next/headers'
 
+import GroupList from '@/components/GroupList'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { getGroupById } from '@/lib/api'
-
-import GroupList from './GroupList'
 
 export default async function Navbar() {
   const cookieStore = await cookies()

@@ -2,6 +2,9 @@ import React from 'react'
 import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
 
+import GroupList from '@/components/GroupList'
+import { Button } from '@/components/ui/button'
+
 export default async function Home() {
   const cookieStore = await cookies()
   const groupId = cookieStore.get('groupId')?.value
@@ -10,5 +13,17 @@ export default async function Home() {
     redirect(`/${groupId}`)
   }
 
-  return <div className="bg-neutral-50 dark:bg-black">edvs</div>
+  return (
+    <main className="flex h-screen flex-col items-center justify-between gap-4 bg-neutral-50 py-10 md:gap-8 md:py-6 dark:bg-black">
+      <div>
+        <h1 className="text-center text-3xl font-bold">Оберіть групу</h1>
+      </div>
+      <div className="grid grid-cols-2 gap-4">
+        <GroupList className="bg-black p-7 text-white dark:bg-white dark:text-black" />
+        <Button variant="outline" className="p-7">
+          Допомога
+        </Button>
+      </div>
+    </main>
+  )
 }
