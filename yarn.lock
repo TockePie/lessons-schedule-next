@@ -3108,6 +3108,7 @@ __metadata:
     lucide-react: "npm:^0.477.0"
     next: "npm:15.2.1-canary.3"
     next-themes: "npm:^0.4.4"
+    normalize-url: "npm:^8.0.1"
     prettier: "npm:^3.5.2"
     prettier-plugin-tailwindcss: "npm:^0.6.11"
     react: "npm:^19.0.0"
@@ -3417,6 +3418,13 @@ __metadata:
   bin:
     next: dist/bin/next
   checksum: 10c0/51d094b841c404974f55d3c2bc46f3ff7b8ba63a0dc5b72b55839fadd932c1ebfb2ca048b28d70acd8c67360614dee3bf049ed8ce2a63631692149d1f896f1c9
+  languageName: node
+  linkType: hard
+
+"normalize-url@npm:^8.0.1":
+  version: 8.0.1
+  resolution: "normalize-url@npm:8.0.1"
+  checksum: 10c0/eb439231c4b84430f187530e6fdac605c5048ef4ec556447a10c00a91fc69b52d8d8298d9d608e68d3e0f7dc2d812d3455edf425e0f215993667c3183bcab1ef
   languageName: node
   linkType: hard
 

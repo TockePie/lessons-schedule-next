@@ -1,10 +1,7 @@
-import { UUID } from 'crypto'
-import { Url } from 'url'
-
 interface GroupProps {
-  group_id: UUID
+  group_id: string
   name: string
-  photo: Url
+  photo: string
   created_at: string
   updated_at: string
 }

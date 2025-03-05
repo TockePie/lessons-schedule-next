@@ -1,20 +1,33 @@
-import React from 'react'
-import { UUID } from 'crypto'
-import { cookies } from 'next/headers'
+'use client'
+
+import React, { useEffect, useState } from 'react'
+import { usePathname } from 'next/navigation'
 
 import GroupList from '@/components/GroupList'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { getGroupById } from '@/lib/api'
+import { GroupProps } from '@/types/group'
+import { InternalServerErrorProps } from '@/types/internal-error'
 
-export default async function Navbar() {
-  const cookieStore = await cookies()
-  const groupId = cookieStore.get('groupId')?.value as UUID
-  const groupData = groupId ? await getGroupById(groupId) : undefined
+export default function Navbar() {
+  const [groupData, setGroupData] = useState<
+    GroupProps | InternalServerErrorProps
+  >()
+  const [logo, setLogo] = useState<string>()
+  const pathname = usePathname()
 
-  const logo =
-    groupData && 'photo' in groupData
-      ? String(groupData.photo)
-      : '/default-logo.png'
+  useEffect(() => {
+    const fetchGroupData = async () => {
+      const groupId = pathname.split('/')[1] as string
+      const data = await getGroupById(groupId)
+      setGroupData(data)
+      setLogo('photo' in data ? data.photo : '/default-logo.png')
+    }
+
+    fetchGroupData().catch((error) => {
+      console.error('Failed to fetch group data:', error)
+    })
+  }, [pathname])
 
   return (
     <nav className="border-b px-4 py-2 md:px-8 lg:px-16 dark:bg-neutral-950">

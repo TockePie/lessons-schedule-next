@@ -1,4 +1,9 @@
-import React from 'react'
+'use client'
+
+import React, { Key, useEffect, useState } from 'react'
+import Cookies from 'js-cookie'
+import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 
 import { Button } from '@/components/ui/button'
 import {
@@ -13,16 +18,29 @@ import { GroupProps } from '@/types/group'
 import { GroupsListProps } from '@/types/group-list'
 import { InternalServerErrorProps } from '@/types/internal-error'
 
-import Choose from './Choose'
-
-export default async function GroupList({
+export default function GroupList({
   groupData,
   className
 }: {
   groupData: GroupProps | InternalServerErrorProps | undefined
   className?: string
 }) {
-  const groupsList = await getGroupsList()
+  const router = useRouter()
+  const [groupsList, setGroupsList] = useState<
+    GroupsListProps[] | InternalServerErrorProps
+  >([])
+
+  useEffect(() => {
+    const fetchGroupsList = async () => {
+      const data = await getGroupsList()
+      setGroupsList(data)
+    }
+
+    fetchGroupsList().catch((error) => {
+      console.error('Failed to fetch groups list:', error)
+    })
+  }, [])
+
   const isError = 'error' in groupsList
 
   const buttonText = isError
@@ -30,6 +48,13 @@ export default async function GroupList({
     : !groupData || 'error' in groupData
       ? 'Оберіть групу'
       : groupData.name
+
+  const handleGroup = async (key: Key) => {
+    if (key === Cookies.get('groupId')) return
+
+    Cookies.set('groupId', key.toString())
+    router.push(`/${key}`)
+  }
 
   return (
     <DropdownMenu>
@@ -49,7 +74,13 @@ export default async function GroupList({
                 value={group.group_id}
                 className="h-9"
               >
-                <Choose {...group} />
+                <Link
+                  href={`/${group.group_id}`}
+                  onClick={() => handleGroup(group.group_id)}
+                  className="w-full"
+                >
+                  {group.name}
+                </Link>
               </DropdownMenuRadioItem>
             ))}
         </DropdownMenuRadioGroup>
