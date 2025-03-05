@@ -1,4 +1,5 @@
 import React, { ReactNode } from 'react'
+import { disableReactDevTools } from '@fvilers/disable-react-devtools'
 import type { Metadata } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
 
@@ -28,6 +29,10 @@ export default function RootLayout({
 }: Readonly<{
   children: ReactNode
 }>) {
+  if (process.env.NODE_ENV === 'production') {
+    disableReactDevTools()
+  }
+
   return (
     <html lang="en" suppressHydrationWarning>
       <body
