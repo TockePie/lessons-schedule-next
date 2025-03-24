@@ -1,7 +1,7 @@
 import React from 'react'
 import { cookies } from 'next/headers'
 
-export default async function Page() {
+const Page = async () => {
   const cookieStore = await cookies()
   const groupId = cookieStore.get('group_id')?.value
 
@@ -11,3 +11,5 @@ export default async function Page() {
     </main>
   )
 }
+
+export default Page

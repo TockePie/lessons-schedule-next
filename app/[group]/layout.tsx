@@ -3,12 +3,12 @@ import { Metadata } from 'next'
 
 import Navbar from '@/components/global/Navbar'
 
-export const metadata: Metadata = {
+const metadata: Metadata = {
   title: 'Lessons Schedule',
   description: 'A simple schedule for lessons'
 }
 
-export default function PageLayout({ children }: { children: ReactNode }) {
+const PageLayout = ({ children }: { children: ReactNode }) => {
   return (
     <>
       <Navbar />
@@ -16,3 +16,6 @@ export default function PageLayout({ children }: { children: ReactNode }) {
     </>
   )
 }
+
+export { metadata }
+export default PageLayout

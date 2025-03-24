@@ -11,7 +11,7 @@ interface ErrorProps {
   reset: () => void
 }
 
-export default function Error({ error, reset }: ErrorProps) {
+const Error = ({ error, reset }: ErrorProps) => {
   useEffect(() => console.error(error), [error])
 
   const copyToClipboard = () => {
@@ -53,3 +53,5 @@ export default function Error({ error, reset }: ErrorProps) {
     </main>
   )
 }
+
+export default Error

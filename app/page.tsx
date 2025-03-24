@@ -5,7 +5,7 @@ import { redirect } from 'next/navigation'
 import GroupList from '@/components/GroupList'
 import { Button } from '@/components/ui/button'
 
-export default async function Home() {
+const Home = async () => {
   const cookieStore = await cookies()
   const groupId = cookieStore.get('groupId')?.value
 
@@ -14,7 +14,7 @@ export default async function Home() {
   }
 
   return (
-    <main className="flex h-screen flex-col items-center justify-between gap-4 bg-neutral-50 py-10 md:gap-8 md:py-6 dark:bg-black">
+    <main className="flex h-screen flex-col items-center justify-between gap-4 bg-neutral-50 py-10 md:justify-center md:gap-8 md:py-6 dark:bg-black">
       <div>
         <h1 className="text-center text-3xl font-bold">Оберіть групу</h1>
       </div>
@@ -27,3 +27,5 @@ export default async function Home() {
     </main>
   )
 }
+
+export default Home

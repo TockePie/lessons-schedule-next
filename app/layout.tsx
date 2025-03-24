@@ -19,16 +19,16 @@ const geistMono = Geist_Mono({
   subsets: ['latin']
 })
 
-export const metadata: Metadata = {
+const metadata: Metadata = {
   title: 'Lessons Schedule',
   description: 'A simple schedule for lessons'
 }
 
-export default function RootLayout({
+const RootLayout = ({
   children
 }: Readonly<{
   children: ReactNode
-}>) {
+}>) => {
   if (process.env.NODE_ENV === 'production') {
     disableReactDevTools()
   }
@@ -46,3 +46,6 @@ export default function RootLayout({
     </html>
   )
 }
+
+export { metadata }
+export default RootLayout
