@@ -1,9 +1,8 @@
 'use client'
 
-import React, { Key, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Cookies from 'js-cookie'
-import Link from 'next/link'
-import { useRouter } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 
 import { Button } from '@/components/ui/button'
 import {
@@ -13,76 +12,84 @@ import {
   DropdownMenuRadioItem,
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu'
-import { getGroupsList } from '@/lib/api'
+import { getGroupById, getGroupsList } from '@/lib/api'
 import { GroupProps } from '@/types/group'
 import { GroupsListProps } from '@/types/group-list'
-import { InternalServerErrorProps } from '@/types/internal-error'
 
-export default function GroupList({
-  groupData,
-  className
-}: {
-  groupData: GroupProps | InternalServerErrorProps | undefined
-  className?: string
-}) {
+export default function GroupList({ className }: { className?: string }) {
+  const [currentGroup, setCurrentGroup] = useState<GroupProps | null>(null)
+  const [groups, setGroups] = useState<GroupsListProps[]>([])
+  const [isLoading, setIsLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
+
+  const pathname = usePathname()
   const router = useRouter()
-  const [groupsList, setGroupsList] = useState<
-    GroupsListProps[] | InternalServerErrorProps
-  >([])
 
   useEffect(() => {
-    const fetchGroupsList = async () => {
-      const data = await getGroupsList()
-      setGroupsList(data)
+    const loadData = async () => {
+      setIsLoading(true)
+      try {
+        const groupsData = await getGroupsList()
+        if ('error' in groupsData) {
+          setError(`Error ${groupsData.error.status}`)
+          return
+        }
+        setGroups(groupsData)
+
+        const groupId = pathname.split('/')[1]
+        if (groupId) {
+          const groupData = await getGroupById(groupId)
+          if (!('error' in groupData)) {
+            setCurrentGroup(groupData)
+          }
+        }
+      } catch (err) {
+        setError('Failed to load data')
+        console.error('Data loading error:', err)
+      } finally {
+        setIsLoading(false)
+      }
     }
 
-    fetchGroupsList().catch((error) => {
-      console.error('Failed to fetch groups list:', error)
-    })
-  }, [])
+    loadData()
+  }, [pathname])
 
-  const isError = 'error' in groupsList
+  const handleGroupSelect = (groupId: string) => {
+    if (groupId === currentGroup?.group_id) return
 
-  const buttonText = isError
-    ? `Помилка ${groupsList.error.status}`
-    : !groupData || 'error' in groupData
-      ? 'Оберіть групу'
-      : groupData.name
-
-  const handleGroup = async (key: Key) => {
-    if (key === Cookies.get('groupId')) return
-
-    Cookies.set('groupId', key.toString())
-    router.push(`/${key}`)
+    Cookies.set('groupId', groupId)
+    router.push(`/${groupId}`)
   }
+
+  const buttonText = error
+    ? `Помилка: ${error}`
+    : currentGroup
+      ? currentGroup.name
+      : 'Оберіть групу'
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline" className={className} disabled={isError}>
-          {buttonText}
+        <Button
+          variant="outline"
+          className={className}
+          disabled={!!error || isLoading}
+        >
+          {isLoading ? 'Завантаження...' : buttonText}
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
-        <DropdownMenuRadioGroup
-          value={groupData && !('error' in groupData) ? groupData.group_id : ''}
-        >
-          {!isError &&
-            groupsList.map((group: GroupsListProps) => (
-              <DropdownMenuRadioItem
-                key={group.group_id}
-                value={group.group_id}
-                className="h-9"
-              >
-                <Link
-                  href={`/${group.group_id}`}
-                  onClick={() => handleGroup(group.group_id)}
-                  className="w-full"
-                >
-                  {group.name}
-                </Link>
-              </DropdownMenuRadioItem>
-            ))}
+        <DropdownMenuRadioGroup value={currentGroup?.group_id || ''}>
+          {groups.map((group) => (
+            <DropdownMenuRadioItem
+              key={group.group_id}
+              value={group.group_id}
+              className="h-9"
+              onClick={() => handleGroupSelect(group.group_id)}
+            >
+              {group.name}
+            </DropdownMenuRadioItem>
+          ))}
         </DropdownMenuRadioGroup>
       </DropdownMenuContent>
     </DropdownMenu>
