@@ -5,7 +5,7 @@ import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 
 import AvatarLogo from './AvatarLogo'
 
-export default function Navbar() {
+const Navbar = () => {
   return (
     <nav className="border-b px-4 py-2 md:px-8 lg:px-16 dark:bg-neutral-950">
       <div className="mx-auto flex max-w-[1024px] items-center justify-between">
@@ -22,3 +22,5 @@ export default function Navbar() {
     </nav>
   )
 }
+
+export default Navbar

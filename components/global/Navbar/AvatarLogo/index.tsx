@@ -6,7 +6,7 @@ import { usePathname } from 'next/navigation'
 import { AvatarImage } from '@/components/ui/avatar'
 import { getGroupById } from '@/lib/api'
 
-export default function AvatarLogo() {
+const AvatarLogo = () => {
   const [logo, setLogo] = useState<string>()
   const pathname = usePathname()
 
@@ -24,3 +24,5 @@ export default function AvatarLogo() {
 
   return <AvatarImage src={logo} alt="Avatar" />
 }
+
+export default AvatarLogo
