@@ -1,6 +1,8 @@
 import normalizeUrl from 'normalize-url'
 
 import { GroupProps } from '@/types/group'
+import { GroupsListProps } from '@/types/group-list'
+import { InternalServerErrorProps } from '@/types/internal-error'
 
 let url: string
 const env = process.env.NODE_ENV
@@ -11,12 +13,14 @@ if (env == 'development') {
   url = normalizeUrl('https://lessons-schedule-api.vercel.app')
 }
 
-export const getGroupsList = async () => {
+const getGroupsList = async (): Promise<
+  GroupsListProps[] | InternalServerErrorProps
+> => {
   try {
     const res = await fetch(`${url}/group`)
     const data = await res.json()
 
-    return data as GroupProps[]
+    return data as GroupsListProps[]
   } catch (error) {
     return {
       error: {
@@ -27,7 +31,9 @@ export const getGroupsList = async () => {
   }
 }
 
-export const getGroupById = async (id: string) => {
+const getGroupById = async (
+  id: string
+): Promise<GroupProps | InternalServerErrorProps> => {
   try {
     const res = await fetch(`${url}/group/${id}`)
     const data = await res.json()
@@ -43,7 +49,8 @@ export const getGroupById = async (id: string) => {
   }
 }
 
-export const getGroupSchedule = async (id: string, week: 'even' | 'odd') => {
+//TODO: Make schedule interface
+const getGroupSchedule = async (id: string, week: 'even' | 'odd') => {
   try {
     const res = await fetch(`${url}/group/${id}?week=${week}`)
     const data = await res.json()
@@ -58,3 +65,5 @@ export const getGroupSchedule = async (id: string, week: 'even' | 'odd') => {
     }
   }
 }
+
+export { getGroupById, getGroupSchedule, getGroupsList }
