@@ -3,6 +3,7 @@ import normalizeUrl from 'normalize-url'
 import { GroupProps } from '@/types/group'
 import { GroupsListProps } from '@/types/group-list'
 import { InternalServerErrorProps } from '@/types/internal-error'
+import { ScheduleProps } from '@/types/schedule'
 
 let url: string
 const env = process.env.NODE_ENV
@@ -51,13 +52,14 @@ const getGroupById = async (
   }
 }
 
-//TODO: Make schedule interface
 const getGroupSchedule = async (id: string, week: 'even' | 'odd') => {
   try {
-    const res = await fetch(`${url}/group/${id}?week=${week}`)
+    const res = await fetch(`${url}/schedule/${id}?week=${week}`, {
+      cache: 'force-cache'
+    })
     const data = await res.json()
 
-    return data as GroupProps
+    return data as ScheduleProps[]
   } catch (error) {
     return {
       error: {

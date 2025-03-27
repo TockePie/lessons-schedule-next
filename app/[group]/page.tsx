@@ -1,11 +1,12 @@
 'use client'
 
-import React from 'react'
+import React, { lazy } from 'react'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@ui/tabs'
 
 import useWeekParity from '@/common/context/week-parity'
-import Table from '@/components/Table'
 import { WeekParity } from '@/types/week-parity'
+
+const TableDesktop = lazy(() => import('@/components/Table'))
 
 const Page = () => {
   const { weekParity, setWeekParity } = useWeekParity()
@@ -15,14 +16,15 @@ const Page = () => {
       <Tabs
         defaultValue={weekParity}
         onValueChange={(value) => setWeekParity(value as WeekParity)}
-        className="flex flex-col items-center gap-2"
+        className="flex flex-col items-center gap-5"
       >
         <TabsList className="grid grid-cols-2 border border-neutral-200">
           <TabsTrigger value="even">Парний тиждень</TabsTrigger>
           <TabsTrigger value="odd">Непарний тиждень</TabsTrigger>
         </TabsList>
-        <TabsContent value={weekParity}>
-          <Table />
+
+        <TabsContent value={weekParity} className="w-full">
+          <TableDesktop />
         </TabsContent>
       </Tabs>
     </main>

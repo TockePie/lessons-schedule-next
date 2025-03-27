@@ -1,12 +1,22 @@
 import React from 'react'
-import { Table } from '@ui/table'
+import { Table, TableHead, TableHeader, TableRow } from '@ui/table'
 
-import useWeekParity from '@/common/context/week-parity'
+import DayOfWeekRow from './DayOfWeekRow'
+import TableBodyComp from './TableBodyComp'
 
-const Table = () => {
-  const { weekParity } = useWeekParity()
+const TableDesktop = () => {
+  return (
+    <Table className="mx-auto w-11/12 max-w-360 table-fixed">
+      <TableHeader>
+        <TableRow>
+          <TableHead className="w-1/12 text-center">Пара</TableHead>
+          {DayOfWeekRow}
+        </TableRow>
+      </TableHeader>
 
-  return <Table></Table>
+      <TableBodyComp />
+    </Table>
+  )
 }
 
-export default Table
+export default TableDesktop
