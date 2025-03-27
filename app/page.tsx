@@ -1,9 +1,9 @@
 import React from 'react'
+import { Button } from '@ui/button'
 import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
 
 import GroupList from '@/components/GroupList'
-import { Button } from '@/components/ui/button'
 
 const Home = async () => {
   const cookieStore = await cookies()

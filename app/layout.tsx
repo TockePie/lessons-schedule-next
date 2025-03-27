@@ -1,9 +1,8 @@
 import React, { ReactNode } from 'react'
 import { disableReactDevTools } from '@fvilers/disable-react-devtools'
+import { Toaster } from '@ui/sonner'
 import type { Metadata } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
-
-import { Toaster } from '@/components/ui/sonner'
 
 import Providers from './providers'
 
