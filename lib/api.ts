@@ -35,7 +35,9 @@ const getGroupById = async (
   id: string
 ): Promise<GroupProps | InternalServerErrorProps> => {
   try {
-    const res = await fetch(`${url}/group/${id}`)
+    const res = await fetch(`${url}/group/${id}`, {
+      cache: 'force-cache'
+    })
     const data = await res.json()
 
     return data as GroupProps

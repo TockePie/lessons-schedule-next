@@ -1,10 +1,9 @@
 'use client'
 
 import React, { useEffect } from 'react'
+import { Button } from '@ui/button'
+import { Textarea } from '@ui/textarea'
 import { toast } from 'sonner'
-
-import { Button } from '@/components/ui/button'
-import { Textarea } from '@/components/ui/textarea'
 
 interface ErrorProps {
   error: Error
