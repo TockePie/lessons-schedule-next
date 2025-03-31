@@ -12,6 +12,7 @@ import {
 } from '@ui/dropdown-menu'
 import Cookies from 'js-cookie'
 import { usePathname, useRouter } from 'next/navigation'
+import { toast } from 'sonner'
 
 import { getGroupById, getGroupsList } from '@/lib/api'
 
@@ -50,9 +51,13 @@ export default function GroupList({ className }: { className?: string }) {
 
   const isLoading = isGroupsLoading || isCurrentGroupLoading
 
-  const errorMessage = isGroupsError
-    ? `Помилка: ${groupsError instanceof Error ? groupsError.message : 'Failed to load data'}`
-    : null
+  if (isGroupsError) {
+    toast.error(
+      `Помилка: ${groupsError instanceof Error ? groupsError.message : 'Failed to load data'}`
+    )
+  }
+
+  const errorMessage = isGroupsError ? 'Помилка' : null
 
   const buttonText = errorMessage
     ? errorMessage
