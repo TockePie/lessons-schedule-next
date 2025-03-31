@@ -16,9 +16,9 @@ const Page = () => {
       <Tabs
         defaultValue={weekParity}
         onValueChange={(value) => setWeekParity(value as WeekParity)}
-        className="flex flex-col items-center gap-5"
+        className="flex flex-col items-center gap-5 select-none"
       >
-        <TabsList className="grid grid-cols-2 border border-neutral-200">
+        <TabsList className="grid grid-cols-2 border border-neutral-200 dark:border-neutral-900 dark:bg-neutral-950">
           <TabsTrigger value="even">Парний тиждень</TabsTrigger>
           <TabsTrigger value="odd">Непарний тиждень</TabsTrigger>
         </TabsList>

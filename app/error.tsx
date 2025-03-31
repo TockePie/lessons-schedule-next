@@ -3,7 +3,8 @@
 import React, { useEffect } from 'react'
 import { Button } from '@ui/button'
 import { Textarea } from '@ui/textarea'
-import { toast } from 'sonner'
+
+import copyToClipboard from '@/utils/copy-to-clipboard'
 
 interface ErrorProps {
   error: Error
@@ -13,16 +14,7 @@ interface ErrorProps {
 const Error = ({ error, reset }: ErrorProps) => {
   useEffect(() => console.error(error), [error])
 
-  const copyToClipboard = () => {
-    navigator.clipboard.writeText(error.message).then(
-      () => {
-        toast.success('Текст помилки скопійовано в буфер обміну')
-      },
-      () => {
-        toast.error('Не вдалося скопіювати текст помилки')
-      }
-    )
-  }
+  const handleCopy = () => copyToClipboard(error)
 
   return (
     <main className="flex h-screen flex-col items-center justify-between gap-4 py-10 md:gap-8 md:py-6">
@@ -40,7 +32,7 @@ const Error = ({ error, reset }: ErrorProps) => {
       <div className="flex flex-col-reverse gap-4 md:flex-row">
         <Button
           variant="outline"
-          onClick={copyToClipboard}
+          onClick={handleCopy}
           className="cursor-pointer"
         >
           Скопіювати текст помилки

@@ -1,6 +1,7 @@
 'use client'
 
-import React, { useEffect, useState } from 'react'
+import React from 'react'
+import { useQuery } from '@tanstack/react-query'
 import { Button } from '@ui/button'
 import {
   DropdownMenu,
@@ -13,54 +14,48 @@ import Cookies from 'js-cookie'
 import { usePathname, useRouter } from 'next/navigation'
 
 import { getGroupById, getGroupsList } from '@/lib/api'
-import { GroupProps } from '@/types/group'
-import { GroupsListProps } from '@/types/group-list'
 
 export default function GroupList({ className }: { className?: string }) {
-  const [currentGroup, setCurrentGroup] = useState<GroupProps | null>(null)
-  const [groups, setGroups] = useState<GroupsListProps[]>([])
-  const [isLoading, setIsLoading] = useState(true)
-  const [error, setError] = useState<string | null>(null)
-
   const pathname = usePathname()
   const router = useRouter()
 
-  useEffect(() => {
-    void (async () => {
-      setIsLoading(true)
-      try {
-        const groupsData = await getGroupsList()
-        if ('error' in groupsData) {
-          setError(`Error ${groupsData.error.status}`)
-          return
-        }
-        setGroups(groupsData)
+  const groupId = pathname.split('/')[1]
 
-        const groupId = pathname.split('/')[1]
-        if (groupId) {
-          const groupData = await getGroupById(groupId)
-          if (!('error' in groupData)) {
-            setCurrentGroup(groupData)
-          }
-        }
-      } catch (err) {
-        setError('Failed to load data')
-        console.error('Data loading error:', err)
-      } finally {
-        setIsLoading(false)
-      }
-    })()
-  }, [pathname])
+  const {
+    data: groups = [],
+    isLoading: isGroupsLoading,
+    isError: isGroupsError,
+    error: groupsError
+  } = useQuery({
+    queryKey: ['groupsList'],
+    queryFn: getGroupsList,
+    refetchOnWindowFocus: false,
+    staleTime: 1000 * 60 * 60 * 24 // 1 day
+  })
 
-  const handleGroupSelect = (groupId: string) => {
-    if (groupId === currentGroup?.group_id) return
+  const { data: currentGroup, isLoading: isCurrentGroupLoading } = useQuery({
+    queryKey: ['group', groupId],
+    queryFn: () => getGroupById(groupId),
+    enabled: !!groupId,
+    refetchOnWindowFocus: false,
+    staleTime: 1000 * 60 * 60 * 24 // 1 day
+  })
 
-    Cookies.set('groupId', groupId)
-    router.push(`/${groupId}`)
+  const handleGroupSelect = (newGroupId: string) => {
+    if (newGroupId === currentGroup?.group_id) return
+
+    Cookies.set('groupId', newGroupId)
+    router.push(`/${newGroupId}`)
   }
 
-  const buttonText = error
-    ? `Помилка: ${error}`
+  const isLoading = isGroupsLoading || isCurrentGroupLoading
+
+  const errorMessage = isGroupsError
+    ? `Помилка: ${groupsError instanceof Error ? groupsError.message : 'Failed to load data'}`
+    : null
+
+  const buttonText = errorMessage
+    ? errorMessage
     : currentGroup
       ? currentGroup.name
       : 'Оберіть групу'
@@ -71,7 +66,7 @@ export default function GroupList({ className }: { className?: string }) {
         <Button
           variant="outline"
           className={className}
-          disabled={!!error || isLoading}
+          disabled={!!errorMessage || isLoading}
         >
           {isLoading ? 'Завантаження...' : buttonText}
         </Button>

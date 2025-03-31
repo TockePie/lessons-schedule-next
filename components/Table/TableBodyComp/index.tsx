@@ -1,31 +1,35 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
+import { useQuery } from '@tanstack/react-query'
 import { usePathname } from 'next/navigation'
 
 import useWeekParity from '@/common/context/week-parity'
 import { TableBody, TableCell, TableRow } from '@/components/ui/table'
 import { getGroupSchedule } from '@/lib/api'
-import { InternalServerErrorProps } from '@/types/internal-error'
-import { ScheduleProps } from '@/types/schedule'
 
 import lessonNumber from '../common/lesson-number'
 
 const TableBodyComp = () => {
-  const [scheduleData, setScheduleData] = useState<
-    ScheduleProps[] | InternalServerErrorProps
-  >()
   const { weekParity } = useWeekParity()
   const pathname = usePathname()
 
-  useEffect(() => {
-    void (async () => {
-      const groupId = pathname.split('/')[1] as string
-      const data = await getGroupSchedule(groupId, weekParity)
-      setScheduleData(data)
-    })()
-  }, [pathname, weekParity])
+  const groupId = pathname.split('/')[1] as string
 
-  if (scheduleData && 'error' in scheduleData)
-    throw new Error(scheduleData.error.message)
+  const {
+    data: scheduleData,
+    isError,
+    error
+  } = useQuery({
+    queryKey: ['group-schedule', pathname, weekParity],
+    queryFn: () => getGroupSchedule(groupId, weekParity),
+    enabled: !!groupId,
+    refetchOnWindowFocus: false,
+    refetchOnMount: false,
+    staleTime: 1000 * 60 * 60 * 24 // 1 day
+  })
+
+  if (isError) {
+    throw new Error(error.message)
+  }
 
   const RowBlock = lessonNumber.map((time, index) => {
     const hasRow =

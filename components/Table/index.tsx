@@ -10,7 +10,7 @@ const TableDesktop = () => {
       <TableHeader>
         <TableRow>
           <TableHead className="w-1/12 text-center">Пара</TableHead>
-          {DayOfWeekRow}
+          <DayOfWeekRow />
         </TableRow>
       </TableHeader>
 

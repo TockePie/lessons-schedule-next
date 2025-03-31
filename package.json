@@ -36,6 +36,7 @@
     "@next/eslint-plugin-next": "^15.2.0",
     "@tailwindcss/postcss": "^4",
     "@tanstack/eslint-plugin-query": "^5.66.1",
+    "@tanstack/react-query-devtools": "^5.71.1",
     "@types/js-cookie": "^3",
     "@types/node": "^20",
     "@types/react": "^19",

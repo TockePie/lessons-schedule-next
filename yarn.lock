@@ -1162,6 +1162,25 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@tanstack/query-devtools@npm:5.67.2":
+  version: 5.67.2
+  resolution: "@tanstack/query-devtools@npm:5.67.2"
+  checksum: 10c0/85172bb7cbca204e62507ffb72add4ff8f204b034ea0c6bb82cc44a00756ab196bd8a688b5e857911274aa5e7c467cdda6a393ebce6ba36ce8d471d5b52060fb
+  languageName: node
+  linkType: hard
+
+"@tanstack/react-query-devtools@npm:^5.71.1":
+  version: 5.71.1
+  resolution: "@tanstack/react-query-devtools@npm:5.71.1"
+  dependencies:
+    "@tanstack/query-devtools": "npm:5.67.2"
+  peerDependencies:
+    "@tanstack/react-query": ^5.71.1
+    react: ^18 || ^19
+  checksum: 10c0/48100df0c406cdec9a08b209d8b33305f9681a7fc6c73490c9da2c5b9ca679e8cdea932f7edae137f4aab67915a3641021c19cf8b52ed0ee70403038b78622cc
+  languageName: node
+  linkType: hard
+
 "@tanstack/react-query@npm:^5.69.0":
   version: 5.69.0
   resolution: "@tanstack/react-query@npm:5.69.0"
@@ -3123,6 +3142,7 @@ __metadata:
     "@tailwindcss/postcss": "npm:^4"
     "@tanstack/eslint-plugin-query": "npm:^5.66.1"
     "@tanstack/react-query": "npm:^5.69.0"
+    "@tanstack/react-query-devtools": "npm:^5.71.1"
     "@types/js-cookie": "npm:^3"
     "@types/node": "npm:^20"
     "@types/react": "npm:^19"
