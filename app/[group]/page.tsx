@@ -12,7 +12,7 @@ const Page = () => {
   const { weekParity, setWeekParity } = useWeekParity()
 
   return (
-    <main className="h-fit bg-neutral-50 p-5 dark:bg-black">
+    <main className="h-full bg-neutral-50 p-5 dark:bg-black">
       <Tabs
         defaultValue={weekParity}
         onValueChange={(value) => setWeekParity(value as WeekParity)}

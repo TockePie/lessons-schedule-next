@@ -18,7 +18,7 @@ const Card = (props: CardProps) => {
   return (
     <div
       className={clsx(
-        'flex min-h-32 cursor-pointer flex-col items-center justify-between gap-1 rounded-lg border-2 bg-white p-2 transition-all hover:bg-neutral-200 dark:border-neutral-700 dark:bg-neutral-900',
+        'flex min-h-32 cursor-pointer flex-col items-center justify-between gap-1 rounded-lg border-2 bg-white p-2 transition-all hover:bg-neutral-200 dark:bg-neutral-900',
         getLessonColor(type),
         'transform transition duration-150 ease-in-out active:scale-95'
       )}
@@ -27,7 +27,7 @@ const Card = (props: CardProps) => {
       <h2 className="overflow-wrap break-word my-auto w-full text-center text-xl font-bold break-words whitespace-normal">
         {title}
       </h2>
-      <p>{teacher}</p>
+      <p className="text-neutral-600 dark:text-neutral-200">{teacher}</p>
     </div>
   )
 }

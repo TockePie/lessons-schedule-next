@@ -35,7 +35,7 @@ const RootLayout = ({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased dark:bg-black`}
+        className={`${geistSans.variable} ${geistMono.variable} h-screen antialiased dark:bg-black`}
       >
         <Providers>
           {children}

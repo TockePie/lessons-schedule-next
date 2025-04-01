@@ -31,6 +31,7 @@ const TableBodyComp = () => {
     throw new Error(error.message)
   }
 
+  //TODO: make message if scheduleData is empty
   return <TableBody>{RowBlock(scheduleData)}</TableBody>
 }
 
