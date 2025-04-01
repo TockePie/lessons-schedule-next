@@ -16,7 +16,21 @@ import { toast } from 'sonner'
 
 import { getGroupById, getGroupsList } from '@/lib/api'
 
-export default function GroupList({ className }: { className?: string }) {
+export default function GroupList({
+  className,
+  variant = 'outline'
+}: {
+  className?: string
+  variant?:
+    | 'link'
+    | 'default'
+    | 'destructive'
+    | 'outline'
+    | 'secondary'
+    | 'ghost'
+    | null
+    | undefined
+}) {
   const pathname = usePathname()
   const router = useRouter()
 
@@ -69,7 +83,7 @@ export default function GroupList({ className }: { className?: string }) {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button
-          variant="outline"
+          variant={variant}
           className={className}
           disabled={!!errorMessage || isLoading}
         >

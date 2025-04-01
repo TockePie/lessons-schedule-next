@@ -1,7 +1,7 @@
 import React from 'react'
 import { Avatar, AvatarFallback } from '@ui/avatar'
 
-import GroupList from '@/components/GroupList'
+import GroupList from '@/components/global/GroupList'
 
 import AvatarLogo from './AvatarLogo'
 

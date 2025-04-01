@@ -1,8 +1,7 @@
 import React, { Key, useState } from 'react'
+import { TableHead } from '@ui/table'
 import clsx from 'clsx'
 import { getDay } from 'date-fns'
-
-import { TableHead } from '@/components/ui/table'
 
 import dayOfWeek from '../common/day-of-the-week'
 

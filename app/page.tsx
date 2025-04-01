@@ -3,7 +3,7 @@ import { Button } from '@ui/button'
 import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
 
-import GroupList from '@/components/GroupList'
+import GroupList from '@/components/global/GroupList'
 
 const Home = async () => {
   const cookieStore = await cookies()
@@ -19,7 +19,7 @@ const Home = async () => {
         <h1 className="text-center text-3xl font-bold">Оберіть групу</h1>
       </div>
       <div className="grid grid-cols-2 gap-4">
-        <GroupList className="bg-black p-7 text-white dark:bg-white dark:text-black" />
+        <GroupList variant="default" className="p-7" />
         <Button variant="outline" className="p-7">
           Допомога
         </Button>

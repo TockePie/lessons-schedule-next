@@ -1,12 +1,12 @@
 import React from 'react'
 import { useQuery } from '@tanstack/react-query'
+import { TableBody } from '@ui/table'
 import { usePathname } from 'next/navigation'
 
 import useWeekParity from '@/common/context/week-parity'
-import { TableBody, TableCell, TableRow } from '@/components/ui/table'
 import { getGroupSchedule } from '@/lib/api'
 
-import lessonNumber from '../common/lesson-number'
+import RowBlock from './RowBlock'
 
 const TableBodyComp = () => {
   const { weekParity } = useWeekParity()
@@ -31,20 +31,7 @@ const TableBodyComp = () => {
     throw new Error(error.message)
   }
 
-  const RowBlock = lessonNumber.map((time, index) => {
-    const hasRow =
-      Array.isArray(scheduleData) &&
-      scheduleData.some((e) => e.row === time.row)
-    if (!hasRow) return
-
-    return (
-      <TableRow key={index}>
-        <TableCell className="text-center">{time.name}</TableCell>
-      </TableRow>
-    )
-  })
-
-  return <TableBody>{RowBlock}</TableBody>
+  return <TableBody>{RowBlock(scheduleData)}</TableBody>
 }
 
 export default TableBodyComp
