@@ -18,6 +18,7 @@ const Home = async () => {
       <div>
         <h1 className="text-center text-3xl font-bold">Оберіть групу</h1>
       </div>
+
       <div className="grid grid-cols-2 gap-4">
         <GroupList variant="default" className="p-7" />
         <Button variant="outline" className="p-7">

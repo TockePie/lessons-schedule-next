@@ -1,6 +1,6 @@
 import React from 'react'
 import { useQuery } from '@tanstack/react-query'
-import { TableBody } from '@ui/table'
+import { TableBody, TableCell, TableRow } from '@ui/table'
 import { usePathname } from 'next/navigation'
 
 import useWeekParity from '@/common/context/week-parity'
@@ -17,6 +17,7 @@ const TableBodyComp = () => {
   const {
     data: scheduleData,
     isError,
+    isLoading,
     error
   } = useQuery({
     queryKey: ['group-schedule', pathname, weekParity],
@@ -27,11 +28,39 @@ const TableBodyComp = () => {
     staleTime: 1000 * 60 * 60 * 24 // 1 day
   })
 
+  if (isLoading) {
+    return (
+      <TableBody>
+        <TableRow>
+          <TableCell colSpan={7} className="py-8 text-center">
+            <div className="flex justify-center">
+              <div className="border-primary h-6 w-6 animate-spin rounded-full border-2 border-t-transparent"></div>
+            </div>
+          </TableCell>
+        </TableRow>
+      </TableBody>
+    )
+  }
+
   if (isError) {
     throw new Error(error.message)
   }
 
-  //TODO: make message if scheduleData is empty
+  if (!scheduleData || scheduleData.length === 0) {
+    return (
+      <TableBody>
+        <TableRow>
+          <TableCell
+            colSpan={7}
+            className="text-muted-foreground py-8 text-center text-xl font-bold"
+          >
+            Розклад відсутній для цієї групи
+          </TableCell>
+        </TableRow>
+      </TableBody>
+    )
+  }
+
   return <TableBody>{RowBlock(scheduleData)}</TableBody>
 }
 

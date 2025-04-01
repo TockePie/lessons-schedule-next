@@ -16,10 +16,7 @@ import { toast } from 'sonner'
 
 import { getGroupById, getGroupsList } from '@/lib/api'
 
-export default function GroupList({
-  className,
-  variant = 'outline'
-}: {
+interface GroupListProps {
   className?: string
   variant?:
     | 'link'
@@ -30,7 +27,11 @@ export default function GroupList({
     | 'ghost'
     | null
     | undefined
-}) {
+}
+
+export default function GroupList(props: GroupListProps) {
+  const { className, variant = 'outline' } = props
+
   const pathname = usePathname()
   const router = useRouter()
 
@@ -63,14 +64,13 @@ export default function GroupList({
     router.push(`/${newGroupId}`)
   }
 
-  const isLoading = isGroupsLoading || isCurrentGroupLoading
-
   if (isGroupsError) {
     toast.error(
       `Помилка: ${groupsError instanceof Error ? groupsError.message : 'Failed to load data'}`
     )
   }
 
+  const isLoading = isGroupsLoading || isCurrentGroupLoading
   const errorMessage = isGroupsError ? 'Помилка' : null
 
   const buttonText = errorMessage
@@ -90,6 +90,7 @@ export default function GroupList({
           {isLoading ? 'Завантаження...' : buttonText}
         </Button>
       </DropdownMenuTrigger>
+
       <DropdownMenuContent>
         <DropdownMenuRadioGroup value={currentGroup?.group_id || ''}>
           {groups.map((group) => (

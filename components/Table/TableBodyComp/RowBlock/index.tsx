@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react'
 
-import lessonNumber from '@/components/Table/common/lesson-number'
+import lessonNumber from '@/common/constants/lesson-number'
 import { TableCell, TableRow } from '@/components/ui/table'
 import { ScheduleProps } from '@/types/schedule'
 
