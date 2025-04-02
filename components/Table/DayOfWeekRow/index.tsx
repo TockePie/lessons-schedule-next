@@ -3,7 +3,7 @@ import { TableHead } from '@ui/table'
 import clsx from 'clsx'
 import { getDay } from 'date-fns'
 
-import dayOfWeek from '../../../common/constants/day-of-the-week'
+import dayOfWeek from '@/common/constants/day-of-the-week'
 
 const DayOfWeekRow = () => {
   const [dayNumber] = useState(getDay(new Date()))
