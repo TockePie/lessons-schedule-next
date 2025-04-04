@@ -1,4 +1,4 @@
-import React, { Key, useState } from 'react'
+import React, { Key, useEffect, useState } from 'react'
 import { TableHead } from '@ui/table'
 import clsx from 'clsx'
 import { getDay } from 'date-fns'
@@ -6,7 +6,11 @@ import { getDay } from 'date-fns'
 import dayOfWeek from '@/common/constants/day-of-the-week'
 
 const DayOfWeekRow = () => {
-  const [dayNumber] = useState(getDay(new Date()))
+  const [dayNumber, setDayNumber] = useState(0)
+
+  useEffect(() => {
+    setDayNumber(getDay(new Date()))
+  }, [])
 
   return (
     <>

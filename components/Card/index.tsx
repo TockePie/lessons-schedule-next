@@ -1,6 +1,7 @@
 import React from 'react'
 import clsx from 'clsx'
 import { Clock } from 'lucide-react'
+import { toast } from 'sonner'
 
 import { ScheduleProps } from '@/types/schedule'
 import getLessonColor from '@/utils/get-lesson-color'
@@ -12,12 +13,21 @@ interface CardProps {
   title: ScheduleProps['title']
   type: ScheduleProps['type']
   teacher: ScheduleProps['teacher']
-  url: ScheduleProps['url']
+  url?: ScheduleProps['url']
   isCurrent: boolean
 }
 
 const Card = (props: CardProps) => {
   const { title, type, teacher, url, isCurrent } = props
+
+  const handleClick = () => {
+    if (url) {
+      openLesson(url)
+      return
+    }
+
+    toast.error("This lesson doesn't have a link")
+  }
 
   return (
     <div
@@ -26,7 +36,7 @@ const Card = (props: CardProps) => {
         'transform transition duration-150 ease-in-out active:scale-95',
         getLessonColor(type)
       )}
-      onClick={() => openLesson(url)}
+      onClick={handleClick}
     >
       {isCurrent && (
         <Button
