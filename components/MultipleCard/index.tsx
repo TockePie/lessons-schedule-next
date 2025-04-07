@@ -16,6 +16,10 @@ interface MultipleCardProps {
 const MultipleCard = (props: MultipleCardProps) => {
   const { data, length, isCurrent } = props
 
+  const Cards = data.map((item, index) => (
+    <Card key={index} {...item} isCurrent={false} />
+  ))
+
   return (
     <Dialog>
       <DialogTriggerComp isCurrent={isCurrent} length={length} />
@@ -25,11 +29,7 @@ const MultipleCard = (props: MultipleCardProps) => {
           <DialogTitle>Оберіть пару</DialogTitle>
         </DialogHeader>
 
-        <div className="grid grid-cols-2 gap-4">
-          {data.map((item, index) => (
-            <Card key={index} {...item} isCurrent={false} />
-          ))}
-        </div>
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">{Cards}</div>
       </DialogContent>
     </Dialog>
   )

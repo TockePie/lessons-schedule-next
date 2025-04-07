@@ -57,6 +57,17 @@ export default function GroupList(props: GroupListProps) {
     staleTime: 1000 * 60 * 60 * 24 // 1 day
   })
 
+  const GroupsItems = groups.map((group) => (
+    <DropdownMenuRadioItem
+      key={group.group_id}
+      value={group.group_id}
+      className="h-9"
+      onClick={() => handleGroupSelect(group.group_id)}
+    >
+      {group.name}
+    </DropdownMenuRadioItem>
+  ))
+
   const handleGroupSelect = (newGroupId: string) => {
     if (newGroupId === currentGroup?.group_id) return
 
@@ -93,16 +104,7 @@ export default function GroupList(props: GroupListProps) {
 
       <DropdownMenuContent>
         <DropdownMenuRadioGroup value={currentGroup?.group_id || ''}>
-          {groups.map((group) => (
-            <DropdownMenuRadioItem
-              key={group.group_id}
-              value={group.group_id}
-              className="h-9"
-              onClick={() => handleGroupSelect(group.group_id)}
-            >
-              {group.name}
-            </DropdownMenuRadioItem>
-          ))}
+          {GroupsItems}
         </DropdownMenuRadioGroup>
       </DropdownMenuContent>
     </DropdownMenu>

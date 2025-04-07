@@ -13,14 +13,24 @@ const TableMobile = lazy(() => import('@/components/Table/Mobile'))
 const Page = () => {
   const { weekParity, setWeekParity } = useWeekParity()
   const { width } = useWindowDimensions()
-  const isDesktop = width > 1279
-  const isMobile = width < 640
+
+  const RenderTable = () => {
+    if (width > 1279) {
+      return <TableDesktop />
+    } else if (width < 640) {
+      return <TableMobile />
+    } else {
+      return <TableDesktop />
+    }
+  }
+
+  const handleChange = (value: string) => setWeekParity(value as WeekParity)
 
   return (
     <main className="h-full bg-neutral-50 p-5 dark:bg-black">
       <Tabs
         defaultValue={weekParity}
-        onValueChange={(value) => setWeekParity(value as WeekParity)}
+        onValueChange={handleChange}
         className="flex flex-col items-center gap-5 select-none"
       >
         <TabsList className="grid grid-cols-2 border border-neutral-200 dark:border-neutral-900 dark:bg-neutral-950">
@@ -29,8 +39,7 @@ const Page = () => {
         </TabsList>
 
         <TabsContent value={weekParity} className="w-full">
-          {isDesktop && <TableDesktop />}
-          {isMobile && <TableMobile />}
+          <RenderTable />
         </TabsContent>
       </Tabs>
     </main>
