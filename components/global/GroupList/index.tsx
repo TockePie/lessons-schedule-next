@@ -29,7 +29,7 @@ interface GroupListProps {
     | undefined
 }
 
-export default function GroupList(props: GroupListProps) {
+const GroupList = (props: GroupListProps) => {
   const { className, variant = 'outline' } = props
 
   const pathname = usePathname()
@@ -110,3 +110,5 @@ export default function GroupList(props: GroupListProps) {
     </DropdownMenu>
   )
 }
+
+export default GroupList

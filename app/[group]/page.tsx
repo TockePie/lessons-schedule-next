@@ -1,28 +1,15 @@
 'use client'
 
-import React, { lazy } from 'react'
+import React from 'react'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@ui/tabs'
 
 import useWeekParity from '@/common/context/week-parity'
-import useWindowDimensions from '@/hooks/use-window-dimentions'
+import TableDesktop from '@/components/Table/Desktop'
+import TableMobile from '@/components/Table/Mobile'
 import { WeekParity } from '@/types/week-parity'
-
-const TableDesktop = lazy(() => import('@/components/Table/Desktop'))
-const TableMobile = lazy(() => import('@/components/Table/Mobile'))
 
 const Page = () => {
   const { weekParity, setWeekParity } = useWeekParity()
-  const { width } = useWindowDimensions()
-
-  const RenderTable = () => {
-    if (width > 1279) {
-      return <TableDesktop />
-    } else if (width < 640) {
-      return <TableMobile />
-    } else {
-      return <TableDesktop />
-    }
-  }
 
   const handleChange = (value: string) => setWeekParity(value as WeekParity)
 
@@ -39,7 +26,8 @@ const Page = () => {
         </TabsList>
 
         <TabsContent value={weekParity} className="w-full">
-          <RenderTable />
+          <TableDesktop />
+          <TableMobile />
         </TabsContent>
       </Tabs>
     </main>

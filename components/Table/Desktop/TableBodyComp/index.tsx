@@ -8,7 +8,7 @@ import { getGroupSchedule } from '@/lib/api'
 
 import RowBlock from './RowBlock'
 
-const TableBodyComp = () => {
+const TableBodyCompDesktop = () => {
   const { weekParity } = useWeekParity()
   const pathname = usePathname()
 
@@ -54,7 +54,7 @@ const TableBodyComp = () => {
             colSpan={7}
             className="text-muted-foreground py-8 text-center text-xl font-bold"
           >
-            Розклад відсутній для цієї групи
+            <span>Розклад відсутній для цієї групи</span>
           </TableCell>
         </TableRow>
       </TableBody>
@@ -64,4 +64,4 @@ const TableBodyComp = () => {
   return <TableBody>{RowBlock(scheduleData)}</TableBody>
 }
 
-export default TableBodyComp
+export default TableBodyCompDesktop

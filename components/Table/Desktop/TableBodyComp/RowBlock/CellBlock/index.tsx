@@ -36,7 +36,8 @@ const CellBlock = (
             length={items.length}
             isCurrent={isCurrentLesson(
               day.id as ScheduleProps['day'],
-              time.row as ScheduleProps['row']
+              time.row as ScheduleProps['row'],
+              items[0].week_parity as ScheduleProps['week_parity']
             )}
           />
         </TableCell>
@@ -52,7 +53,7 @@ const CellBlock = (
             type={item.type}
             teacher={item.teacher}
             url={item.url}
-            isCurrent={isCurrentLesson(item.day, item.row)}
+            isCurrent={isCurrentLesson(item.day, item.row, item.week_parity)}
           />
         ))}
       </TableCell>

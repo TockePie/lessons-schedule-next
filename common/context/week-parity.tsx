@@ -7,9 +7,9 @@ import React, {
   useContext,
   useState
 } from 'react'
-import { getISOWeek } from 'date-fns'
 
 import { WeekParity, WeekParityContextValue } from '@/types/week-parity'
+import getWeekParity from '@/utils/get-week-parity'
 
 const WeekParityContext = createContext<WeekParityContextValue | undefined>(
   undefined
@@ -17,7 +17,7 @@ const WeekParityContext = createContext<WeekParityContextValue | undefined>(
 
 const WeekParityProvider: FC<{ children: ReactNode }> = ({ children }) => {
   const [weekParity, setWeekParity] = useState<WeekParity>(
-    getISOWeek(new Date()) % 2 === 0 ? 'even' : 'odd'
+    getWeekParity() as WeekParity
   )
 
   return (

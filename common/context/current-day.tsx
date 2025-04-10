@@ -9,6 +9,7 @@ const CurrentDayContext = createContext<CurrentDayContextValue | undefined>(
 
 const CurrentDayProvider = ({ children }: { children: ReactNode }) => {
   const [currentDay, setCurrentDay] = useState(currentDayTime().currentDay)
+
   return (
     <CurrentDayContext.Provider value={{ currentDay, setCurrentDay }}>
       {children}

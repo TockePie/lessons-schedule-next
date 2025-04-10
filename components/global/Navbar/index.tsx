@@ -3,6 +3,8 @@ import { Avatar, AvatarFallback } from '@ui/avatar'
 
 import GroupList from '@/components/global/GroupList'
 
+import Sidebar from '../Sidebar'
+
 import AvatarLogo from './AvatarLogo'
 
 const Navbar = () => {
@@ -17,7 +19,10 @@ const Navbar = () => {
           <h1 className="text-2xl font-bold">Розклад</h1>
         </div>
 
-        <GroupList />
+        <div className="flex items-center gap-x-3">
+          <GroupList />
+          <Sidebar />
+        </div>
       </div>
     </nav>
   )

@@ -24,7 +24,7 @@ const RowBlock = (scheduleData: ScheduleProps[] | undefined): ReactNode => {
             <p className="font-bold">{timeRow}</p>
           </div>
         </TableCell>
-        {CellBlock(time, scheduleData)}
+        <CellBlock time={time} scheduleData={scheduleData} />
       </TableRow>
     )
   })

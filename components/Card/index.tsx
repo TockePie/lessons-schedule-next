@@ -1,4 +1,7 @@
+'use client'
+
 import React from 'react'
+import { Button } from '@ui/button'
 import clsx from 'clsx'
 import { Clock } from 'lucide-react'
 import { toast } from 'sonner'
@@ -6,8 +9,6 @@ import { toast } from 'sonner'
 import { ScheduleProps } from '@/types/schedule'
 import getLessonColor from '@/utils/get-lesson-color'
 import openLesson from '@/utils/open-lesson'
-
-import { Button } from '../ui/button'
 
 interface CardProps {
   title: ScheduleProps['title']
