@@ -1,4 +1,3 @@
-//TODO: add sidebar
 //TODO: It should have: reset group, link to form to write about missing information
 
 import React from 'react'

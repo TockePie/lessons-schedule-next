@@ -1,16 +1,22 @@
 'use client'
 
 import React from 'react'
+import { DropdownMenuItem } from '@radix-ui/react-dropdown-menu'
 import { useQuery } from '@tanstack/react-query'
 import { Button } from '@ui/button'
 import {
   DropdownMenu,
   DropdownMenuContent,
+  DropdownMenuGroup,
   DropdownMenuRadioGroup,
   DropdownMenuRadioItem,
+  DropdownMenuSeparator,
   DropdownMenuTrigger
 } from '@ui/dropdown-menu'
+import clsx from 'clsx'
 import Cookies from 'js-cookie'
+import { Plus } from 'lucide-react'
+import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import { toast } from 'sonner'
 
@@ -95,7 +101,7 @@ const GroupList = (props: GroupListProps) => {
       <DropdownMenuTrigger asChild>
         <Button
           variant={variant}
-          className={className}
+          className={clsx(className, 'cursor-pointer')}
           disabled={!!errorMessage || isLoading}
         >
           {isLoading ? 'Завантаження...' : buttonText}
@@ -106,6 +112,19 @@ const GroupList = (props: GroupListProps) => {
         <DropdownMenuRadioGroup value={currentGroup?.group_id || ''}>
           {GroupsItems}
         </DropdownMenuRadioGroup>
+
+        <DropdownMenuSeparator />
+        <DropdownMenuGroup>
+          <DropdownMenuItem
+            className="mr-3 flex h-9 w-full items-center gap-2"
+            asChild
+          >
+            <Link href="https://forms.gle/yvn6Xw1hUheGkkvi8" target="_blank">
+              <Plus size="18" className="ml-1" />
+              <span className="text-sm">Додати групу</span>
+            </Link>
+          </DropdownMenuItem>
+        </DropdownMenuGroup>
       </DropdownMenuContent>
     </DropdownMenu>
   )

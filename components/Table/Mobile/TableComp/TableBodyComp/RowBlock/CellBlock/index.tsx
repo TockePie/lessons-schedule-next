@@ -1,4 +1,4 @@
-import React, { FC, ReactNode } from 'react'
+import React, { FC } from 'react'
 import { TableCell } from '@ui/table'
 
 import dayOfWeek from '@/common/constants/day-of-the-week'

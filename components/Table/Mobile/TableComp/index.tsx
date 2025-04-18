@@ -10,7 +10,7 @@ const TableComp = () => {
   const { currentDay } = useCurrentDay()
 
   return (
-    <Table className="mx-auto w-[100%] table-fixed border border-neutral-200 dark:border-neutral-800">
+    <Table className="mx-auto w-full max-w-96 table-fixed border border-neutral-200 dark:border-neutral-800">
       <TableHeader>
         <TableRow>
           <TableHead className="w-1/3 text-center">Пара</TableHead>

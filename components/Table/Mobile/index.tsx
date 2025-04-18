@@ -25,7 +25,7 @@ const TableMobile = () => {
       onValueChange={(value) =>
         setCurrentDay(Number(value) as CurrentDayContextValue['currentDay'])
       }
-      className="flex flex-col items-center gap-5 select-none md:hidden"
+      className="flex flex-col items-center gap-5 select-none lg:hidden"
     >
       <TabsList className="grid w-83 grid-cols-6 border border-neutral-200 dark:border-neutral-900 dark:bg-neutral-950">
         {DayButtons}
