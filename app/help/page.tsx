@@ -1,12 +1,12 @@
-const HelpPage = () => {
-  //TODO: Add content
+import React from 'react'
 
+const Help = () => {
   return (
-    <div>
-      <h1>Help Page</h1>
-      <p>Це сторінка поки що не розроблена, але скоро вона з&apos;явиться</p>
+    <div className="flex h-full w-full flex-col p-3">
+      <h1 className="text-2xl font-bold">Допомога</h1>
+      <p className="mt-4">This is the help page.</p>
     </div>
   )
 }
 
-export default HelpPage
+export default Help

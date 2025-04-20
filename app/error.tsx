@@ -1,34 +1,47 @@
 'use client'
 
-import { useEffect } from 'react'
-import { Button, Textarea } from '@nextui-org/react'
+import React, { useEffect } from 'react'
+import { Button } from '@ui/button'
+import { Textarea } from '@ui/textarea'
 
-import { ERROR_TEXTS } from '@/common/constants/texts'
-import styles from '@/styles/app/error.module.scss'
+import copyToClipboard from '@/utils/copy-to-clipboard'
 
-const Error = ({ error, reset }: { error: Error; reset: () => void }) => {
+interface ErrorProps {
+  error: Error
+  reset: () => void
+}
+
+const Error = ({ error, reset }: ErrorProps) => {
   useEffect(() => console.error(error), [error])
 
+  const handleCopy = () => copyToClipboard(error)
+
   return (
-    <section className={styles.section}>
-      <h2 className={styles.title}>{ERROR_TEXTS.title}</h2>
-      <Textarea
-        isReadOnly
-        variant="bordered"
-        label={ERROR_TEXTS.textareaLabel}
-        labelPlacement="outside"
-        defaultValue={error.message}
-        className={styles.textarea}
-      />
-      <div className={styles.buttons}>
-        <Button onClick={() => navigator.clipboard.writeText(error.message)}>
-          {ERROR_TEXTS.copyButton}
+    <main className="flex h-screen flex-col items-center justify-between gap-4 py-10 md:gap-8 md:py-6">
+      <div className="flex w-full flex-col items-center gap-4">
+        <h2 className="text-3xl font-bold lg:text-4xl">Виникла помилка</h2>
+        <h3 className="max-w-72 text-lg font-semibold lg:text-2xl">
+          {error.name}
+        </h3>
+        <Textarea
+          className="min-h-20 w-11/12 resize-none md:w-1/2"
+          readOnly
+          value={error.message}
+        />
+      </div>
+      <div className="flex flex-col-reverse gap-4 md:flex-row">
+        <Button
+          variant="outline"
+          onClick={handleCopy}
+          className="cursor-pointer"
+        >
+          Скопіювати текст помилки
         </Button>
-        <Button color="primary" onClick={() => reset()}>
-          {ERROR_TEXTS.retryButton}
+        <Button onClick={() => reset()} className="cursor-pointer">
+          Спробувати ще раз
         </Button>
       </div>
-    </section>
+    </main>
   )
 }
 

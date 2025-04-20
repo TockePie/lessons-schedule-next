@@ -1,26 +1,29 @@
-import * as React from 'react'
-import { NextUIProvider } from '@nextui-org/system'
+'use client'
+
+import React, { ReactNode } from 'react'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { ThemeProvider as NextThemesProvider } from 'next-themes'
-import { cookies } from 'next/headers'
 
-import { WeekParityProvider } from '@/common/providers/weekParity'
-import { GroupProvider } from '@/common/providers/group'
+import { CurrentDayProvider } from '@/common/context/current-day'
+import { IsClientProvider } from '@/common/context/is-client'
+import { WeekParityProvider } from '@/common/context/week-parity'
 
-const Providers = async ({ children }: { children: React.ReactNode }) => {
-  const cookieStore = await cookies()
-  const initialGroupId = cookieStore.get('groupId')?.value || null
+const queryClient = new QueryClient()
 
+const Providers = ({ children }: { children: ReactNode }) => {
   return (
-    <NextThemesProvider attribute="class" defaultTheme="system">
-      <NextUIProvider>
+    <QueryClientProvider client={queryClient}>
+      <NextThemesProvider attribute="class" defaultTheme="system" enableSystem>
         <WeekParityProvider>
-          <GroupProvider initialGroupId={initialGroupId}>
-            {children}
-          </GroupProvider>
+          <CurrentDayProvider>
+            <IsClientProvider>{children}</IsClientProvider>
+          </CurrentDayProvider>
+          <ReactQueryDevtools initialIsOpen={false} />
         </WeekParityProvider>
-      </NextUIProvider>
-    </NextThemesProvider>
+      </NextThemesProvider>
+    </QueryClientProvider>
   )
 }
 
-export { Providers }
+export default Providers

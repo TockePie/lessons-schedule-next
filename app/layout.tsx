@@ -1,49 +1,50 @@
-import { Metadata, Viewport } from 'next'
-import { Analytics } from '@vercel/analytics/react'
-import clsx from 'clsx'
+import React, { ReactNode } from 'react'
+import { disableReactDevTools } from '@fvilers/disable-react-devtools'
+import { Toaster } from '@ui/sonner'
+import type { Metadata } from 'next'
+import { Geist, Geist_Mono } from 'next/font/google'
 
-import NavbarComponent from '@/components/Navbar/Navbar'
-import { fontSans } from '@/config/fonts'
-import { Providers } from '@/app/providers'
-import { LAYOUT_TEXTS } from '@/common/constants/texts'
+import Providers from './providers'
 
-import styles from '@/styles/app/layout.module.scss'
-import '@/styles/globals.css'
+import './globals.css'
+
+const geistSans = Geist({
+  variable: '--font-geist-sans',
+  subsets: ['latin']
+})
+
+const geistMono = Geist_Mono({
+  variable: '--font-geist-mono',
+  subsets: ['latin']
+})
 
 const metadata: Metadata = {
-  title: {
-    default: LAYOUT_TEXTS.title.default,
-    template: LAYOUT_TEXTS.title.template
-  },
-  description: LAYOUT_TEXTS.description,
-  icons: {
-    icon: '/favicon.ico'
+  title: 'Lessons Schedule',
+  description: 'A simple schedule for lessons'
+}
+
+const RootLayout = ({
+  children
+}: Readonly<{
+  children: ReactNode
+}>) => {
+  if (process.env.NODE_ENV === 'production') {
+    disableReactDevTools()
   }
-}
 
-const viewport: Viewport = {
-  themeColor: [
-    { media: '(prefers-color-scheme: light)', color: 'white' },
-    { media: '(prefers-color-scheme: dark)', color: 'black' }
-  ]
-}
-
-const RootLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <html suppressHydrationWarning lang="en">
-      <head />
-      <body className={clsx(styles.body, fontSans.variable)}>
-        <Analytics />
+    <html lang="en" suppressHydrationWarning>
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} h-screen antialiased dark:bg-black`}
+      >
         <Providers>
-          <div className={styles.content}>
-            <NavbarComponent />
-            <main>{children}</main>
-          </div>
+          {children}
+          <Toaster />
         </Providers>
       </body>
     </html>
   )
 }
 
+export { metadata }
 export default RootLayout
-export { viewport, metadata }
