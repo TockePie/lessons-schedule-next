@@ -57,10 +57,10 @@ const CellBlock: FC<CellBlockProps> = ({ time, scheduleData }) => {
           <TableCell key={`day-${day.id}`} className="text-center">
             <Card
               key={`${day.id}-${time.row}`}
-              title={itemToDisplay.title}
-              type={itemToDisplay.type}
-              teacher={itemToDisplay.teacher}
-              url={itemToDisplay.url}
+              title={itemToDisplay.subject.title}
+              type={itemToDisplay.subject.type}
+              teacher={itemToDisplay.subject.teacher}
+              url={itemToDisplay.subject.url}
               isCurrent={isCurrentLesson(
                 itemToDisplay.day,
                 itemToDisplay.row,

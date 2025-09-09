@@ -1,8 +1,8 @@
 import React from 'react'
-import { Button } from '@ui/button'
-import Link from 'next/link'
+// import { Button } from '@ui/button'
+// import Link from 'next/link'
 
-import GroupList from '@/components/global/GroupList'
+// import GroupList from '@/components/global/GroupList'
 
 const ExamPage = () => {
   return (

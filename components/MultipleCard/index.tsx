@@ -4,6 +4,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@ui/dialog'
 import { ScheduleProps } from '@/types/schedule'
 
 import Card from '../Card'
+import { ScrollArea } from '../ui/scroll-area'
 
 import DialogTriggerComp from './DialogTriggerComp'
 
@@ -29,7 +30,9 @@ const MultipleCard = (props: MultipleCardProps) => {
           <DialogTitle>Оберіть пару</DialogTitle>
         </DialogHeader>
 
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">{Cards}</div>
+        <ScrollArea className="h-128 w-full rounded-md">
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">{Cards}</div>
+        </ScrollArea>
       </DialogContent>
     </Dialog>
   )
