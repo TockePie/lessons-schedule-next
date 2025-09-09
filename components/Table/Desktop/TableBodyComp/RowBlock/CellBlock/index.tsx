@@ -49,10 +49,10 @@ const CellBlock = (
         {items.map((item, index) => (
           <Card
             key={`${day.id}-${time.row}-${index}`}
-            title={item.title}
-            type={item.type}
-            teacher={item.teacher}
-            url={item.url}
+            title={item.subject.title}
+            type={item.subject.type}
+            teacher={item.subject.teacher}
+            url={item.subject.url}
             isCurrent={isCurrentLesson(item.day, item.row, item.week_parity)}
           />
         ))}

@@ -17,7 +17,7 @@ const MultipleCard = (props: MultipleCardProps) => {
   const { data, length, isCurrent } = props
 
   const Cards = data.map((item, index) => (
-    <Card key={index} {...item} isCurrent={false} />
+    <Card key={index} {...item.subject} isCurrent={false} />
   ))
 
   return (

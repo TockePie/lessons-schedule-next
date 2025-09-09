@@ -1,17 +1,13 @@
 import { UUID } from 'crypto'
-import { URL } from 'url'
+
+import { Subject } from './subject'
 
 interface ScheduleProps {
-  schedule_id: UUID
-  group_id: UUID
-  title: string
-  teacher: string
-  url: URL
-  type: 'LECTURE' | 'PRACTICE' | 'LAB'
-  is_selective: boolean
-  day: 1 | 2 | 3 | 4 | 5 | 6 | 7
+  id: UUID
+  day: 1 | 2 | 3 | 4 | 5 | 6
   row: 1 | 2 | 3 | 4 | 5 | 6 | 7
   week_parity: 'EVEN' | 'ODD' | 'BOTH'
+  subject: Subject
   created_at: Date
   updated_at: Date
 }

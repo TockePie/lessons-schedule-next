@@ -8,26 +8,26 @@ import convertTime from '@/utils/convert-time'
 import CellBlock from './CellBlock'
 
 const RowBlock = (scheduleData: ScheduleProps[] | undefined): ReactNode => {
-  return lessonNumber.map((time, index) => {
-    const hasRow =
-      Array.isArray(scheduleData) &&
-      scheduleData.some((e) => e.row === time.row)
-    if (!hasRow) return
+  const allRows = scheduleData?.map((item) => item.row) ?? []
+  const maxRowNumber = Math.max(...allRows)
 
-    const timeRow = convertTime(time.beginTime)
+  return lessonNumber
+    .filter((time) => time.row <= maxRowNumber)
+    .map((time, index) => {
+      const timeRow = convertTime(time.beginTime)
 
-    return (
-      <TableRow key={index}>
-        <TableCell className="text-center">
-          <div className="flex flex-col items-center justify-center gap-4">
-            <p>{time.name}</p>
-            <p className="font-bold">{timeRow}</p>
-          </div>
-        </TableCell>
-        {CellBlock(time, scheduleData)}
-      </TableRow>
-    )
-  })
+      return (
+        <TableRow key={index}>
+          <TableCell className="text-center">
+            <div className="flex flex-col items-center justify-center gap-4">
+              <p>{time.name}</p>
+              <p className="font-bold">{timeRow}</p>
+            </div>
+          </TableCell>
+          {CellBlock(time, scheduleData ?? [])}
+        </TableRow>
+      )
+    })
 }
 
 export default RowBlock

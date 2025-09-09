@@ -6,15 +6,15 @@ import clsx from 'clsx'
 import { Clock } from 'lucide-react'
 import { toast } from 'sonner'
 
-import { ScheduleProps } from '@/types/schedule'
+import { Subject } from '@/types/subject'
 import getLessonColor from '@/utils/get-lesson-color'
 import openLesson from '@/utils/open-lesson'
 
 interface CardProps {
-  title: ScheduleProps['title']
-  type: ScheduleProps['type']
-  teacher: ScheduleProps['teacher']
-  url?: ScheduleProps['url']
+  title: Subject['title']
+  type: Subject['type']
+  teacher: Subject['teacher']
+  url?: Subject['url']
   isCurrent: boolean
 }
 

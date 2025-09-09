@@ -10,7 +10,9 @@ const isCurrentLesson = (
   week: ScheduleProps['week_parity']
 ): boolean => {
   const weekParity = getWeekParity()
-  if (weekParity !== week.toUpperCase()) return false
+  if (week.toLowerCase() !== weekParity && week !== 'BOTH') {
+    return false
+  }
 
   const dayTimeInfo = currentDayTime()
   const currentTimeInMinutes = dayTimeInfo.minutesSinceMidnight

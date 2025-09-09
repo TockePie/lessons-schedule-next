@@ -1,6 +1,6 @@
-import { ScheduleProps } from '@/types/schedule'
+import { Subject } from '@/types/subject'
 
-const getLessonColor = (lessonType: ScheduleProps['type']) => {
+const getLessonColor = (lessonType: Subject['type']) => {
   switch (lessonType) {
     case 'LECTURE':
       return 'border-indigo-400'
