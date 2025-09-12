@@ -27,7 +27,7 @@ const Card = (props: CardProps) => {
       return
     }
 
-    toast.error("This lesson doesn't have a link")
+    toast.error('Заняття не має посилання чи локації')
   }
 
   return (
