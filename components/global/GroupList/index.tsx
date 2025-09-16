@@ -77,7 +77,9 @@ const GroupList = (props: GroupListProps) => {
   const handleGroupSelect = (newGroupId: string) => {
     if (newGroupId === currentGroup?.group_id) return
 
-    Cookies.set('groupId', newGroupId)
+    Cookies.set('groupId', newGroupId, {
+      expires: 30
+    })
     router.push(`/${newGroupId}`)
   }
 
@@ -116,7 +118,7 @@ const GroupList = (props: GroupListProps) => {
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
           <DropdownMenuItem
-            className="mr-3 flex h-9 w-full items-center gap-2"
+            className="focus:bg-accent focus:text-accent-foreground mr-3 flex h-9 w-full items-center gap-2 rounded-sm"
             asChild
           >
             <Link href="https://forms.gle/yvn6Xw1hUheGkkvi8" target="_blank">

@@ -1,5 +1,11 @@
 import React from 'react'
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@ui/dialog'
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogHeader,
+  DialogTitle
+} from '@ui/dialog'
 
 import { ScheduleProps } from '@/types/schedule'
 
@@ -17,8 +23,10 @@ interface MultipleCardProps {
 const MultipleCard = (props: MultipleCardProps) => {
   const { data, length, isCurrent } = props
 
-  const Cards = data.map((item, index) => (
-    <Card key={index} {...item.subject} isCurrent={false} />
+  const Cards = data.map((item) => (
+    <DialogClose key={item.id}>
+      <Card {...item.subject} isCurrent={false} />
+    </DialogClose>
   ))
 
   return (
