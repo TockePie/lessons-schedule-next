@@ -1,6 +1,5 @@
 import React from 'react'
 import { Avatar, AvatarFallback } from '@ui/avatar'
-import { Badge } from '@ui/badge'
 
 import GroupList from '@/components/global/GroupList'
 
