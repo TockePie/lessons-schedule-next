@@ -77,7 +77,9 @@ const GroupList = (props: GroupListProps) => {
   const handleGroupSelect = (newGroupId: string) => {
     if (newGroupId === currentGroup?.group_id) return
 
-    Cookies.set('groupId', newGroupId)
+    Cookies.set('groupId', newGroupId, {
+      expires: 30
+    })
     router.push(`/${newGroupId}`)
   }
 

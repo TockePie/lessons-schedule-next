@@ -17,10 +17,10 @@ const Navbar = () => {
             <AvatarLogo />
             <AvatarFallback className="rounded-xl">LS</AvatarFallback>
           </Avatar>
-          <h1 className="text-2xl font-bold max-sm:hidden">Розклад</h1>
-          <Badge variant="secondary" className="bg-amber-400 dark:bg-amber-700">
+          <h1 className="text-2xl font-bold">Розклад</h1>
+          {/* <Badge variant="secondary" className="bg-amber-400 dark:bg-amber-700">
             Testing
-          </Badge>
+          </Badge> */}
         </div>
 
         <div className="flex items-center gap-x-3">
