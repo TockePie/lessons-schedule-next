@@ -38,7 +38,7 @@ const MultipleCard = (props: MultipleCardProps) => {
           <DialogTitle>Оберіть пару</DialogTitle>
         </DialogHeader>
 
-        <ScrollArea className="h-128 w-full rounded-md">
+        <ScrollArea className="size-full max-h-128 rounded-md">
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2">{Cards}</div>
         </ScrollArea>
       </DialogContent>

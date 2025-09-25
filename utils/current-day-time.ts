@@ -13,8 +13,6 @@ const currentDayTime = (): {
   const now = new Date()
   const minutesSinceMidnight = now.getHours() * 60 + now.getMinutes()
 
-  console.log({ currentDay, now, minutesSinceMidnight })
-
   return { currentDay, minutesSinceMidnight }
 }
 
