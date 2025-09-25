@@ -2,6 +2,7 @@ import React, { ReactNode } from 'react'
 import { TableCell } from '@ui/table'
 
 import dayOfWeek from '@/common/constants/day-of-the-week'
+import useCurrent from '@/common/context/current-date'
 import Card from '@/components/Card'
 import MultipleCard from '@/components/MultipleCard'
 import { ScheduleProps } from '@/types/schedule'
@@ -16,6 +17,8 @@ const CellBlock = (
   },
   scheduleData: ScheduleProps[]
 ): ReactNode => {
+  const { currentDay, minutesSinceMidnight } = useCurrent()
+
   return dayOfWeek.map((day) => {
     if (day.id === 0) return
 
@@ -37,7 +40,9 @@ const CellBlock = (
             isCurrent={isCurrentLesson(
               day.id as ScheduleProps['day'],
               time.row as ScheduleProps['row'],
-              items[0].week_parity as ScheduleProps['week_parity']
+              items[0].week_parity as ScheduleProps['week_parity'],
+              currentDay,
+              minutesSinceMidnight
             )}
           />
         </TableCell>
@@ -53,7 +58,13 @@ const CellBlock = (
             type={item.subject.type}
             teacher={item.subject.teacher}
             url={item.subject.url}
-            isCurrent={isCurrentLesson(item.day, item.row, item.week_parity)}
+            isCurrent={isCurrentLesson(
+              item.day,
+              item.row,
+              item.week_parity,
+              currentDay,
+              minutesSinceMidnight
+            )}
           />
         ))}
       </TableCell>
