@@ -61,7 +61,11 @@ const TableBodyCompDesktop = () => {
     )
   }
 
-  return <TableBody>{RowBlock(scheduleData)}</TableBody>
+  return (
+    <TableBody>
+      <RowBlock scheduleData={scheduleData} />
+    </TableBody>
+  )
 }
 
 export default TableBodyCompDesktop
