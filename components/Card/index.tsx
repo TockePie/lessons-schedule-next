@@ -27,7 +27,13 @@ const Card = (props: CardProps) => {
       return
     }
 
+    //TODO: Make a add url dialog
     toast.error('Заняття не має посилання чи локації')
+    // toast.error('Заняття не має посилання чи локації', {
+    //   action: {
+    //     label: 'Додати'
+    //   }
+    // })
   }
 
   return (

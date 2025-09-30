@@ -1,10 +1,11 @@
-import React, { FC } from 'react'
+import React, { FC, useContext } from 'react'
 import { TableCell } from '@ui/table'
 
 import dayOfWeek from '@/common/constants/day-of-the-week'
-import useCurrentDay from '@/common/context/current-day'
+import useCurrent from '@/common/context/current-date'
 import Card from '@/components/Card'
 import MultipleCard from '@/components/MultipleCard'
+import { DayContext } from '@/components/Table/Mobile'
 import { ScheduleProps } from '@/types/schedule'
 import isCurrentLesson from '@/utils/is-current-lesson'
 
@@ -19,7 +20,8 @@ interface CellBlockProps {
 }
 
 const CellBlock: FC<CellBlockProps> = ({ time, scheduleData }) => {
-  const { currentDay } = useCurrentDay()
+  const manualDay = useContext(DayContext)
+  const { currentDay, minutesSinceMidnight } = useCurrent()
 
   return (
     <>
@@ -28,7 +30,7 @@ const CellBlock: FC<CellBlockProps> = ({ time, scheduleData }) => {
           (item) => item.day === day.id && item.row === time.row
         )
 
-        if (currentDay !== day.id) return null
+        if (manualDay !== day.id) return null
 
         if (matchingItems.length === 0) {
           return <TableCell key={`day-${day.id}`} className="text-center" />
@@ -46,7 +48,9 @@ const CellBlock: FC<CellBlockProps> = ({ time, scheduleData }) => {
                 isCurrent={isCurrentLesson(
                   day.id as ScheduleProps['day'],
                   time.row as ScheduleProps['row'],
-                  matchingItems[0].week_parity as ScheduleProps['week_parity']
+                  matchingItems[0].week_parity as ScheduleProps['week_parity'],
+                  currentDay,
+                  minutesSinceMidnight
                 )}
               />
             </TableCell>
@@ -64,7 +68,9 @@ const CellBlock: FC<CellBlockProps> = ({ time, scheduleData }) => {
               isCurrent={isCurrentLesson(
                 itemToDisplay.day,
                 itemToDisplay.row,
-                itemToDisplay.week_parity
+                itemToDisplay.week_parity,
+                currentDay,
+                minutesSinceMidnight
               )}
             />
           </TableCell>

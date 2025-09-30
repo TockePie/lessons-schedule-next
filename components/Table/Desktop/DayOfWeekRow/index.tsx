@@ -1,28 +1,24 @@
-import React, { Key, useEffect, useState } from 'react'
+import React from 'react'
 import { TableHead } from '@ui/table'
 import clsx from 'clsx'
-import { getDay } from 'date-fns'
 
 import dayOfWeek from '@/common/constants/day-of-the-week'
+import useCurrent from '@/common/context/current-date'
 
 const DayOfWeekRow = () => {
-  const [dayNumber, setDayNumber] = useState(0)
-
-  useEffect(() => {
-    setDayNumber(getDay(new Date()))
-  }, [])
+  const { currentDay } = useCurrent()
 
   return (
     <>
-      {dayOfWeek.map((day, index) => {
+      {dayOfWeek.map((day) => {
         if (day.id === 0) return null
 
         return (
           <TableHead
-            key={index as Key}
+            key={day.id}
             className={clsx(
               'text-center',
-              dayNumber === day.id && 'bg-neutral-200 dark:bg-neutral-800'
+              currentDay === day.id && 'bg-neutral-200 dark:bg-neutral-800'
             )}
           >
             {day.name}
