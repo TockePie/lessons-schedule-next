@@ -4,12 +4,9 @@ const useCurrentDate = () => {
   const [currentDate, setcurrentDate] = useState(new Date())
 
   useEffect(() => {
-    const interval = setInterval(
-      () => {
-        setcurrentDate(new Date())
-      },
-      2 * 60 * 1000
-    ) // update every 2 minutes
+    const interval = setInterval(() => {
+      setcurrentDate(new Date())
+    }, 60 * 1000)
 
     return () => clearInterval(interval)
   }, [])
