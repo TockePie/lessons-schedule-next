@@ -1,11 +1,9 @@
-import { URL } from 'url'
+import { URL } from 'node:url'
 
-interface Subject {
+export interface Subject {
   title: string
   teacher: string
   type: 'LECTURE' | 'PRACTICE' | 'LAB'
-  url: URL
+  url?: URL
   is_selective: boolean
 }
-
-export { type Subject }
