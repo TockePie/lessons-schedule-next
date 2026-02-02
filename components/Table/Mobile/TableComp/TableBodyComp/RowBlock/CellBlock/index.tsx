@@ -8,6 +8,8 @@ import MultipleCard from '@/components/MultipleCard'
 import { DayContext } from '@/components/Table/Mobile'
 import { ScheduleProps } from '@/types/schedule'
 import isCurrentLesson from '@/utils/is-current-lesson'
+import { toast } from 'sonner'
+import openLesson from '@/utils/open-lesson'
 
 interface CellBlockProps {
   time: {
@@ -72,6 +74,19 @@ const CellBlock: FC<CellBlockProps> = ({ time, scheduleData }) => {
                 currentDay,
                 minutesSinceMidnight
               )}
+              actionFn={() => {
+                if (itemToDisplay.subject.url) {
+                  openLesson(itemToDisplay.subject.url)
+                  return
+                }
+
+                toast.error('Заняття не має посилання чи локації', {
+                  action: {
+                    label: 'Додати',
+                    onClick: () => {}
+                  }
+                })
+              }}
             />
           </TableCell>
         )

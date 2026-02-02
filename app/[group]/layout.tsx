@@ -1,4 +1,3 @@
-import React, { ReactNode } from 'react'
 import { Metadata } from 'next'
 
 import Navbar from '@/components/global/Navbar'
@@ -8,10 +7,18 @@ const metadata: Metadata = {
   description: 'A simple schedule for lessons'
 }
 
-const PageLayout = ({ children }: { children: ReactNode }) => {
+const PageLayout = async ({
+  children,
+  params
+}: {
+  children: React.ReactNode
+  params: Promise<{ group: string }>
+}) => {
+  const { group } = await params
+
   return (
     <>
-      <Navbar />
+      <Navbar groupId={group} />
       {children}
     </>
   )

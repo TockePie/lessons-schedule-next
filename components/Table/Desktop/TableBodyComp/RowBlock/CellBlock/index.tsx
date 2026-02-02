@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react'
+import { ReactNode } from 'react'
 import { TableCell } from '@ui/table'
 
 import dayOfWeek from '@/common/constants/day-of-the-week'
@@ -7,6 +7,8 @@ import Card from '@/components/Card'
 import MultipleCard from '@/components/MultipleCard'
 import { ScheduleProps } from '@/types/schedule'
 import isCurrentLesson from '@/utils/is-current-lesson'
+import openLesson from '@/utils/open-lesson'
+import { toast } from 'sonner'
 
 const CellBlock = (
   time: {
@@ -65,6 +67,19 @@ const CellBlock = (
               currentDay,
               minutesSinceMidnight
             )}
+            actionFn={() => {
+              if (item.subject.url) {
+                openLesson(item.subject.url)
+                return
+              }
+
+              toast.error('Заняття не має посилання чи локації', {
+                action: {
+                  label: 'Додати',
+                  onClick: () => {}
+                }
+              })
+            }}
           />
         ))}
       </TableCell>

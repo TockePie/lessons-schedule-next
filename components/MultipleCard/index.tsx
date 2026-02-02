@@ -13,6 +13,8 @@ import Card from '../Card'
 import { ScrollArea } from '../ui/scroll-area'
 
 import DialogTriggerComp from './DialogTriggerComp'
+import openLesson from '@/utils/open-lesson'
+import { toast } from 'sonner'
 
 interface MultipleCardProps {
   data: ScheduleProps[]
@@ -25,7 +27,23 @@ const MultipleCard = (props: MultipleCardProps) => {
 
   const Cards = data.map((item) => (
     <DialogClose key={item.id}>
-      <Card {...item.subject} isCurrent={false} />
+      <Card
+        {...item.subject}
+        actionFn={() => {
+          if (item.subject.url) {
+            openLesson(item.subject.url)
+            return
+          }
+
+          toast.error('Заняття не має посилання чи локації', {
+            action: {
+              label: 'Додати',
+              onClick: () => {}
+            }
+          })
+        }}
+        isCurrent={false}
+      />
     </DialogClose>
   ))
 
