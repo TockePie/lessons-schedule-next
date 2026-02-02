@@ -1,4 +1,5 @@
-import React from 'react'
+'use client'
+
 import { useQuery } from '@tanstack/react-query'
 import { TableBody, TableCell, TableRow } from '@ui/table'
 import { usePathname } from 'next/navigation'

@@ -1,4 +1,5 @@
-import React from 'react'
+'use client'
+
 import { TableHead } from '@ui/table'
 import clsx from 'clsx'
 
@@ -8,25 +9,21 @@ import useCurrent from '@/common/context/current-date'
 const DayOfWeekRow = () => {
   const { currentDay } = useCurrent()
 
-  return (
-    <>
-      {dayOfWeek.map((day) => {
-        if (day.id === 0) return null
+  return dayOfWeek.map((day) => {
+    if (day.id === 0) return null
 
-        return (
-          <TableHead
-            key={day.id}
-            className={clsx(
-              'text-center',
-              currentDay === day.id && 'bg-neutral-200 dark:bg-neutral-800'
-            )}
-          >
-            {day.name}
-          </TableHead>
-        )
-      })}
-    </>
-  )
+    return (
+      <TableHead
+        key={day.id}
+        className={clsx(
+          'text-center',
+          currentDay === day.id && 'bg-neutral-200 dark:bg-neutral-800'
+        )}
+      >
+        {day.name}
+      </TableHead>
+    )
+  })
 }
 
 export default DayOfWeekRow

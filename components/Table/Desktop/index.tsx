@@ -1,12 +1,9 @@
-'use client'
-
-import React from 'react'
 import { Table, TableHead, TableHeader, TableRow } from '@ui/table'
 
 import DayOfWeekRow from './DayOfWeekRow'
 import TableBodyComp from './TableBodyComp'
 
-const TableDesktop = () => {
+export default function TableDesktop() {
   return (
     <Table className="mx-auto w-[100%] max-w-360 table-fixed border border-neutral-200 max-lg:hidden dark:border-neutral-800">
       <TableHeader>
@@ -20,5 +17,3 @@ const TableDesktop = () => {
     </Table>
   )
 }
-
-export default TableDesktop
