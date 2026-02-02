@@ -1,52 +1,26 @@
-import { dirname } from 'path'
-import { fileURLToPath } from 'url'
-import { FlatCompat } from '@eslint/eslintrc'
-import typescriptEslintParser from '@typescript-eslint/parser'
-import typescriptEslintPlugin from '@typescript-eslint/eslint-plugin'
+import { defineConfig, globalIgnores } from 'eslint/config'
+import nextVitals from 'eslint-config-next/core-web-vitals'
+import nextTs from 'eslint-config-next/typescript'
+import eslintConfigPrettier from 'eslint-config-prettier/flat'
 import simpleImportSort from 'eslint-plugin-simple-import-sort'
-import prettierPlugin from 'eslint-plugin-prettier'
-import reactPlugin from 'eslint-plugin-react'
 
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = dirname(__filename)
-
-const compat = new FlatCompat({
-  baseDirectory: __dirname
-})
-
-const eslintConfig = [
-  ...compat.extends(
-    'next/core-web-vitals',
-    'next/typescript',
-    'plugin:@typescript-eslint/recommended',
-    'plugin:prettier/recommended',
-    'plugin:react/recommended'
-  ),
+export default defineConfig([
+  ...nextVitals,
+  ...nextTs,
+  eslintConfigPrettier,
+  // Override default ignores of eslint-config-next.
+  globalIgnores([
+    // Default ignores of eslint-config-next:
+    '.next/**',
+    'out/**',
+    'build/**',
+    'next-env.d.ts'
+  ]),
   {
-    files: ['**/*.ts', '**/*.tsx'],
-    languageOptions: {
-      parser: typescriptEslintParser,
-      parserOptions: {
-        project: './tsconfig.json',
-        tsconfigRootDir: __dirname
-      }
-    },
     plugins: {
-      '@typescript-eslint': typescriptEslintPlugin,
-      'simple-import-sort': simpleImportSort,
-      prettier: prettierPlugin,
-      react: reactPlugin
+      'simple-import-sort': simpleImportSort
     },
     rules: {
-      '@typescript-eslint/no-explicit-any': 'off',
-      '@typescript-eslint/no-floating-promises': 'warn',
-      '@typescript-eslint/no-unsafe-argument': 'warn',
-      '@typescript-eslint/no-empty-interface': [
-        'error',
-        {
-          allowSingleExtends: true
-        }
-      ],
       'simple-import-sort/exports': 'error',
       'simple-import-sort/imports': [
         'error',
@@ -66,15 +40,7 @@ const eslintConfig = [
             ['^.+\\.?(css)$']
           ]
         }
-      ],
-      'prettier/prettier': [
-        'error',
-        {
-          endOfLine: 'auto'
-        }
       ]
     }
   }
-]
-
-export default eslintConfig
+])
