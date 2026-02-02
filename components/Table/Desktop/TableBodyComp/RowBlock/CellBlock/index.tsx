@@ -9,6 +9,7 @@ import { ScheduleProps } from '@/types/schedule'
 import isCurrentLesson from '@/utils/is-current-lesson'
 import openLesson from '@/utils/open-lesson'
 import { toast } from 'sonner'
+import LessonCard from '@/components/Card/lesson-card'
 
 const CellBlock = (
   time: {
@@ -54,7 +55,7 @@ const CellBlock = (
     return (
       <TableCell key={`day-${day.id}`} className="text-center">
         {items.map((item, index) => (
-          <Card
+          <LessonCard
             key={`${day.id}-${time.row}-${index}`}
             title={item.subject.title}
             type={item.subject.type}

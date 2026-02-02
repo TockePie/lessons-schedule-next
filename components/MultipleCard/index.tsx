@@ -1,10 +1,11 @@
-import React from 'react'
+import { toast } from 'sonner'
 import {
   Dialog,
   DialogClose,
   DialogContent,
   DialogHeader,
-  DialogTitle
+  DialogTitle,
+  DialogTrigger
 } from '@ui/dialog'
 
 import { ScheduleProps } from '@/types/schedule'
@@ -12,9 +13,8 @@ import { ScheduleProps } from '@/types/schedule'
 import Card from '../Card'
 import { ScrollArea } from '../ui/scroll-area'
 
-import DialogTriggerComp from './DialogTriggerComp'
 import openLesson from '@/utils/open-lesson'
-import { toast } from 'sonner'
+import LessonCard from '../Card/lesson-card'
 
 interface MultipleCardProps {
   data: ScheduleProps[]
@@ -27,7 +27,7 @@ const MultipleCard = (props: MultipleCardProps) => {
 
   const Cards = data.map((item) => (
     <DialogClose key={item.id}>
-      <Card
+      <LessonCard
         {...item.subject}
         actionFn={() => {
           if (item.subject.url) {
@@ -49,7 +49,9 @@ const MultipleCard = (props: MultipleCardProps) => {
 
   return (
     <Dialog>
-      <DialogTriggerComp isCurrent={isCurrent} length={length} />
+      <DialogTrigger className="w-full">
+        <Card isCurrent={isCurrent} title={`${length} предметів`}></Card>
+      </DialogTrigger>
 
       <DialogContent className="w-[1000px]">
         <DialogHeader>

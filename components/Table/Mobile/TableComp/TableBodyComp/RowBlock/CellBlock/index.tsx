@@ -10,6 +10,7 @@ import { ScheduleProps } from '@/types/schedule'
 import isCurrentLesson from '@/utils/is-current-lesson'
 import { toast } from 'sonner'
 import openLesson from '@/utils/open-lesson'
+import LessonCard from '@/components/Card/lesson-card'
 
 interface CellBlockProps {
   time: {
@@ -61,7 +62,7 @@ const CellBlock: FC<CellBlockProps> = ({ time, scheduleData }) => {
 
         return (
           <TableCell key={`day-${day.id}`} className="text-center">
-            <Card
+            <LessonCard
               key={`${day.id}-${time.row}`}
               title={itemToDisplay.subject.title}
               type={itemToDisplay.subject.type}

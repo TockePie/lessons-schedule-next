@@ -2,24 +2,20 @@ import { Button } from '@ui/button'
 import clsx from 'clsx'
 import { Clock } from 'lucide-react'
 
-import { Subject } from '@/types/subject'
+import { PropsWithChildren } from 'react'
 
-interface Props extends Omit<Subject, 'is_selective'> {
-  actionFn: () => void
+interface Props extends PropsWithChildren {
   isCurrent: boolean
+  title: string
+  className?: string
+  actionFn?: () => void
 }
 
-const LESSON_COLORS: Record<Subject['type'], string> = {
-  LECTURE: 'border-indigo-400',
-  PRACTICE: 'border-red-400',
-  LAB: 'border-lime-400'
-} as const
-
 export default function Card({
-  title,
-  type,
-  teacher,
+  children,
   isCurrent,
+  title,
+  className,
   actionFn
 }: Props) {
   return (
@@ -27,7 +23,7 @@ export default function Card({
       className={clsx(
         'flex min-h-32 cursor-pointer flex-col items-center justify-between gap-1 rounded-xl border-2 bg-white p-2 transition-all hover:bg-neutral-200 dark:bg-neutral-950 hover:dark:bg-neutral-800',
         'transform transition duration-150 ease-in-out active:scale-95',
-        LESSON_COLORS[type]
+        className
       )}
       onClick={actionFn}
     >
@@ -42,7 +38,7 @@ export default function Card({
       <h2 className="overflow-wrap break-word my-auto w-full text-center text-xl font-bold break-words whitespace-normal">
         {title}
       </h2>
-      <p className="text-neutral-600 dark:text-neutral-200">{teacher}</p>
+      {children}
     </div>
   )
 }
