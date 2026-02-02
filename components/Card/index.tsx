@@ -1,8 +1,7 @@
+import { PropsWithChildren } from 'react'
 import { Button } from '@ui/button'
 import clsx from 'clsx'
 import { Clock } from 'lucide-react'
-
-import { PropsWithChildren } from 'react'
 
 interface Props extends PropsWithChildren {
   isCurrent: boolean

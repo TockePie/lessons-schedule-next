@@ -1,4 +1,3 @@
-import { toast } from 'sonner'
 import {
   Dialog,
   DialogClose,
@@ -7,24 +6,22 @@ import {
   DialogTitle,
   DialogTrigger
 } from '@ui/dialog'
+import { toast } from 'sonner'
 
 import { ScheduleProps } from '@/types/schedule'
+import openLesson from '@/utils/open-lesson'
 
 import Card from '../Card'
+import LessonCard from '../Card/lesson-card'
 import { ScrollArea } from '../ui/scroll-area'
 
-import openLesson from '@/utils/open-lesson'
-import LessonCard from '../Card/lesson-card'
-
-interface MultipleCardProps {
+interface Props {
   data: ScheduleProps[]
   length: number
   isCurrent: boolean
 }
 
-const MultipleCard = (props: MultipleCardProps) => {
-  const { data, length, isCurrent } = props
-
+export default function MultipleCard({ data, length, isCurrent }: Props) {
   const Cards = data.map((item) => (
     <DialogClose key={item.id}>
       <LessonCard
@@ -65,5 +62,3 @@ const MultipleCard = (props: MultipleCardProps) => {
     </Dialog>
   )
 }
-
-export default MultipleCard

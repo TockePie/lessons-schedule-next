@@ -1,6 +1,7 @@
-import React, { ReactNode } from 'react'
+import { ReactNode } from 'react'
 import { disableReactDevTools } from '@fvilers/disable-react-devtools'
 import { Toaster } from '@ui/sonner'
+import clsx from 'clsx'
 import type { Metadata } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
 
@@ -18,16 +19,16 @@ const geistMono = Geist_Mono({
   subsets: ['latin']
 })
 
-const metadata: Metadata = {
+export const metadata: Metadata = {
   title: 'Lessons Schedule',
   description: 'A simple schedule for lessons'
 }
 
-const RootLayout = ({
+export default function RootLayout({
   children
 }: Readonly<{
   children: ReactNode
-}>) => {
+}>) {
   if (process.env.NODE_ENV === 'production') {
     disableReactDevTools()
   }
@@ -35,7 +36,11 @@ const RootLayout = ({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} h-screen antialiased dark:bg-black`}
+        className={clsx(
+          geistSans.variable,
+          geistMono.variable,
+          'h-screen antialiased dark:bg-black'
+        )}
       >
         <Providers>
           {children}
@@ -45,6 +50,3 @@ const RootLayout = ({
     </html>
   )
 }
-
-export { metadata }
-export default RootLayout

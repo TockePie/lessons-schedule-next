@@ -1,4 +1,5 @@
 import { Subject } from '@/types/subject'
+
 import Card from '.'
 
 const LESSON_COLORS: Record<Subject['type'], string> = {
