@@ -2,7 +2,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@ui/avatar'
 
 import GroupList from '@/components/global/GroupList'
 
-import Sidebar from '../Sidebar'
+import Sidebar from '../global/Sidebar'
 
 import { getGroupById } from '@/lib/api'
 

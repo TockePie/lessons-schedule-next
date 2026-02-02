@@ -1,19 +1,18 @@
 import { Metadata } from 'next'
 
-import Navbar from '@/components/global/Navbar'
+import Navbar from '@/components/Navbar'
+import { PropsWithChildren } from 'react'
 
-const metadata: Metadata = {
+export const metadata: Metadata = {
   title: 'Lessons Schedule',
   description: 'A simple schedule for lessons'
 }
 
-const PageLayout = async ({
-  children,
-  params
-}: {
-  children: React.ReactNode
+interface Props extends PropsWithChildren {
   params: Promise<{ group: string }>
-}) => {
+}
+
+export default async function PageLayout({ children, params }: Props) {
   const { group } = await params
 
   return (
@@ -23,6 +22,3 @@ const PageLayout = async ({
     </>
   )
 }
-
-export { metadata }
-export default PageLayout

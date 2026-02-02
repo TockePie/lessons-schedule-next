@@ -14,7 +14,7 @@ import { Menu, Plus } from 'lucide-react'
 import Link from 'next/link'
 
 import GitHubLogo from '@/icons/GitHubIcon'
-import ClearCacheBtn from '../ClearCacheBtn'
+import ClearCacheBtn from '../../ClearCacheBtn'
 
 const Sidebar = () => {
   return (

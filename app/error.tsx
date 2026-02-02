@@ -5,7 +5,7 @@ import { Button } from '@ui/button'
 import { Textarea } from '@ui/textarea'
 
 import copyToClipboard from '@/utils/copy-to-clipboard'
-import ClearCacheBtn from '@/components/global/ClearCacheBtn'
+import ClearCacheBtn from '@/components/ClearCacheBtn'
 
 interface Props {
   error: Error
@@ -16,7 +16,6 @@ export default function Error({ error, resetFn }: Props) {
   useEffect(() => console.error(error), [error])
 
   const handleCopy = () => copyToClipboard(error)
-  const handleReset = () => resetFn()
 
   return (
     <main className="flex h-screen flex-col items-center justify-between gap-4 py-10 md:gap-8 md:py-6">
@@ -40,7 +39,7 @@ export default function Error({ error, resetFn }: Props) {
           Скопіювати текст помилки
         </Button>
         <ClearCacheBtn />
-        <Button onClick={handleReset} className="cursor-pointer">
+        <Button onClick={resetFn} className="cursor-pointer">
           Спробувати ще раз
         </Button>
       </div>
