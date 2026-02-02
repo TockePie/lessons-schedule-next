@@ -1,6 +1,5 @@
 //TODO: It should have: reset group, link to form to write about missing information
 
-import React from 'react'
 import { Button } from '@ui/button'
 import {
   Sheet,
@@ -15,6 +14,7 @@ import { Menu, Plus } from 'lucide-react'
 import Link from 'next/link'
 
 import GitHubLogo from '@/icons/GitHubIcon'
+import ClearCacheBtn from '../ClearCacheBtn'
 
 const Sidebar = () => {
   return (
@@ -37,6 +37,8 @@ const Sidebar = () => {
             </Link>
           </Button>
 
+          <ClearCacheBtn className="h-10" />
+
           <div className="mx-auto flex w-full max-w-360 flex-col gap-2">
             <p className="text-xl font-semibold">Кольори</p>
 
@@ -53,14 +55,6 @@ const Sidebar = () => {
               ))}
             </div>
           </div>
-
-          {/* <div className="flex flex-col items-start gap-y-5">
-            <p className="text-xl font-semibold">Сторінки</p>
-
-             <Link href="/exams" className="flex items-center gap-x-2">
-              Іспити
-            </Link>
-          </div> */}
         </div>
 
         <SheetFooter>
