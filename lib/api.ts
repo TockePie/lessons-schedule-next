@@ -43,6 +43,22 @@ const getGroupById = async (id: string): Promise<GroupProps> => {
   }
 }
 
+export async function getGroupPicture(id: string): Promise<string> {
+  try {
+    const res = await fetch(`${url}/group/photo/${id}`, {
+      cache: 'force-cache'
+    })
+
+    if (!res.ok) {
+      throw new Error(`Error ${res.status}: ${res.statusText}`)
+    }
+
+    return res.text()
+  } catch (error) {
+    throw new Error(`Failed to fetch group: ${(error as Error).message}`)
+  }
+}
+
 const getGroupSchedule = async (id: string, week: 'even' | 'odd') => {
   try {
     const res = await fetch(`${url}/schedule/${id}?week=${week}`, {

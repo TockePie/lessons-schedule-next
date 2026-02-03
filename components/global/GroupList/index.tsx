@@ -1,6 +1,5 @@
 'use client'
 
-import React from 'react'
 import { DropdownMenuItem } from '@radix-ui/react-dropdown-menu'
 import { useQuery } from '@tanstack/react-query'
 import { Button } from '@ui/button'
@@ -42,6 +41,7 @@ const GroupList = (props: GroupListProps) => {
   const router = useRouter()
 
   const groupId = pathname.split('/')[1]
+  const cookieGroupId = Cookies.get('groupId')
 
   const {
     data: groups = [],
@@ -92,11 +92,13 @@ const GroupList = (props: GroupListProps) => {
   const isLoading = isGroupsLoading || isCurrentGroupLoading
   const errorMessage = isGroupsError ? 'Помилка' : null
 
-  const buttonText = errorMessage
-    ? errorMessage
-    : currentGroup
-      ? currentGroup.name
-      : 'Оберіть групу'
+  const buttonText = !cookieGroupId
+    ? 'Оберіть групу'
+    : errorMessage
+      ? errorMessage
+      : currentGroup
+        ? currentGroup.name
+        : 'Оберіть групу'
 
   return (
     <DropdownMenu>

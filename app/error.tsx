@@ -4,8 +4,8 @@ import { useEffect } from 'react'
 import { Button } from '@ui/button'
 import { Textarea } from '@ui/textarea'
 
-import copyToClipboard from '@/utils/copy-to-clipboard'
 import ClearCacheBtn from '@/components/ClearCacheBtn'
+import copyToClipboard from '@/utils/copy-to-clipboard'
 
 interface Props {
   error: Error
