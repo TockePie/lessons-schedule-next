@@ -28,6 +28,23 @@ const TableBodyCompMobile = () => {
     staleTime: 1000 * 60 * 60 * 24 // 1 day
   })
 
+  if (!groupId) {
+    return (
+      <TableBody>
+        <TableRow>
+          <TableCell
+            colSpan={2}
+            className="text-muted-foreground py-8 text-center text-xl font-bold"
+          >
+            <span className="text-wrap">
+              Оберіть групу, щоб побачити розклад
+            </span>
+          </TableCell>
+        </TableRow>
+      </TableBody>
+    )
+  }
+
   if (isLoading) {
     return (
       <TableBody>

@@ -13,7 +13,7 @@ const TableBodyCompDesktop = () => {
   const { weekParity } = useWeekParity()
   const pathname = usePathname()
 
-  const groupId = pathname.split('/')[1] as string
+  const groupId = pathname.split('/')[1]
 
   const {
     data: scheduleData,
@@ -28,6 +28,21 @@ const TableBodyCompDesktop = () => {
     refetchOnMount: false,
     staleTime: 1000 * 60 * 60 * 24 // 1 day
   })
+
+  if (!groupId) {
+    return (
+      <TableBody>
+        <TableRow>
+          <TableCell
+            colSpan={7}
+            className="text-muted-foreground py-8 text-center text-xl font-bold"
+          >
+            <span>Оберіть групу, щоб побачити розклад</span>
+          </TableCell>
+        </TableRow>
+      </TableBody>
+    )
+  }
 
   if (isLoading) {
     return (
