@@ -27,19 +27,7 @@ export default function MultipleCard({ data, length, isCurrent }: Props) {
     <DialogClose key={item.id}>
       <LessonCard
         {...item.subject}
-        actionFn={() => {
-          if (item.subject.url) {
-            openLesson(item.subject.url)
-            return
-          }
-
-          toast.error('Заняття не має посилання чи локації', {
-            action: {
-              label: 'Додати',
-              onClick: () => {}
-            }
-          })
-        }}
+        actionFn={openLesson(item.subject.url)}
         isCurrent={false}
       />
     </DialogClose>

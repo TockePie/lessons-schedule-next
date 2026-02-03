@@ -1,6 +1,5 @@
 import React, { FC, useContext } from 'react'
 import { TableCell } from '@ui/table'
-import { toast } from 'sonner'
 
 import dayOfWeek from '@/common/constants/day-of-the-week'
 import useCurrent from '@/common/context/current-date'
@@ -74,19 +73,7 @@ const CellBlock: FC<CellBlockProps> = ({ time, scheduleData }) => {
                 currentDay,
                 minutesSinceMidnight
               )}
-              actionFn={() => {
-                if (itemToDisplay.subject.url) {
-                  openLesson(itemToDisplay.subject.url)
-                  return
-                }
-
-                toast.error('Заняття не має посилання чи локації', {
-                  action: {
-                    label: 'Додати',
-                    onClick: () => {}
-                  }
-                })
-              }}
+              actionFn={openLesson(itemToDisplay.subject.url)}
             />
           </TableCell>
         )
