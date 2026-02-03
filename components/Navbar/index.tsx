@@ -1,6 +1,6 @@
 import { Avatar, AvatarFallback, AvatarImage } from '@ui/avatar'
 
-import GroupList from '@/components/global/GroupList'
+import GroupList from '@/components/GroupList'
 import { getGroupPicture } from '@/lib/api'
 
 import Sidebar from '../global/Sidebar'
