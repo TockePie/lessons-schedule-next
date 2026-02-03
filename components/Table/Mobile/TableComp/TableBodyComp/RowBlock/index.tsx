@@ -2,14 +2,14 @@ import React, { ReactNode, useContext } from 'react'
 
 import lessonNumber from '@/common/constants/lesson-number'
 import { TableCell, TableRow } from '@/components/ui/table'
-import { ScheduleProps } from '@/types/schedule'
+import { ScheduleEntityType } from '@/types/entities/schedule'
 import convertTime from '@/utils/convert-time'
 
 import { DayContext } from '../../..'
 
 import CellBlock from './CellBlock'
 
-const RowBlock = (scheduleData: ScheduleProps[] | undefined): ReactNode => {
+const RowBlock = (scheduleData: ScheduleEntityType[] | undefined): ReactNode => {
   const manualDay = useContext(DayContext)
 
   const allRows =

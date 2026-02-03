@@ -1,6 +1,4 @@
-import { URL } from 'url'
-
-const openLesson = (url: URL): void => {
+const openLesson = (url: string): void => {
   window.open(url, '_blank')
 }
 

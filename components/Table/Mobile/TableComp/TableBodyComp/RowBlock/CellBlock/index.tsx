@@ -1,16 +1,15 @@
 import React, { FC, useContext } from 'react'
 import { TableCell } from '@ui/table'
+import { toast } from 'sonner'
 
 import dayOfWeek from '@/common/constants/day-of-the-week'
 import useCurrent from '@/common/context/current-date'
-import Card from '@/components/Card'
+import LessonCard from '@/components/Card/lesson-card'
 import MultipleCard from '@/components/MultipleCard'
 import { DayContext } from '@/components/Table/Mobile'
-import { ScheduleProps } from '@/types/schedule'
+import { ScheduleEntityType } from '@/types/entities/schedule'
 import isCurrentLesson from '@/utils/is-current-lesson'
-import { toast } from 'sonner'
 import openLesson from '@/utils/open-lesson'
-import LessonCard from '@/components/Card/lesson-card'
 
 interface CellBlockProps {
   time: {
@@ -19,7 +18,7 @@ interface CellBlockProps {
     endTime: number
     name: string
   }
-  scheduleData: ScheduleProps[]
+  scheduleData: ScheduleEntityType[]
 }
 
 const CellBlock: FC<CellBlockProps> = ({ time, scheduleData }) => {
@@ -49,9 +48,9 @@ const CellBlock: FC<CellBlockProps> = ({ time, scheduleData }) => {
                 data={matchingItems}
                 length={matchingItems.length}
                 isCurrent={isCurrentLesson(
-                  day.id as ScheduleProps['day'],
-                  time.row as ScheduleProps['row'],
-                  matchingItems[0].week_parity as ScheduleProps['week_parity'],
+                  day.id,
+                  time.row,
+                  matchingItems[0].week_parity,
                   currentDay,
                   minutesSinceMidnight
                 )}

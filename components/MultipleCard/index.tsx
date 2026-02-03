@@ -8,7 +8,7 @@ import {
 } from '@ui/dialog'
 import { toast } from 'sonner'
 
-import { ScheduleProps } from '@/types/schedule'
+import { ScheduleEntityType } from '@/types/entities/schedule'
 import openLesson from '@/utils/open-lesson'
 
 import Card from '../Card'
@@ -16,7 +16,7 @@ import LessonCard from '../Card/lesson-card'
 import { ScrollArea } from '../ui/scroll-area'
 
 interface Props {
-  data: ScheduleProps[]
+  data: ScheduleEntityType[]
   length: number
   isCurrent: boolean
 }

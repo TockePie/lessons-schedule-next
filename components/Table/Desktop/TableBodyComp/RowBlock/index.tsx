@@ -2,7 +2,7 @@ import React, { ReactNode } from 'react'
 
 import lessonNumber from '@/common/constants/lesson-number'
 import { TableCell, TableRow } from '@/components/ui/table'
-import { ScheduleProps } from '@/types/schedule'
+import { ScheduleEntityType } from '@/types/entities/schedule'
 import convertTime from '@/utils/convert-time'
 
 import CellBlock from './CellBlock'
@@ -10,7 +10,7 @@ import CellBlock from './CellBlock'
 const RowBlock = ({
   scheduleData
 }: {
-  scheduleData: ScheduleProps[] | undefined
+  scheduleData: ScheduleEntityType[] | undefined
 }): ReactNode => {
   const allRows = scheduleData?.map((item) => item.row) ?? []
   const maxRowNumber = Math.max(...allRows)

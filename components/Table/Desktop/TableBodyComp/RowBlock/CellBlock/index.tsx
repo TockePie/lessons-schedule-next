@@ -1,15 +1,14 @@
 import { ReactNode } from 'react'
 import { TableCell } from '@ui/table'
+import { toast } from 'sonner'
 
 import dayOfWeek from '@/common/constants/day-of-the-week'
 import useCurrent from '@/common/context/current-date'
-import Card from '@/components/Card'
+import LessonCard from '@/components/Card/lesson-card'
 import MultipleCard from '@/components/MultipleCard'
-import { ScheduleProps } from '@/types/schedule'
+import { ScheduleEntityType } from '@/types/entities/schedule'
 import isCurrentLesson from '@/utils/is-current-lesson'
 import openLesson from '@/utils/open-lesson'
-import { toast } from 'sonner'
-import LessonCard from '@/components/Card/lesson-card'
 
 const CellBlock = (
   time: {
@@ -18,7 +17,7 @@ const CellBlock = (
     endTime: number
     name: string
   },
-  scheduleData: ScheduleProps[]
+  scheduleData: ScheduleEntityType[]
 ): ReactNode => {
   const { currentDay, minutesSinceMidnight } = useCurrent()
 
@@ -41,9 +40,9 @@ const CellBlock = (
             data={items}
             length={items.length}
             isCurrent={isCurrentLesson(
-              day.id as ScheduleProps['day'],
-              time.row as ScheduleProps['row'],
-              items[0].week_parity as ScheduleProps['week_parity'],
+              day.id,
+              time.row,
+              items[0].week_parity,
               currentDay,
               minutesSinceMidnight
             )}

@@ -13,8 +13,8 @@ import clsx from 'clsx'
 import { Menu, Plus } from 'lucide-react'
 import Link from 'next/link'
 
+import ClearCacheBtn from '@/components/ClearCacheBtn'
 import GitHubLogo from '@/icons/GitHubIcon'
-import ClearCacheBtn from '../../ClearCacheBtn'
 
 const Sidebar = () => {
   return (
