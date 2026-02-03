@@ -16,7 +16,7 @@ import Link from 'next/link'
 import ClearCacheBtn from '@/components/ClearCacheBtn'
 import GitHubLogo from '@/icons/GitHubIcon'
 
-const Sidebar = () => {
+export default function Sidebar() {
   return (
     <Sheet>
       <SheetTrigger asChild>
@@ -75,5 +75,3 @@ const Sidebar = () => {
     </Sheet>
   )
 }
-
-export default Sidebar

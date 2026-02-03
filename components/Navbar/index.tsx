@@ -1,9 +1,8 @@
 import { Avatar, AvatarFallback, AvatarImage } from '@ui/avatar'
 
 import GroupList from '@/components/GroupList'
+import Sidebar from '@/components/Sidebar'
 import { getGroupPicture } from '@/lib/api'
-
-import Sidebar from '../global/Sidebar'
 
 export default async function Navbar({ groupId }: { groupId?: string }) {
   const groupPicture = groupId ? await getGroupPicture(groupId) : null
