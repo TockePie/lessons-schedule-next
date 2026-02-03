@@ -31,6 +31,7 @@ export async function getGroupsList() {
   return apiFetch('/group', z.array(GroupsList))
 }
 
+//XXX: Doesn't used anymore. Remove then
 export async function getGroupById(id: string) {
   return apiFetch(`/group/${id}`, GroupEntity, {
     cache: 'force-cache'

@@ -12,35 +12,17 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger
 } from '@ui/dropdown-menu'
-import clsx from 'clsx'
 import Cookies from 'js-cookie'
 import { Plus } from 'lucide-react'
 import Link from 'next/link'
-import { usePathname, useRouter } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 import { toast } from 'sonner'
 
-import { getGroupById, getGroupsList } from '@/lib/api'
+import { getGroupsList } from '@/lib/api'
 
-interface GroupListProps {
-  className?: string
-  variant?:
-    | 'link'
-    | 'default'
-    | 'destructive'
-    | 'outline'
-    | 'secondary'
-    | 'ghost'
-    | null
-    | undefined
-}
-
-const GroupList = (props: GroupListProps) => {
-  const { className, variant = 'outline' } = props
-
-  const pathname = usePathname()
+export default function GroupList() {
   const router = useRouter()
 
-  const groupId = pathname.split('/')[1]
   const cookieGroupId = Cookies.get('groupId')
 
   const {
@@ -55,13 +37,7 @@ const GroupList = (props: GroupListProps) => {
     staleTime: 1000 * 60 * 60 * 24 // 1 day
   })
 
-  const { data: currentGroup, isLoading: isCurrentGroupLoading } = useQuery({
-    queryKey: ['group', groupId],
-    queryFn: () => getGroupById(groupId),
-    enabled: !!groupId,
-    refetchOnWindowFocus: false,
-    staleTime: 1000 * 60 * 60 * 24 // 1 day
-  })
+  const currentGroup = groups.find((group) => group.group_id === cookieGroupId)
 
   const GroupsItems = groups.map((group) => (
     <DropdownMenuRadioItem
@@ -89,7 +65,6 @@ const GroupList = (props: GroupListProps) => {
     )
   }
 
-  const isLoading = isGroupsLoading || isCurrentGroupLoading
   const errorMessage = isGroupsError ? 'Помилка' : null
 
   const buttonText = !cookieGroupId
@@ -104,11 +79,11 @@ const GroupList = (props: GroupListProps) => {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button
-          variant={variant}
-          className={clsx(className, 'cursor-pointer')}
-          disabled={!!errorMessage || isLoading}
+          variant="outline"
+          className="cursor-pointer"
+          disabled={!!errorMessage || isGroupsLoading}
         >
-          {isLoading ? 'Завантаження...' : buttonText}
+          {isGroupsLoading ? 'Завантаження...' : buttonText}
         </Button>
       </DropdownMenuTrigger>
 
@@ -133,5 +108,3 @@ const GroupList = (props: GroupListProps) => {
     </DropdownMenu>
   )
 }
-
-export default GroupList
