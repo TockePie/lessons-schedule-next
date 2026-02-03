@@ -1,4 +1,3 @@
-import { ReactNode } from 'react'
 import { disableReactDevTools } from '@fvilers/disable-react-devtools'
 import { Toaster } from '@ui/sonner'
 import clsx from 'clsx'
@@ -27,7 +26,7 @@ export const metadata: Metadata = {
 export default function RootLayout({
   children
 }: Readonly<{
-  children: ReactNode
+  children: React.ReactNode
 }>) {
   if (process.env.NODE_ENV === 'production') {
     disableReactDevTools()
