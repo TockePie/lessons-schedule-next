@@ -16,7 +16,7 @@ interface Props {
   isGroup: string
 }
 
-const TableComp = ({ scheduleData, isGroup }: Props) => {
+const TableMobile = ({ scheduleData, isGroup }: Props) => {
   const manualDay = useContext(DayContext)
 
   const dayName = manualDay === 7 ? 'Неділя' : DAY_OF_WEEK[manualDay!].name
@@ -44,4 +44,4 @@ const TableComp = ({ scheduleData, isGroup }: Props) => {
   )
 }
 
-export default TableComp
+export default TableMobile

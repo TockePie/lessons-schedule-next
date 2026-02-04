@@ -3,7 +3,7 @@ import { redirect } from 'next/navigation'
 
 import Navbar from '@/components/Navbar'
 import TableDesktop from '@/components/Table/Desktop'
-import TableComp from '@/components/Table/Mobile'
+import TableMobile from '@/components/Table/Mobile'
 import DayTabs from '@/components/Table/Mobile/day-tabs'
 
 export default async function Home() {
@@ -20,7 +20,7 @@ export default async function Home() {
       <main className="h-full bg-neutral-50 p-5 dark:bg-black">
         <TableDesktop scheduleData={[]} isGroup="" />
         <DayTabs>
-          <TableComp scheduleData={[]} isGroup="" />
+          <TableMobile scheduleData={[]} isGroup="" />
         </DayTabs>
       </main>
     </>

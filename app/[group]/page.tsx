@@ -1,7 +1,9 @@
 import ParityTabs from '@/components/ParityTabs'
 import TableDesktop from '@/components/Table/Desktop'
+import TableMobile from '@/components/Table/Mobile'
+import DayTabs from '@/components/Table/Mobile/day-tabs'
 import { getGroupSchedule } from '@/lib/api'
-import { getTime } from '@/utils/get-time'
+import { getTime } from '@/lib/get-time'
 
 interface Props {
   params: Promise<{ group: string }>
@@ -25,8 +27,22 @@ export default async function Page({ params }: Props) {
     <main className="h-full bg-neutral-50 p-5 dark:bg-black">
       <ParityTabs
         weekParity={time.weekParity}
-        evenChild={<TableDesktop scheduleData={scheduleEven} isGroup={group} />}
-        oddChild={<TableDesktop scheduleData={scheduleOdd} isGroup={group} />}
+        evenChild={
+          <>
+            <TableDesktop scheduleData={scheduleEven} isGroup={group} />
+            <DayTabs>
+              <TableMobile scheduleData={scheduleEven} isGroup={group} />
+            </DayTabs>
+          </>
+        }
+        oddChild={
+          <>
+            <TableDesktop scheduleData={scheduleOdd} isGroup={group} />
+            <DayTabs>
+              <TableMobile scheduleData={scheduleOdd} isGroup={group} />
+            </DayTabs>
+          </>
+        }
       />
     </main>
   )
