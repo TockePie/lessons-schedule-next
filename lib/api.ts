@@ -1,10 +1,9 @@
 import z, { ZodType } from 'zod'
 
-import { GroupEntity } from '@/types/entities/group'
 import { ScheduleEntity } from '@/types/entities/schedule'
 import { GroupsList } from '@/types/groups-list'
 
-const URL = process.env.NEXT_PUBLIC_API_URL
+export const URL = process.env.NEXT_PUBLIC_API_URL
 if (!URL) {
   throw new Error(
     'Missing environment variable - NEXT_PUBLIC_API_URL. It refers to the API where this website fetches schedules, groups etc.'
@@ -31,17 +30,14 @@ export async function getGroupsList() {
   return apiFetch('/group', z.array(GroupsList))
 }
 
-//XXX: Doesn't used anymore. Remove then
-export async function getGroupById(id: string) {
-  return apiFetch(`/group/${id}`, GroupEntity, {
-    cache: 'force-cache'
-  })
-}
-
-export async function getGroupSchedule(id: string, week: 'even' | 'odd') {
-  return apiFetch(`/schedule/${id}?week=${week}`, z.array(ScheduleEntity), {
-    cache: 'force-cache'
-  })
+export async function getGroupSchedule(id: string, week?: 'even' | 'odd') {
+  return apiFetch(
+    `/schedule/${id}${week ? `?week=${week}` : ''}`,
+    z.array(ScheduleEntity),
+    {
+      cache: 'force-cache'
+    }
+  )
 }
 
 export async function getGroupPicture(id: string): Promise<string> {

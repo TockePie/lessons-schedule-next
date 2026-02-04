@@ -6,7 +6,7 @@ import clsx from 'clsx'
 import dayOfWeek from '@/common/constants/day-of-the-week'
 import useCurrent from '@/common/context/current-date'
 
-const DayOfWeekRow = () => {
+export default function DayOfWeekRow() {
   const { currentDay } = useCurrent()
 
   return dayOfWeek.map((day) => {
@@ -25,5 +25,3 @@ const DayOfWeekRow = () => {
     )
   })
 }
-
-export default DayOfWeekRow

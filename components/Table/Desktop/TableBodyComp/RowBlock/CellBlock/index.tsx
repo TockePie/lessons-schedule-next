@@ -2,11 +2,11 @@ import { ReactNode } from 'react'
 import { TableCell } from '@ui/table'
 
 import dayOfWeek from '@/common/constants/day-of-the-week'
-import useCurrent from '@/common/context/current-date'
+// import useCurrent from '@/common/context/current-date'
 import LessonCard from '@/components/Card/lesson-card'
 import MultipleCard from '@/components/MultipleCard'
 import { ScheduleEntityType } from '@/types/entities/schedule'
-import isCurrentLesson from '@/utils/is-current-lesson'
+// import isCurrentLesson from '@/utils/is-current-lesson'
 import openLesson from '@/utils/open-lesson'
 
 const CellBlock = (
@@ -18,7 +18,7 @@ const CellBlock = (
   },
   scheduleData: ScheduleEntityType[]
 ): ReactNode => {
-  const { currentDay, minutesSinceMidnight } = useCurrent()
+  // const { currentDay, minutesSinceMidnight } = useCurrent()
 
   return dayOfWeek.map((day) => {
     if (day.id === 0) return
@@ -38,13 +38,14 @@ const CellBlock = (
             key={`day-${day.id}`}
             data={items}
             length={items.length}
-            isCurrent={isCurrentLesson(
-              day.id,
-              time.row,
-              items[0].week_parity,
-              currentDay,
-              minutesSinceMidnight
-            )}
+            isCurrent={false}
+            // isCurrent={isCurrentLesson(
+            //   day.id,
+            //   time.row,
+            //   items[0].week_parity,
+            //   currentDay,
+            //   minutesSinceMidnight
+            // )}
           />
         </TableCell>
       )
@@ -59,13 +60,14 @@ const CellBlock = (
             type={item.subject.type}
             teacher={item.subject.teacher}
             url={item.subject.url}
-            isCurrent={isCurrentLesson(
-              item.day,
-              item.row,
-              item.week_parity,
-              currentDay,
-              minutesSinceMidnight
-            )}
+            isCurrent={false}
+            // isCurrent={isCurrentLesson(
+            //   item.day,
+            //   item.row,
+            //   item.week_parity,
+            //   currentDay,
+            //   minutesSinceMidnight
+            // )}
             actionFn={openLesson(item.subject.url)}
           />
         ))}

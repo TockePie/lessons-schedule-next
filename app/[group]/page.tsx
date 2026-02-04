@@ -1,36 +1,33 @@
-'use client'
-
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@ui/tabs'
-
-import useWeekParity from '@/common/context/week-parity'
+import ParityTabs from '@/components/ParityTabs'
 import TableDesktop from '@/components/Table/Desktop'
-import TableMobile from '@/components/Table/Mobile'
-import { WeekParity } from '@/types/week-parity'
+import { getGroupSchedule } from '@/lib/api'
+import { getTime } from '@/utils/get-time'
 
-const Page = () => {
-  const { weekParity, setWeekParity } = useWeekParity()
+interface Props {
+  params: Promise<{ group: string }>
+}
 
-  const handleChange = (value: string) => setWeekParity(value as WeekParity)
+export default async function Page({ params }: Props) {
+  const time = await getTime()
+
+  const { group } = await params
+  const scheduleData = await getGroupSchedule(group)
+
+  const scheduleEven = scheduleData?.filter(
+    (data) => data.week_parity === 'EVEN' || data.week_parity === 'BOTH'
+  )
+
+  const scheduleOdd = scheduleData?.filter(
+    (data) => data.week_parity === 'ODD' || data.week_parity === 'BOTH'
+  )
 
   return (
     <main className="h-full bg-neutral-50 p-5 dark:bg-black">
-      <Tabs
-        defaultValue={weekParity}
-        onValueChange={handleChange}
-        className="flex flex-col items-center gap-5 pb-5 select-none"
-      >
-        <TabsList className="grid grid-cols-2 border border-neutral-200 dark:border-neutral-900 dark:bg-neutral-950">
-          <TabsTrigger value="even">Парний тиждень</TabsTrigger>
-          <TabsTrigger value="odd">Непарний тиждень</TabsTrigger>
-        </TabsList>
-
-        <TabsContent value={weekParity} className="w-full">
-          <TableDesktop />
-          <TableMobile />
-        </TabsContent>
-      </Tabs>
+      <ParityTabs
+        weekParity={time.weekParity}
+        evenChild={<TableDesktop scheduleData={scheduleEven} />}
+        oddChild={<TableDesktop scheduleData={scheduleOdd} />}
+      />
     </main>
   )
 }
-
-export default Page
