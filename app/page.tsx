@@ -3,7 +3,8 @@ import { redirect } from 'next/navigation'
 
 import Navbar from '@/components/Navbar'
 import TableDesktop from '@/components/Table/Desktop'
-import TableMobile from '@/components/Table/Mobile'
+import TableComp from '@/components/Table/Mobile'
+import DayTabs from '@/components/Table/Mobile/day-tabs'
 
 export default async function Home() {
   const cookieStore = await cookies()
@@ -18,7 +19,9 @@ export default async function Home() {
       <Navbar />
       <main className="h-full bg-neutral-50 p-5 dark:bg-black">
         <TableDesktop scheduleData={[]} isGroup="" />
-        <TableMobile />
+        <DayTabs>
+          <TableComp scheduleData={[]} isGroup="" />
+        </DayTabs>
       </main>
     </>
   )

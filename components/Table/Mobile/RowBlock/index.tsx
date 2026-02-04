@@ -5,7 +5,7 @@ import { TableCell, TableRow } from '@/components/ui/table'
 import { ScheduleEntityType } from '@/types/entities/schedule'
 import convertTime from '@/utils/convert-time'
 
-import { DayContext } from '../../..'
+import { DayContext } from '../day-tabs'
 
 import CellBlock from './CellBlock'
 

@@ -1,0 +1,46 @@
+'use client'
+
+import React, { createContext, useState } from 'react'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@ui/tabs'
+
+import { DAY_OF_WEEK } from '@/common/constants/day-of-the-week'
+import useCurrent from '@/common/context/current-date'
+import { CurrentDay } from '@/types/current-date'
+
+const DayContext = createContext<CurrentDay | null>(null)
+
+const DayTabs = ({ children }: { children: React.ReactNode }) => {
+  const { currentDay } = useCurrent()
+  const [manualDay, setManualDay] = useState(currentDay)
+
+  const DayButtons = [...Array(7).keys()].map((day) => {
+    if (day === 0) return null
+
+    return (
+      <TabsTrigger key={day} value={day.toString()}>
+        {DAY_OF_WEEK[day].shortUa.toUpperCase()}
+      </TabsTrigger>
+    )
+  })
+
+  return (
+    <DayContext value={manualDay}>
+      <Tabs
+        defaultValue={manualDay.toString()}
+        onValueChange={(value) => setManualDay(Number(value) as CurrentDay)}
+        className="flex flex-col items-center gap-5 select-none lg:hidden"
+      >
+        <TabsList className="grid w-83 grid-cols-6 border border-neutral-200 dark:border-neutral-900 dark:bg-neutral-950">
+          {DayButtons}
+        </TabsList>
+
+        <TabsContent value={manualDay.toString()} className="w-full">
+          {children}
+        </TabsContent>
+      </Tabs>
+    </DayContext>
+  )
+}
+
+export { DayContext }
+export default DayTabs

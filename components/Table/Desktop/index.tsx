@@ -2,8 +2,9 @@ import { Table, TableBody, TableHead, TableHeader, TableRow } from '@ui/table'
 
 import { ScheduleEntityType } from '@/types/entities/schedule'
 
+import EmptyState from '../empty-state'
+
 import DayOfWeekRow from './DayOfWeekRow'
-import EmptyState from './empty-state'
 import RowBlock from './RowBlock'
 
 interface Props {
@@ -22,9 +23,12 @@ export default function TableDesktop({ scheduleData, isGroup }: Props) {
       </TableHeader>
 
       {!isGroup ? (
-        <EmptyState message="Оберіть групу, щоб побачити розклад" />
+        <EmptyState
+          message="Оберіть групу, щоб побачити розклад"
+          size="desktop"
+        />
       ) : !scheduleData || scheduleData.length === 0 ? (
-        <EmptyState message="Розклад відсутній для цієї групи" />
+        <EmptyState message="Розклад відсутній для цієї групи" size="desktop" />
       ) : (
         <TableBody>
           <RowBlock scheduleData={scheduleData} />

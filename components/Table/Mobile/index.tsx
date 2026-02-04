@@ -1,48 +1,47 @@
 'use client'
 
-import { createContext, useState } from 'react'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@ui/tabs'
+import { useContext } from 'react'
+import { Table, TableBody, TableHead, TableHeader, TableRow } from '@ui/table'
 
 import { DAY_OF_WEEK } from '@/common/constants/day-of-the-week'
-import useCurrent from '@/common/context/current-date'
-import { CurrentDay } from '@/types/current-date'
+import { ScheduleEntityType } from '@/types/entities/schedule'
 
-import TableComp from './TableComp'
+import EmptyState from '../empty-state'
 
-const DayContext = createContext<CurrentDay | null>(null)
+import { DayContext } from './day-tabs'
+import RowBlock from './RowBlock'
 
-const TableMobile = () => {
-  const { currentDay } = useCurrent()
-  const [manualDay, setManualDay] = useState(currentDay)
+interface Props {
+  scheduleData: ScheduleEntityType[] | undefined
+  isGroup: string
+}
 
-  const DayButtons = [...Array(7).keys()].map((day) => {
-    if (day === 0) return null
+const TableComp = ({ scheduleData, isGroup }: Props) => {
+  const manualDay = useContext(DayContext)
 
-    return (
-      <TabsTrigger key={day} value={day.toString()}>
-        {DAY_OF_WEEK[day].shortUa.toUpperCase()}
-      </TabsTrigger>
-    )
-  })
+  const dayName = manualDay === 7 ? 'Неділя' : DAY_OF_WEEK[manualDay!].name
 
   return (
-    <DayContext value={manualDay}>
-      <Tabs
-        defaultValue={manualDay.toString()}
-        onValueChange={(value) => setManualDay(Number(value) as CurrentDay)}
-        className="flex flex-col items-center gap-5 select-none lg:hidden"
-      >
-        <TabsList className="grid w-83 grid-cols-6 border border-neutral-200 dark:border-neutral-900 dark:bg-neutral-950">
-          {DayButtons}
-        </TabsList>
+    <Table className="mx-auto w-full max-w-96 table-fixed border border-neutral-200 dark:border-neutral-800">
+      <TableHeader>
+        <TableRow>
+          <TableHead className="w-1/3 text-center">Пара</TableHead>
+          <TableHead className="text-center">{dayName}</TableHead>
+        </TableRow>
+      </TableHeader>
 
-        <TabsContent value={manualDay.toString()} className="w-full">
-          <TableComp />
-        </TabsContent>
-      </Tabs>
-    </DayContext>
+      {!isGroup ? (
+        <EmptyState
+          message="Оберіть групу, щоб побачити розклад"
+          size="mobile"
+        />
+      ) : !scheduleData || scheduleData.length === 0 ? (
+        <EmptyState message="Розклад відсутній для цієї групи" size="mobile" />
+      ) : (
+        <TableBody>{RowBlock(scheduleData)}</TableBody>
+      )}
+    </Table>
   )
 }
 
-export { DayContext }
-export default TableMobile
+export default TableComp
