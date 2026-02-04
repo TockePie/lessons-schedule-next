@@ -1,7 +1,7 @@
 import React, { FC, useContext } from 'react'
 import { TableCell } from '@ui/table'
 
-import dayOfWeek from '@/common/constants/day-of-the-week'
+import { DAY_OF_WEEK } from '@/common/constants/day-of-the-week'
 import useCurrent from '@/common/context/current-date'
 import LessonCard from '@/components/Card/lesson-card'
 import MultipleCard from '@/components/MultipleCard'
@@ -26,7 +26,7 @@ const CellBlock: FC<CellBlockProps> = ({ time, scheduleData }) => {
 
   return (
     <>
-      {dayOfWeek.map((day) => {
+      {DAY_OF_WEEK.map((day) => {
         const matchingItems = scheduleData.filter(
           (item) => item.day === day.id && item.row === time.row
         )

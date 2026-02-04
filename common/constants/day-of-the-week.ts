@@ -1,4 +1,4 @@
-const dayOfWeek = [
+export const DAY_OF_WEEK = [
   {
     id: 0,
     short: 'sun',
@@ -42,5 +42,3 @@ const dayOfWeek = [
     name: 'Субота'
   }
 ]
-
-export default dayOfWeek

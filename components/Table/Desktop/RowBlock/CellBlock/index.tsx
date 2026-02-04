@@ -1,26 +1,29 @@
-import { ReactNode } from 'react'
+'use client'
+
 import { TableCell } from '@ui/table'
 
-import dayOfWeek from '@/common/constants/day-of-the-week'
-// import useCurrent from '@/common/context/current-date'
+import { DAY_OF_WEEK } from '@/common/constants/day-of-the-week'
+import useCurrent from '@/common/context/current-date'
 import LessonCard from '@/components/Card/lesson-card'
 import MultipleCard from '@/components/MultipleCard'
 import { ScheduleEntityType } from '@/types/entities/schedule'
-// import isCurrentLesson from '@/utils/is-current-lesson'
+import isCurrentLesson from '@/utils/is-current-lesson'
 import openLesson from '@/utils/open-lesson'
 
-const CellBlock = (
+interface Props {
   time: {
     row: number
     beginTime: number
     endTime: number
     name: string
-  },
+  }
   scheduleData: ScheduleEntityType[]
-): ReactNode => {
-  // const { currentDay, minutesSinceMidnight } = useCurrent()
+}
 
-  return dayOfWeek.map((day) => {
+export default function CellBlock({ time, scheduleData }: Props) {
+  const { currentDay, minutesSinceMidnight } = useCurrent()
+
+  return DAY_OF_WEEK.map((day) => {
     if (day.id === 0) return
 
     const items = Array.isArray(scheduleData)
@@ -38,14 +41,13 @@ const CellBlock = (
             key={`day-${day.id}`}
             data={items}
             length={items.length}
-            isCurrent={false}
-            // isCurrent={isCurrentLesson(
-            //   day.id,
-            //   time.row,
-            //   items[0].week_parity,
-            //   currentDay,
-            //   minutesSinceMidnight
-            // )}
+            isCurrent={isCurrentLesson(
+              day.id,
+              time.row,
+              items[0].week_parity,
+              currentDay,
+              minutesSinceMidnight
+            )}
           />
         </TableCell>
       )
@@ -60,14 +62,13 @@ const CellBlock = (
             type={item.subject.type}
             teacher={item.subject.teacher}
             url={item.subject.url}
-            isCurrent={false}
-            // isCurrent={isCurrentLesson(
-            //   item.day,
-            //   item.row,
-            //   item.week_parity,
-            //   currentDay,
-            //   minutesSinceMidnight
-            // )}
+            isCurrent={isCurrentLesson(
+              item.day,
+              item.row,
+              item.week_parity,
+              currentDay,
+              minutesSinceMidnight
+            )}
             actionFn={openLesson(item.subject.url)}
           />
         ))}
@@ -75,5 +76,3 @@ const CellBlock = (
     )
   })
 }
-
-export default CellBlock

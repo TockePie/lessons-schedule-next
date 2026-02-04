@@ -3,7 +3,7 @@
 import { createContext, useState } from 'react'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@ui/tabs'
 
-import dayOfWeek from '@/common/constants/day-of-the-week'
+import { DAY_OF_WEEK } from '@/common/constants/day-of-the-week'
 import useCurrent from '@/common/context/current-date'
 import { CurrentDay } from '@/types/current-date'
 
@@ -20,7 +20,7 @@ const TableMobile = () => {
 
     return (
       <TabsTrigger key={day} value={day.toString()}>
-        {dayOfWeek[day].shortUa.toUpperCase()}
+        {DAY_OF_WEEK[day].shortUa.toUpperCase()}
       </TabsTrigger>
     )
   })

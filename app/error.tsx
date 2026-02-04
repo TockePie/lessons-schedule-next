@@ -9,10 +9,10 @@ import copyToClipboard from '@/utils/copy-to-clipboard'
 
 interface Props {
   error: Error
-  resetFn: () => void
+  reset: () => void
 }
 
-export default function Error({ error, resetFn }: Props) {
+export default function Error({ error, reset }: Props) {
   useEffect(() => console.error(error), [error])
 
   const handleCopy = () => copyToClipboard(error)
@@ -39,7 +39,7 @@ export default function Error({ error, resetFn }: Props) {
           Скопіювати текст помилки
         </Button>
         <ClearCacheBtn />
-        <Button onClick={resetFn} className="cursor-pointer">
+        <Button onClick={reset} className="cursor-pointer">
           Спробувати ще раз
         </Button>
       </div>

@@ -1,6 +1,6 @@
 import React, { ReactNode, useContext } from 'react'
 
-import lessonNumber from '@/common/constants/lesson-number'
+import { LESSON_NUMBER } from '@/common/constants/lesson-number'
 import { TableCell, TableRow } from '@/components/ui/table'
 import { ScheduleEntityType } from '@/types/entities/schedule'
 import convertTime from '@/utils/convert-time'
@@ -9,7 +9,9 @@ import { DayContext } from '../../..'
 
 import CellBlock from './CellBlock'
 
-const RowBlock = (scheduleData: ScheduleEntityType[] | undefined): ReactNode => {
+const RowBlock = (
+  scheduleData: ScheduleEntityType[] | undefined
+): ReactNode => {
   const manualDay = useContext(DayContext)
 
   const allRows =
@@ -18,7 +20,7 @@ const RowBlock = (scheduleData: ScheduleEntityType[] | undefined): ReactNode => 
       .map((item) => item.row) ?? []
   const maxRowNumber = Math.max(...allRows)
 
-  return lessonNumber.map((time, index) => {
+  return LESSON_NUMBER.map((time, index) => {
     if (time.row > maxRowNumber && time.row !== 1) return null
 
     const timeRow = convertTime(time.beginTime)

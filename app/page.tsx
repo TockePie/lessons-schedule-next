@@ -17,7 +17,7 @@ export default async function Home() {
     <>
       <Navbar />
       <main className="h-full bg-neutral-50 p-5 dark:bg-black">
-        <TableDesktop />
+        <TableDesktop scheduleData={[]} isGroup="" />
         <TableMobile />
       </main>
     </>

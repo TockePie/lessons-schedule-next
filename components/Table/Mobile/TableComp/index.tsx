@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import { Table, TableHead, TableHeader, TableRow } from '@ui/table'
 
-import dayOfWeek from '@/common/constants/day-of-the-week'
+import { DAY_OF_WEEK } from '@/common/constants/day-of-the-week'
 
 import { DayContext } from '..'
 
@@ -10,7 +10,7 @@ import TableBodyComp from './TableBodyComp'
 const TableComp = () => {
   const manualDay = useContext(DayContext)
 
-  const dayName = manualDay === 7 ? 'Неділя' : dayOfWeek[manualDay!].name
+  const dayName = manualDay === 7 ? 'Неділя' : DAY_OF_WEEK[manualDay!].name
 
   return (
     <Table className="mx-auto w-full max-w-96 table-fixed border border-neutral-200 dark:border-neutral-800">

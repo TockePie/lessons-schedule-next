@@ -1,4 +1,4 @@
-import lessonNumber from '@/common/constants/lesson-number'
+import { LESSON_NUMBER } from '@/common/constants/lesson-number'
 import { CurrentDay } from '@/types/current-date'
 import { WeekParityType } from '@/types/entities/schedule'
 
@@ -16,7 +16,7 @@ const isCurrentLesson = (
 
   if (currentDay !== day) return false
 
-  const lessonTiming = lessonNumber.find((lesson) => lesson.row === row)
+  const lessonTiming = LESSON_NUMBER.find((lesson) => lesson.row === row)
   if (!lessonTiming) return false
 
   return (

@@ -25,8 +25,8 @@ export default async function Page({ params }: Props) {
     <main className="h-full bg-neutral-50 p-5 dark:bg-black">
       <ParityTabs
         weekParity={time.weekParity}
-        evenChild={<TableDesktop scheduleData={scheduleEven} />}
-        oddChild={<TableDesktop scheduleData={scheduleOdd} />}
+        evenChild={<TableDesktop scheduleData={scheduleEven} isGroup={group} />}
+        oddChild={<TableDesktop scheduleData={scheduleOdd} isGroup={group} />}
       />
     </main>
   )

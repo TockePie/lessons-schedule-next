@@ -6,7 +6,6 @@ import {
   DialogTitle,
   DialogTrigger
 } from '@ui/dialog'
-import { toast } from 'sonner'
 
 import { ScheduleEntityType } from '@/types/entities/schedule'
 import openLesson from '@/utils/open-lesson'
@@ -21,7 +20,6 @@ interface Props {
   isCurrent: boolean
 }
 
-//TODO: Implement new url adding
 export default function MultipleCard({ data, length, isCurrent }: Props) {
   const Cards = data.map((item) => (
     <DialogClose key={item.id}>
