@@ -17,9 +17,9 @@ export default async function Home() {
     <>
       <Navbar />
       <main className="h-full bg-neutral-50 p-5 dark:bg-black">
-        <LessonsTable scheduleData={[]} isGroup="" device="desktop" />
+        <LessonsTable scheduleDataLenght={0} isGroup="" device="desktop" />
         <DayTabs>
-          <LessonsTable scheduleData={[]} isGroup="" device="mobile" />
+          <LessonsTable scheduleDataLenght={0} isGroup="" device="mobile" />
         </DayTabs>
       </main>
     </>
