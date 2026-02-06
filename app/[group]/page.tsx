@@ -1,8 +1,8 @@
 import ParityTabs from '@/components/ParityTabs'
 import LessonsTable from '@/components/Table'
-import RowBlockDesktop from '@/components/Table/Desktop/RowBlock'
+import RowBlockDesktop from '@/components/Table/Desktop/row-block'
 import DayTabs from '@/components/Table/Mobile/day-tabs'
-import RowBlockMobile from '@/components/Table/Mobile/RowBlock'
+import RowBlockMobile from '@/components/Table/Mobile/row-block'
 import { getGroupSchedule } from '@/lib/api'
 import { getTime } from '@/lib/get-time'
 

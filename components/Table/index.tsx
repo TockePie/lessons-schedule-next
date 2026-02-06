@@ -2,7 +2,7 @@ import { PropsWithChildren } from 'react'
 import { Table, TableBody, TableHead, TableHeader, TableRow } from '@ui/table'
 import clsx from 'clsx'
 
-import DayOfWeekRow from './Desktop/DayOfWeekRow'
+import DayOfWeekRow from './Desktop/day-of-week-row'
 import DayTableHead from './Mobile/day-table-head'
 import EmptyState from './empty-state'
 
