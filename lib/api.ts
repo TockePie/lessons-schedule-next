@@ -1,7 +1,7 @@
 import z, { ZodType } from 'zod'
 
+import { GroupList } from '@/types/entities/group'
 import { ScheduleEntity } from '@/types/entities/schedule'
-import { GroupsList } from '@/types/groups-list'
 
 export const URL = process.env.NEXT_PUBLIC_API_URL
 if (!URL) {
@@ -27,7 +27,7 @@ async function apiFetch<T>(
 }
 
 export async function getGroupsList() {
-  return apiFetch('/group', z.array(GroupsList))
+  return apiFetch('/group', z.array(GroupList))
 }
 
 export async function getGroupSchedule(id: string, week?: 'even' | 'odd') {
