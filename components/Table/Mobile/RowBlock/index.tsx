@@ -7,9 +7,8 @@ import { TableCell, TableRow } from '@/components/ui/table'
 import { ScheduleEntityType } from '@/types/entities/schedule'
 import convertTime from '@/utils/convert-time'
 
+import CellBlock from '../../cell-block'
 import { DayContext } from '../day-tabs'
-
-import CellBlock from './CellBlock'
 
 export default function RowBlock({
   scheduleData
@@ -31,13 +30,17 @@ export default function RowBlock({
 
     return (
       <TableRow key={index}>
-        <TableCell className="text-center">
+        <TableCell className="min-w-54 text-center">
           <div className="flex flex-col items-center justify-center gap-4">
             <p>{time.name}</p>
             <p className="font-bold">{timeRow}</p>
           </div>
         </TableCell>
-        <CellBlock time={time} scheduleData={scheduleData ?? []} />
+        <CellBlock
+          time={time}
+          scheduleData={scheduleData ?? []}
+          manualDay={manualDay}
+        />
       </TableRow>
     )
   })

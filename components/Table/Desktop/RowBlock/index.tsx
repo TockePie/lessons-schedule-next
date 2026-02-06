@@ -4,7 +4,7 @@ import { LESSON_NUMBER } from '@/common/constants/lesson-number'
 import { ScheduleEntityType } from '@/types/entities/schedule'
 import convertTime from '@/utils/convert-time'
 
-import CellBlock from './CellBlock'
+import CellBlock from '../../cell-block'
 
 export default function RowBlock({
   scheduleData
@@ -24,7 +24,11 @@ export default function RowBlock({
           </div>
         </TableCell>
 
-        <CellBlock time={time} scheduleData={scheduleData ?? []} />
+        <CellBlock
+          time={time}
+          scheduleData={scheduleData ?? []}
+          manualDay={null}
+        />
       </TableRow>
     )
   )

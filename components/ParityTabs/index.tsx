@@ -15,6 +15,7 @@ export default function ParityTabs({ weekParity, evenChild, oddChild }: Props) {
 
   useEffect(() => {
     router.push(`?parity=${weekParity}`)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const handleChange = (value: string) => {

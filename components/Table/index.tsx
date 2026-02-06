@@ -31,7 +31,7 @@ export default function LessonsTable({
     >
       <TableHeader>
         <TableRow>
-          <TableHead className="w-1/12 text-center">Пара</TableHead>
+          <TableHead className="w-1/3 text-center lg:w-1/12">Пара</TableHead>
 
           {device === 'mobile' ? (
             <DayTableHead />
