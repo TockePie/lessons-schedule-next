@@ -1,4 +1,6 @@
-import React, { ReactNode, useContext } from 'react'
+'use client'
+
+import { useContext } from 'react'
 
 import { LESSON_NUMBER } from '@/common/constants/lesson-number'
 import { TableCell, TableRow } from '@/components/ui/table'
@@ -9,9 +11,11 @@ import { DayContext } from '../day-tabs'
 
 import CellBlock from './CellBlock'
 
-const RowBlock = (
+export default function RowBlock({
+  scheduleData
+}: {
   scheduleData: ScheduleEntityType[] | undefined
-): ReactNode => {
+}) {
   const manualDay = useContext(DayContext)
 
   const allRows =
@@ -38,5 +42,3 @@ const RowBlock = (
     )
   })
 }
-
-export default RowBlock

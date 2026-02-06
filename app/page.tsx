@@ -2,8 +2,7 @@ import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
 
 import Navbar from '@/components/Navbar'
-import TableDesktop from '@/components/Table/Desktop'
-import TableMobile from '@/components/Table/Mobile'
+import LessonsTable from '@/components/Table'
 import DayTabs from '@/components/Table/Mobile/day-tabs'
 
 export default async function Home() {
@@ -18,9 +17,9 @@ export default async function Home() {
     <>
       <Navbar />
       <main className="h-full bg-neutral-50 p-5 dark:bg-black">
-        <TableDesktop scheduleData={[]} isGroup="" />
+        <LessonsTable scheduleData={[]} isGroup="" device="desktop" />
         <DayTabs>
-          <TableMobile scheduleData={[]} isGroup="" />
+          <LessonsTable scheduleData={[]} isGroup="" device="mobile" />
         </DayTabs>
       </main>
     </>
