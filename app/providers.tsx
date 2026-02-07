@@ -1,29 +1,13 @@
 'use client'
 
-import React, { ReactNode } from 'react'
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { ThemeProvider as NextThemesProvider } from 'next-themes'
 
 import { CurrentDateProvider } from '@/common/context/current-date'
-import { IsClientProvider } from '@/common/context/is-client'
-import { WeekParityProvider } from '@/common/context/week-parity'
 
-const queryClient = new QueryClient()
-
-const Providers = ({ children }: { children: ReactNode }) => {
+export default function Providers({ children }: { children: React.ReactNode }) {
   return (
-    <QueryClientProvider client={queryClient}>
-      <NextThemesProvider attribute="class" defaultTheme="system" enableSystem>
-        <WeekParityProvider>
-          <CurrentDateProvider>
-            <IsClientProvider>{children}</IsClientProvider>
-          </CurrentDateProvider>
-          <ReactQueryDevtools initialIsOpen={false} />
-        </WeekParityProvider>
-      </NextThemesProvider>
-    </QueryClientProvider>
+    <NextThemesProvider attribute="class" defaultTheme="system" enableSystem>
+      <CurrentDateProvider>{children}</CurrentDateProvider>
+    </NextThemesProvider>
   )
 }
-
-export default Providers

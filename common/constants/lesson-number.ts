@@ -1,4 +1,4 @@
-const lessonNumber = [
+export const LESSON_NUMBER = [
   {
     row: 1,
     beginTime: 510,
@@ -42,5 +42,3 @@ const lessonNumber = [
     name: '7 пара'
   }
 ]
-
-export default lessonNumber

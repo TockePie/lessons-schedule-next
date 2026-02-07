@@ -1,6 +1,8 @@
 import { getISOWeek } from 'date-fns'
 
-const getWeekParity = () => {
+import { WeekParity } from '@/types/week-parity'
+
+export default function getWeekParity(): WeekParity {
   const currentDate = new Date()
   const currentWeek = getISOWeek(currentDate)
 
@@ -8,5 +10,3 @@ const getWeekParity = () => {
 
   return weekParity
 }
-
-export default getWeekParity

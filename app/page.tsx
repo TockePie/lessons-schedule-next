@@ -1,11 +1,11 @@
-import React from 'react'
-import { Button } from '@ui/button'
 import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
 
-import GroupList from '@/components/global/GroupList'
+import Navbar from '@/components/Navbar'
+import LessonsTable from '@/components/Table'
+import DayTabs from '@/components/Table/Mobile/day-tabs'
 
-const Home = async () => {
+export default async function Home() {
   const cookieStore = await cookies()
   const groupId = cookieStore.get('groupId')?.value
 
@@ -14,20 +14,14 @@ const Home = async () => {
   }
 
   return (
-    <main className="flex h-screen flex-col items-center justify-between gap-4 bg-neutral-50 py-10 md:justify-center md:gap-8 md:py-6 dark:bg-black">
-      <div>
-        <h1 className="text-center text-3xl font-bold">Оберіть групу</h1>
-      </div>
-
-      <div className="grid grid-cols-2 gap-4">
-        <GroupList variant="default" className="p-7" />
-        <Button variant="outline" className="p-7" disabled>
-          {/* <Link href="/help">Допомога</Link> */}
-          Допомога
-        </Button>
-      </div>
-    </main>
+    <>
+      <Navbar />
+      <main className="h-full bg-neutral-50 p-5 dark:bg-black">
+        <LessonsTable scheduleDataLenght={0} isGroup="" device="desktop" />
+        <DayTabs>
+          <LessonsTable scheduleDataLenght={0} isGroup="" device="mobile" />
+        </DayTabs>
+      </main>
+    </>
   )
 }
-
-export default Home

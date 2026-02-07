@@ -1,37 +1,41 @@
-import React from 'react'
 import {
   Dialog,
   DialogClose,
   DialogContent,
   DialogHeader,
-  DialogTitle
+  DialogTitle,
+  DialogTrigger
 } from '@ui/dialog'
 
-import { ScheduleProps } from '@/types/schedule'
+import { ScheduleEntityType } from '@/types/entities/schedule'
+import openLesson from '@/utils/open-lesson'
 
 import Card from '../Card'
+import LessonCard from '../Card/lesson-card'
 import { ScrollArea } from '../ui/scroll-area'
 
-import DialogTriggerComp from './DialogTriggerComp'
-
-interface MultipleCardProps {
-  data: ScheduleProps[]
+interface Props {
+  data: ScheduleEntityType[]
   length: number
   isCurrent: boolean
 }
 
-const MultipleCard = (props: MultipleCardProps) => {
-  const { data, length, isCurrent } = props
-
+export default function MultipleCard({ data, length, isCurrent }: Props) {
   const Cards = data.map((item) => (
     <DialogClose key={item.id}>
-      <Card {...item.subject} isCurrent={false} />
+      <LessonCard
+        {...item.subject}
+        actionFn={openLesson(item.subject.url)}
+        isCurrent={false}
+      />
     </DialogClose>
   ))
 
   return (
     <Dialog>
-      <DialogTriggerComp isCurrent={isCurrent} length={length} />
+      <DialogTrigger className="w-full">
+        <Card isCurrent={isCurrent} title={`${length} предметів`}></Card>
+      </DialogTrigger>
 
       <DialogContent className="w-[1000px]">
         <DialogHeader>
@@ -45,5 +49,3 @@ const MultipleCard = (props: MultipleCardProps) => {
     </Dialog>
   )
 }
-
-export default MultipleCard

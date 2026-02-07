@@ -1,35 +1,48 @@
-import normalizeUrl from 'normalize-url'
+import z, { ZodType } from 'zod'
 
-import { GroupProps } from '@/types/group'
-import { GroupsListProps } from '@/types/group-list'
-import { ScheduleProps } from '@/types/schedule'
+import { GroupList } from '@/types/entities/group'
+import { ScheduleEntity } from '@/types/entities/schedule'
 
-let url: string
-const env = process.env.NODE_ENV
-
-if (env == 'development') {
-  url = normalizeUrl('http://localhost:4000')
-} else if (env == 'production') {
-  url = normalizeUrl('https://lessons-schedule-api.vercel.app')
+export const URL = process.env.NEXT_PUBLIC_API_URL
+if (!URL) {
+  throw new Error(
+    'Missing environment variable - NEXT_PUBLIC_API_URL. It refers to the API where this website fetches schedules, groups etc.'
+  )
 }
 
-const getGroupsList = async (): Promise<GroupsListProps[]> => {
-  try {
-    const res = await fetch(`${url}/group`)
+async function apiFetch<T>(
+  endpoint: string,
+  schema: ZodType<T>,
+  options: RequestInit = {}
+): Promise<T> {
+  const res = await fetch(`${URL}${endpoint}`, options)
 
-    if (!res.ok) {
-      throw new Error(`Error ${res.status}: ${res.statusText}`)
-    }
-
-    return (await res.json()) as GroupsListProps[]
-  } catch (error) {
-    throw new Error(`Failed to fetch groups: ${(error as Error).message}`)
+  if (!res.ok) {
+    throw new Error(`Error ${res.status}: ${res.statusText}`)
   }
+
+  const data = await res.json()
+
+  return schema.parse(data)
 }
 
-const getGroupById = async (id: string): Promise<GroupProps> => {
+export async function getGroupsList() {
+  return apiFetch('/group', z.array(GroupList))
+}
+
+export async function getGroupSchedule(id: string, week?: 'even' | 'odd') {
+  return apiFetch(
+    `/schedule/${id}${week ? `?week=${week}` : ''}`,
+    z.array(ScheduleEntity),
+    {
+      cache: 'force-cache'
+    }
+  )
+}
+
+export async function getGroupPicture(id: string): Promise<string> {
   try {
-    const res = await fetch(`${url}/group/${id}`, {
+    const res = await fetch(`${URL}/group/photo/${id}`, {
       cache: 'force-cache'
     })
 
@@ -37,26 +50,8 @@ const getGroupById = async (id: string): Promise<GroupProps> => {
       throw new Error(`Error ${res.status}: ${res.statusText}`)
     }
 
-    return (await res.json()) as GroupProps
+    return res.text()
   } catch (error) {
     throw new Error(`Failed to fetch group: ${(error as Error).message}`)
   }
 }
-
-const getGroupSchedule = async (id: string, week: 'even' | 'odd') => {
-  try {
-    const res = await fetch(`${url}/schedule/${id}?week=${week}`, {
-      cache: 'force-cache'
-    })
-
-    if (!res.ok) {
-      throw new Error(`Error ${res.status}: ${res.statusText}`)
-    }
-
-    return (await res.json()) as ScheduleProps[]
-  } catch (error) {
-    throw new Error(`Failed to fetch schedule: ${(error as Error).message}`)
-  }
-}
-
-export { getGroupById, getGroupSchedule, getGroupsList }

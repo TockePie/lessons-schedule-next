@@ -1,17 +1,18 @@
 'use client'
 
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import { Button } from '@ui/button'
 import { Textarea } from '@ui/textarea'
 
+import ClearCacheBtn from '@/components/ClearCacheBtn'
 import copyToClipboard from '@/utils/copy-to-clipboard'
 
-interface ErrorProps {
+interface Props {
   error: Error
   reset: () => void
 }
 
-const Error = ({ error, reset }: ErrorProps) => {
+export default function Error({ error, reset }: Props) {
   useEffect(() => console.error(error), [error])
 
   const handleCopy = () => copyToClipboard(error)
@@ -37,12 +38,11 @@ const Error = ({ error, reset }: ErrorProps) => {
         >
           Скопіювати текст помилки
         </Button>
-        <Button onClick={() => reset()} className="cursor-pointer">
+        <ClearCacheBtn />
+        <Button onClick={reset} className="cursor-pointer">
           Спробувати ще раз
         </Button>
       </div>
     </main>
   )
 }
-
-export default Error
