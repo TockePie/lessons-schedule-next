@@ -1,7 +1,7 @@
 'use client'
 
+import { useState } from 'react'
 import { DropdownMenuRadioItem } from '@ui/dropdown-menu'
-import Cookies from 'js-cookie'
 import { useRouter } from 'next/navigation'
 
 interface Props {
@@ -10,27 +10,31 @@ interface Props {
 }
 
 export default function GroupSelectItem({ groupId, name }: Props) {
+  const [loading, setLoading] = useState(false)
   const router = useRouter()
-  const cookieGroupId = Cookies.get('groupId')
 
-  const handleSelect = () => {
-    if (groupId === cookieGroupId) return
+  const handleSelect = async () => {
+    setLoading(true)
 
-    Cookies.set('groupId', groupId, {
-      expires: 30
+    await fetch('/api/set-group', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ groupId })
     })
 
     router.push(`/${groupId}`)
     router.refresh()
+    setLoading(false)
   }
 
   return (
     <DropdownMenuRadioItem
       value={groupId}
       onClick={handleSelect}
+      disabled={loading}
       className="h-9"
     >
-      {name}
+      {loading ? 'Завантаження...' : name}
     </DropdownMenuRadioItem>
   )
 }

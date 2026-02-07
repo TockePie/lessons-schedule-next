@@ -6,14 +6,15 @@ const openLesson = (url: string | null) => () => {
     return
   }
 
-  toast.error('Заняття не має посилання чи локації', {
-    action: {
-      label: 'Додати',
-      onClick: () => {
-        // Future "Add URL" logic goes here
-      }
-    }
-  })
+  // toast.error('Заняття не має посилання чи локації', {
+  //   action: {
+  //     label: 'Додати',
+  //     onClick: () => {
+  //       // Future "Add URL" logic goes here
+  //     }
+  //   }
+  // })
+  toast.error('Заняття не має посилання чи локації')
 }
 
 export default openLesson
