@@ -10,7 +10,7 @@ const LESSON_COLORS: Record<SubjectType, string> = {
 
 interface Props extends Omit<
   SubjectEntityType,
-  'is_selective' | 'created_at' | 'updated_at'
+  'is_selective' | 'created_at' | 'updated_at' | 'subject_id'
 > {
   actionFn: () => void
   isCurrent: boolean
