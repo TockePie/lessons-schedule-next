@@ -47,8 +47,6 @@ export async function getGroupSchedule(
   const queryString = params.toString().replaceAll('%2C', ',')
   const url = queryString ? `?${queryString}` : ''
 
-  console.log({ selectives, url })
-
   return apiFetch(`/schedule/${id}${url}`, z.array(ScheduleEntity), {
     cache: 'force-cache'
   })
