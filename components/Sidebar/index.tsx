@@ -16,6 +16,8 @@ import Link from 'next/link'
 import ClearCacheBtn from '@/components/ClearCacheBtn'
 import GitHubLogo from '@/icons/GitHubIcon'
 
+import SelectSelectives from '../SelectSelectives'
+
 export default function Sidebar() {
   return (
     <Sheet>
@@ -38,6 +40,12 @@ export default function Sidebar() {
           </Button>
 
           <ClearCacheBtn className="h-10" />
+
+          <SelectSelectives>
+            <Button variant="outline" className="h-10">
+              Обрати свої вибіркові
+            </Button>
+          </SelectSelectives>
 
           <div className="mx-auto flex w-full max-w-360 flex-col gap-2">
             <p className="text-xl font-semibold">Кольори</p>

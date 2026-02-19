@@ -1,3 +1,5 @@
+import { cookies } from 'next/headers'
+
 import ParityTabs from '@/components/ParityTabs'
 import LessonsTable from '@/components/Table'
 import RowBlockDesktop from '@/components/Table/Desktop/row-block'
@@ -11,10 +13,16 @@ interface Props {
 }
 
 export default async function Page({ params }: Props) {
+  const cookieStore = await cookies()
+  const savedSelectivesRaw = cookieStore.get('selected_selectives')?.value
+  const savedSelectives: string[] = savedSelectivesRaw
+    ? JSON.parse(savedSelectivesRaw)
+    : []
+
   const time = await getTime()
 
   const { group } = await params
-  const scheduleData = await getGroupSchedule(group)
+  const scheduleData = await getGroupSchedule(group, undefined, savedSelectives)
 
   const scheduleEven = scheduleData?.filter(
     (data) => data.week_parity === 'EVEN' || data.week_parity === 'BOTH'
