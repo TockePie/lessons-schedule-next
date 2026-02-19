@@ -1,3 +1,4 @@
+import { URLSearchParams } from 'node:url'
 import z, { ZodType } from 'zod'
 
 import { GroupList } from '@/types/entities/group'
@@ -30,14 +31,31 @@ export async function getGroupsList() {
   return apiFetch('/group', z.array(GroupList))
 }
 
-export async function getGroupSchedule(id: string, week?: 'even' | 'odd') {
-  return apiFetch(
-    `/schedule/${id}${week ? `?week=${week}` : ''}`,
-    z.array(ScheduleEntity),
-    {
-      cache: 'force-cache'
-    }
-  )
+export async function getGroupSchedule(
+  id: string,
+  week?: 'even' | 'odd',
+  selectives: string[] = []
+) {
+  const params = new URLSearchParams()
+
+  if (week) params.append('week', week)
+
+  if (selectives.length > 0) {
+    params.append('selectives', selectives.join(','))
+  }
+
+  const queryString = params.toString().replaceAll('%2C', ',')
+  const url = queryString ? `?${queryString}` : ''
+
+  console.log({ selectives, url })
+
+  return apiFetch(`/schedule/${id}${url}`, z.array(ScheduleEntity), {
+    cache: 'force-cache'
+  })
+}
+
+export async function getAllSelectives(id: string) {
+  return apiFetch(`/schedule/${id}/selectives`, z.array(ScheduleEntity))
 }
 
 export async function getGroupPicture(id: string): Promise<string> {
