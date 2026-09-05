@@ -1,7 +1,7 @@
 'use client'
 
 import { TableHead } from '@ui/table'
-import clsx from 'clsx'
+import { cx } from 'class-variance-authority'
 
 import { DAY_OF_WEEK } from '@/common/constants/day-of-the-week'
 import useCurrent from '@/common/context/current-date'
@@ -15,7 +15,7 @@ export default function DayOfWeekRow() {
     return (
       <TableHead
         key={day.id}
-        className={clsx(
+        className={cx(
           'text-center',
           currentDay === day.id && 'bg-neutral-200 dark:bg-neutral-800'
         )}

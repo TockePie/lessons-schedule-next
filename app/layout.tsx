@@ -1,6 +1,6 @@
+import { cx } from 'class-variance-authority'
 import { disableReactDevTools } from '@fvilers/disable-react-devtools'
 import { Toaster } from '@ui/sonner'
-import clsx from 'clsx'
 import type { Metadata } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
 
@@ -35,7 +35,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={clsx(
+        className={cx(
           geistSans.variable,
           geistMono.variable,
           'h-screen antialiased dark:bg-black'

@@ -1,6 +1,6 @@
 import { PropsWithChildren } from 'react'
 import { Button } from '@ui/button'
-import clsx from 'clsx'
+import { cx } from 'class-variance-authority'
 import { Clock } from 'lucide-react'
 
 interface Props extends PropsWithChildren {
@@ -19,7 +19,7 @@ export default function Card({
 }: Props) {
   return (
     <div
-      className={clsx(
+      className={cx(
         'flex min-h-32 cursor-pointer flex-col items-center justify-between gap-1 rounded-xl border-2 bg-white p-2 transition-all hover:bg-neutral-200 dark:bg-neutral-950 hover:dark:bg-neutral-800',
         'transform transition duration-150 ease-in-out active:scale-95',
         className

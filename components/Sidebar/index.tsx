@@ -9,7 +9,7 @@ import {
   SheetTitle,
   SheetTrigger
 } from '@ui/sheet'
-import clsx from 'clsx'
+import { cx } from 'class-variance-authority'
 import { Menu, Plus } from 'lucide-react'
 import Link from 'next/link'
 
@@ -57,7 +57,7 @@ export default function Sidebar() {
                 { type: 'LAB', name: 'Лабораторні', color: 'bg-lime-400' }
               ].map((item) => (
                 <div key={item.type} className="flex items-center gap-2">
-                  <div className={clsx('h-5 w-5 rounded-sm', item.color)} /> -{' '}
+                  <div className={cx('h-5 w-5 rounded-sm', item.color)} /> -{' '}
                   {item.name}
                 </div>
               ))}

@@ -1,6 +1,6 @@
 import { PropsWithChildren } from 'react'
 import { Table, TableBody, TableHead, TableHeader, TableRow } from '@ui/table'
-import clsx from 'clsx'
+import { cx } from 'class-variance-authority'
 
 import DayOfWeekRow from './Desktop/day-of-week-row'
 import DayTableHead from './Mobile/day-table-head'
@@ -20,7 +20,7 @@ export default function LessonsTable({
 }: Props) {
   return (
     <Table
-      className={clsx(
+      className={cx(
         'mx-auto w-full table-fixed border border-neutral-200 dark:border-neutral-800',
         device === 'mobile'
           ? 'max-w-96'
