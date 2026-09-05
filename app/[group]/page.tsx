@@ -5,8 +5,8 @@ import LessonsTable from '@/components/Table'
 import RowBlockDesktop from '@/components/Table/Desktop/row-block'
 import DayTabs from '@/components/Table/Mobile/day-tabs'
 import RowBlockMobile from '@/components/Table/Mobile/row-block'
-import { getGroupSchedule } from '@/lib/api'
 import { getTime } from '@/lib/get-time'
+import { getGroupSchedule } from '@/api/endpoints/schedule'
 
 interface Props {
   params: Promise<{ group: string }>

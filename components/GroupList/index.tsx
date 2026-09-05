@@ -12,9 +12,8 @@ import { Plus } from 'lucide-react'
 import { cookies } from 'next/headers'
 import Link from 'next/link'
 
-import { getGroupsList } from '@/lib/api'
-
 import GroupSelectItem from './list-item'
+import { getGroupsList } from '@/api/endpoints/group'
 
 export default async function GroupList() {
   const groups = await getGroupsList()

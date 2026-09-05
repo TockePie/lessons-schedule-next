@@ -1,7 +1,7 @@
 import { TableCell, TableRow } from '@ui/table'
 
 import { LESSON_NUMBER } from '@/common/constants/lesson-number'
-import { ScheduleEntityType } from '@/types/entities/schedule'
+import { Schedule } from '@/types/entities/schedule'
 import convertTime from '@/utils/convert-time'
 
 import CellBlock from '../cell-block'
@@ -9,7 +9,7 @@ import CellBlock from '../cell-block'
 export default function RowBlock({
   scheduleData
 }: {
-  scheduleData: ScheduleEntityType[] | undefined
+  scheduleData: Schedule | undefined
 }) {
   const allRows = scheduleData?.map((item) => item.row) ?? []
   const maxRowNumber = Math.max(...allRows)

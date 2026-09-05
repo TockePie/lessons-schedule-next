@@ -7,7 +7,7 @@ import useCurrent from '@/common/context/current-date'
 import LessonCard from '@/components/Card/lesson-card'
 import MultipleCard from '@/components/MultipleCard'
 import { CurrentDay } from '@/types/current-date'
-import { ScheduleEntityType } from '@/types/entities/schedule'
+import { Schedule } from '@/types/entities/schedule'
 import isCurrentLesson from '@/utils/is-current-lesson'
 import openLesson from '@/utils/open-lesson'
 
@@ -18,7 +18,7 @@ interface Props {
     endTime: number
     name: string
   }
-  scheduleData: ScheduleEntityType[]
+  scheduleData: Schedule
   manualDay: CurrentDay | null
 }
 

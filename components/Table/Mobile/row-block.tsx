@@ -4,7 +4,7 @@ import { useContext } from 'react'
 
 import { LESSON_NUMBER } from '@/common/constants/lesson-number'
 import { TableCell, TableRow } from '@/components/ui/table'
-import { ScheduleEntityType } from '@/types/entities/schedule'
+import { Schedule } from '@/types/entities/schedule'
 import convertTime from '@/utils/convert-time'
 
 import CellBlock from '../cell-block'
@@ -14,7 +14,7 @@ import { DayContext } from './day-tabs'
 export default function RowBlock({
   scheduleData
 }: {
-  scheduleData: ScheduleEntityType[] | undefined
+  scheduleData: Schedule | undefined
 }) {
   const manualDay = useContext(DayContext)
   const dayFilter = scheduleData?.filter((item) => item.day === manualDay)

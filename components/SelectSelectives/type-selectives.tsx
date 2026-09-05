@@ -9,13 +9,13 @@ import {
   FieldTitle
 } from '@ui/field'
 
-import { ScheduleEntityType } from '@/types/entities/schedule'
+import { Schedule } from '@/types/entities/schedule'
 import { SubjectType } from '@/types/entities/subject'
 
 import useSelectives from './context/selected'
 
 interface Props {
-  selectives: ScheduleEntityType[]
+  selectives: Schedule
   type: Omit<SubjectType, 'PRACTICE'>
   selected: string[]
 }

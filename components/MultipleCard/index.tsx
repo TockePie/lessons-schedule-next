@@ -7,7 +7,7 @@ import {
   DialogTrigger
 } from '@ui/dialog'
 
-import { ScheduleEntityType } from '@/types/entities/schedule'
+import { Schedule } from '@/types/entities/schedule'
 import openLesson from '@/utils/open-lesson'
 
 import Card from '../Card'
@@ -15,7 +15,7 @@ import LessonCard from '../Card/lesson-card'
 import { ScrollArea } from '../ui/scroll-area'
 
 interface Props {
-  data: ScheduleEntityType[]
+  data: Schedule
   length: number
   isCurrent: boolean
 }
