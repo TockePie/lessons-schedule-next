@@ -1,8 +1,8 @@
-import { z } from 'zod'
+import { z } from 'zod/mini'
 
-export const GroupList = z.object({
+export const groupSchema = z.object({
   group_id: z.uuid(),
   name: z.string()
 })
 
-export type GroupListType = z.infer<typeof GroupList>
+export const groupListSchema = z.array(groupSchema)

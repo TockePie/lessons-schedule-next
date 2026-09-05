@@ -1,16 +1,18 @@
-import z from 'zod'
+import { z } from 'zod/mini'
 
-import { SubjectEntity } from './subject'
+import { subjectSchema } from './subject'
 
-export const WeekParityEnum = z.enum(['EVEN', 'ODD', 'BOTH'])
-export type WeekParityType = z.infer<typeof WeekParityEnum>
+export const weekParityEnum = z.enum(['EVEN', 'ODD', 'BOTH'])
+export type WeekParity = z.infer<typeof weekParityEnum>
 
-export const ScheduleEntity = z.object({
+export const scheduleItemSchema = z.object({
   id: z.uuid(),
-  day: z.number().min(1).max(6),
-  row: z.number().min(1).max(7),
-  week_parity: WeekParityEnum,
-  subject: SubjectEntity
+  day: z.number().check(z.minimum(1), z.maximum(6)),
+  row: z.number().check(z.minimum(1), z.maximum(7)),
+  week_parity: weekParityEnum,
+  externalId: z.uuid(),
+  subject: subjectSchema
 })
 
-export type ScheduleEntityType = z.infer<typeof ScheduleEntity>
+export const scheduleSchema = z.array(scheduleItemSchema)
+export type Schedule = z.infer<typeof scheduleSchema>

@@ -1,13 +1,13 @@
 import { LESSON_NUMBER } from '@/common/constants/lesson-number'
 import { CurrentDay } from '@/types/current-date'
-import { WeekParityType } from '@/types/entities/schedule'
+import { WeekParity } from '@/types/entities/schedule'
 
 import getWeekParity from './get-week-parity'
 
 const isCurrentLesson = (
   day: number,
   row: number,
-  week: WeekParityType,
+  week: WeekParity,
   currentDay: CurrentDay,
   minutesSinceMidnight: number
 ): boolean => {
