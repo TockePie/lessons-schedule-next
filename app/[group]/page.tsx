@@ -5,7 +5,7 @@ import LessonsTable from '@/components/Table'
 import RowBlockDesktop from '@/components/Table/Desktop/row-block'
 import DayTabs from '@/components/Table/Mobile/day-tabs'
 import RowBlockMobile from '@/components/Table/Mobile/row-block'
-import { getTime } from '@/lib/get-time'
+import { getTime } from '@/api/endpoints/get-time'
 import { getGroupSchedule } from '@/api/endpoints/schedule'
 
 interface Props {

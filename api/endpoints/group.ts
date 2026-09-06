@@ -1,6 +1,7 @@
 import { groupListSchema } from '@/types/entities/group'
 
-import { fetchAndValidate, fetchText } from '../core/fetch'
+import { fetchAndValidate } from '../core/fetch-and-validate'
+import { fetchText } from '../core/fetch-text'
 
 export async function getGroupsList() {
   return await fetchAndValidate('/group', groupListSchema)
