@@ -6,13 +6,20 @@ import { useRouter } from 'next/navigation'
 
 import { GroupListItem } from '../../types/group'
 
-export default function GroupSelectItem({ group_id, name }: GroupListItem) {
+type Props = GroupListItem & {
+  currentGroup?: string
+}
+
+export default function GroupSelectItem({
+  group_id,
+  name,
+  currentGroup
+}: Props) {
   const router = useRouter()
-  const cookieGroupId = Cookies.get('group_id')
 
   const handleSelect = async () => {
-    if (group_id === cookieGroupId) return
-    Cookies.set('group_id', group_id, {
+    if (group_id === currentGroup) return
+    Cookies.set('groupId', group_id, {
       expires: 30
     })
 

@@ -17,11 +17,9 @@ import { getGroupsList } from '../../api/group'
 import GroupSelectItem from './list-item'
 
 export default async function GroupList() {
-  const groups = await getGroupsList()
+  const [groups, cookieStore] = await Promise.all([getGroupsList(), cookies()])
 
-  const cookieStore = await cookies()
   const cookieGroupId = cookieStore.get('groupId')?.value
-
   const currentGroup = groups.find((group) => group.group_id === cookieGroupId)
 
   const buttonText = !cookieGroupId
@@ -45,6 +43,7 @@ export default async function GroupList() {
               key={group.group_id}
               group_id={group.group_id}
               name={group.name}
+              currentGroup={currentGroup?.group_id}
             />
           ))}
         </DropdownMenuRadioGroup>
