@@ -2,8 +2,14 @@
 
 import { createContext, useContext } from 'react'
 
-import { useCurrentDate } from '@/hooks/use-current-date'
-import { CurrentDateContextValue } from '@/types/current-date'
+import { useCurrentDate } from './hooks/use-current-date'
+import { CurrentDay } from './types/current-day'
+
+interface CurrentDateContextValue {
+  currentDate: Date
+  currentDay: CurrentDay
+  minutesSinceMidnight: number
+}
 
 const CurrentDateContext = createContext<CurrentDateContextValue | undefined>(
   undefined
@@ -23,7 +29,7 @@ export function CurrentDateProvider({
   )
 }
 
-export default function useCurrent() {
+export function useCurrent() {
   const context = useContext(CurrentDateContext)
   if (!context) throw new Error('CurrentDayContext is not provided')
   return context

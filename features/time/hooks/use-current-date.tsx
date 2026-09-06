@@ -8,7 +8,7 @@ import {
   startOfMinute
 } from 'date-fns'
 
-import { CurrentDay } from '@/types/current-date'
+import { CurrentDay } from '../types/current-day'
 
 export function useCurrentDate() {
   const [currentDate, setCurrentDate] = useState(() => new Date())

@@ -3,10 +3,9 @@
 import { TableCell } from '@ui/table'
 
 import { DAY_OF_WEEK } from '@/common/constants/day-of-the-week'
-import useCurrent from '@/common/context/current-date'
 import LessonCard from '@/components/Card/lesson-card'
 import MultipleCard from '@/components/MultipleCard'
-import { CurrentDay } from '@/types/current-date'
+import { CurrentDay, useCurrent } from '@/features/time'
 import { Schedule } from '@/types/entities/schedule'
 import isCurrentLesson from '@/utils/is-current-lesson'
 import openLesson from '@/utils/open-lesson'

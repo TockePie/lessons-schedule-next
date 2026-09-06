@@ -2,7 +2,7 @@
 
 import { ThemeProvider as NextThemesProvider } from 'next-themes'
 
-import { CurrentDateProvider } from '@/common/context/current-date'
+import { CurrentDateProvider } from '@/features/time'
 
 export default function Providers({ children }: { children: React.ReactNode }) {
   return (

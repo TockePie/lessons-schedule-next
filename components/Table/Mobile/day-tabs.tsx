@@ -4,8 +4,7 @@ import React, { createContext, useState } from 'react'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@ui/tabs'
 
 import { DAY_OF_WEEK } from '@/common/constants/day-of-the-week'
-import useCurrent from '@/common/context/current-date'
-import { CurrentDay } from '@/types/current-date'
+import { CurrentDay, useCurrent } from '@/features/time'
 
 const DayContext = createContext<CurrentDay | null>(null)
 
