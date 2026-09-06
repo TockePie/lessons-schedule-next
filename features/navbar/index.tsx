@@ -1,8 +1,8 @@
 import { Avatar, AvatarFallback, AvatarImage } from '@ui/avatar'
 
-import GroupList from '@/components/GroupList'
-import Sidebar from '@/components/Sidebar'
-import { getGroupPicture } from '@/api/endpoints/group'
+import { getGroupPicture } from './api/group'
+import GroupList from './components/group-list'
+import Sidebar from './components/sidebar'
 
 export default async function Navbar({ groupId }: { groupId?: string }) {
   const groupPicture = groupId ? await getGroupPicture(groupId) : null
@@ -16,9 +16,6 @@ export default async function Navbar({ groupId }: { groupId?: string }) {
             <AvatarFallback className="rounded-xl">LS</AvatarFallback>
           </Avatar>
           <h1 className="text-2xl font-bold">Розклад</h1>
-          {/* <Badge variant="secondary" className="bg-amber-400 dark:bg-amber-700">
-            Testing
-          </Badge> */}
         </div>
 
         <div className="flex items-center gap-x-3">

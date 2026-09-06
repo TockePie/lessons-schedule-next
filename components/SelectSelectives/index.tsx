@@ -11,10 +11,11 @@ import { ScrollArea } from '@ui/scroll-area'
 import { Separator } from '@ui/separator'
 import { cookies } from 'next/headers'
 
+import { getAllSelectives } from '@/api/endpoints/schedule'
+
 import { SelectedProvider } from './context/selected'
 import SelectivesFooter from './selectives-footer'
 import TypeSelectives from './type-selectives'
-import { getAllSelectives } from '@/api/endpoints/schedule'
 
 export default async function SelectSelectives({
   children

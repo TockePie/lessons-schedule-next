@@ -12,8 +12,9 @@ import { Plus } from 'lucide-react'
 import { cookies } from 'next/headers'
 import Link from 'next/link'
 
+import { getGroupsList } from '../../api/group'
+
 import GroupSelectItem from './list-item'
-import { getGroupsList } from '@/api/endpoints/group'
 
 export default async function GroupList() {
   const groups = await getGroupsList()
@@ -42,7 +43,7 @@ export default async function GroupList() {
           {groups.map((group) => (
             <GroupSelectItem
               key={group.group_id}
-              groupId={group.group_id}
+              group_id={group.group_id}
               name={group.name}
             />
           ))}

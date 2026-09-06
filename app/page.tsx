@@ -1,9 +1,9 @@
 import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
 
-import Navbar from '@/components/Navbar'
 import LessonsTable from '@/components/Table'
 import DayTabs from '@/components/Table/Mobile/day-tabs'
+import Navbar from '@/features/navbar'
 
 export default async function Home() {
   const cookieStore = await cookies()

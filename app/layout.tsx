@@ -1,6 +1,6 @@
-import { cx } from 'class-variance-authority'
 import { disableReactDevTools } from '@fvilers/disable-react-devtools'
 import { Toaster } from '@ui/sonner'
+import { cx } from 'class-variance-authority'
 import type { Metadata } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
 

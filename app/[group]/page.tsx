@@ -1,12 +1,12 @@
 import { cookies } from 'next/headers'
 
+import { getTime } from '@/api/endpoints/get-time'
+import { getGroupSchedule } from '@/api/endpoints/schedule'
 import ParityTabs from '@/components/ParityTabs'
 import LessonsTable from '@/components/Table'
 import RowBlockDesktop from '@/components/Table/Desktop/row-block'
 import DayTabs from '@/components/Table/Mobile/day-tabs'
 import RowBlockMobile from '@/components/Table/Mobile/row-block'
-import { getTime } from '@/api/endpoints/get-time'
-import { getGroupSchedule } from '@/api/endpoints/schedule'
 
 interface Props {
   params: Promise<{ group: string }>
