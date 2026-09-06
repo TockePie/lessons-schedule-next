@@ -1,10 +1,9 @@
 'use client'
 
 import { createContext, useContext } from 'react'
-import { getISODay } from 'date-fns'
 
-import useCurrentDate from '@/hooks/use-current-date'
-import { CurrentDateContextValue, CurrentDay } from '@/types/current-date'
+import { useCurrentDate } from '@/hooks/use-current-date'
+import { CurrentDateContextValue } from '@/types/current-date'
 
 const CurrentDateContext = createContext<CurrentDateContextValue | undefined>(
   undefined
@@ -15,15 +14,10 @@ export function CurrentDateProvider({
 }: {
   children: React.ReactNode
 }) {
-  const currentDate = useCurrentDate()
-  const currentDay = getISODay(currentDate) as CurrentDay
-  const minutesSinceMidnight =
-    currentDate.getHours() * 60 + currentDate.getMinutes()
+  const value = useCurrentDate()
 
   return (
-    <CurrentDateContext.Provider
-      value={{ currentDate, currentDay, minutesSinceMidnight }}
-    >
+    <CurrentDateContext.Provider value={value}>
       {children}
     </CurrentDateContext.Provider>
   )
