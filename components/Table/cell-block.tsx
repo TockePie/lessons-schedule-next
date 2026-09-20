@@ -42,7 +42,6 @@ export default function CellBlock({ time, scheduleData, manualDay }: Props) {
         <TableCell key={`day-${day.id}`} className="text-center">
           <MultipleCard
             key={`day-${day.id}`}
-            data={items}
             length={items.length}
             isCurrent={isCurrentLesson(
               day.id,
@@ -51,7 +50,16 @@ export default function CellBlock({ time, scheduleData, manualDay }: Props) {
               currentDay,
               minutesSinceMidnight
             )}
-          />
+          >
+            {items.map((item) => (
+              <LessonCard
+                {...item.subject}
+                key={item.id}
+                actionFn={openLesson(item.subject.url)}
+                isCurrent={false}
+              />
+            ))}
+          </MultipleCard>
         </TableCell>
       )
     }

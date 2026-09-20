@@ -1,3 +1,4 @@
+import { PropsWithChildren } from 'react'
 import {
   Dialog,
   DialogClose,
@@ -8,29 +9,14 @@ import {
 } from '@ui/dialog'
 import { ScrollArea } from '@ui/scroll-area'
 
-import { Schedule } from '@/features/schedule/types/schedule'
-import openLesson from '@/utils/open-lesson'
-
 import { Card } from './base-card'
-import { LessonCard } from './lesson-card'
 
-interface Props {
-  data: Schedule
+interface Props extends PropsWithChildren {
   length: number
   isCurrent: boolean
 }
 
-export function MultipleCard({ data, length, isCurrent }: Props) {
-  const Cards = data.map((item) => (
-    <DialogClose key={item.id}>
-      <LessonCard
-        {...item.subject}
-        actionFn={openLesson(item.subject.url)}
-        isCurrent={false}
-      />
-    </DialogClose>
-  ))
-
+export function MultipleCard({ length, isCurrent, children }: Props) {
   return (
     <Dialog>
       <DialogTrigger className="w-full">
@@ -43,7 +29,9 @@ export function MultipleCard({ data, length, isCurrent }: Props) {
         </DialogHeader>
 
         <ScrollArea className="size-full max-h-128 rounded-md">
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">{Cards}</div>
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+            <DialogClose>{children}</DialogClose>
+          </div>
         </ScrollArea>
       </DialogContent>
     </Dialog>
