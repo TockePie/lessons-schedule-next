@@ -14,7 +14,7 @@ import { cx } from 'class-variance-authority'
 import { Menu, Plus } from 'lucide-react'
 
 import ClearCacheBtn from '@/components/ClearCacheBtn'
-import SelectSelectives from '@/components/SelectSelectives'
+import SelectSelectives from '@/features/selectives'
 
 import GitHubLogo from './icons/github'
 
