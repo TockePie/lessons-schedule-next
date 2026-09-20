@@ -8,6 +8,8 @@ import Providers from './providers'
 
 import './globals.css'
 
+import { env } from '@/lib/env'
+
 const geistSans = Geist({
   variable: '--font-geist-sans',
   subsets: ['latin']
@@ -28,7 +30,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  if (process.env.NODE_ENV === 'production') {
+  if (env.NODE_ENV === 'production') {
     disableReactDevTools()
   }
 

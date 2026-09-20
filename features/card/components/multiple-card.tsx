@@ -6,13 +6,13 @@ import {
   DialogTitle,
   DialogTrigger
 } from '@ui/dialog'
+import { ScrollArea } from '@ui/scroll-area'
 
 import { Schedule } from '@/features/schedule/types/schedule'
 import openLesson from '@/utils/open-lesson'
 
-import Card from '../Card'
-import LessonCard from '../Card/lesson-card'
-import { ScrollArea } from '../ui/scroll-area'
+import { Card } from './base-card'
+import { LessonCard } from './lesson-card'
 
 interface Props {
   data: Schedule
@@ -20,7 +20,7 @@ interface Props {
   isCurrent: boolean
 }
 
-export default function MultipleCard({ data, length, isCurrent }: Props) {
+export function MultipleCard({ data, length, isCurrent }: Props) {
   const Cards = data.map((item) => (
     <DialogClose key={item.id}>
       <LessonCard

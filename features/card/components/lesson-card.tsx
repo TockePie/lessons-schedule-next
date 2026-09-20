@@ -1,9 +1,6 @@
-import {
-  SubjectEntityType,
-  SubjectType
-} from '@/features/schedule/types/subject'
+import { Subject, SubjectType } from '@/features/schedule/types/subject'
 
-import Card from '.'
+import { Card } from './base-card'
 
 const LESSON_COLORS: Record<SubjectType, string> = {
   LECTURE: 'border-indigo-400',
@@ -12,14 +9,14 @@ const LESSON_COLORS: Record<SubjectType, string> = {
 } as const
 
 interface Props extends Omit<
-  SubjectEntityType,
+  Subject,
   'is_selective' | 'created_at' | 'updated_at' | 'subject_id'
 > {
   actionFn: () => void
   isCurrent: boolean
 }
 
-export default function LessonCard(props: Props) {
+export function LessonCard(props: Props) {
   const { type, teacher } = props
 
   return (

@@ -6,12 +6,17 @@ const envSchema = z.object({
   }),
   THIS_WEBSITE_URL: z.url({
     message: 'THIS_WEBSITE_URL must be a valid URL pointing to this website.'
-  })
+  }),
+  NODE_ENV: z._default(
+    z.enum(['development', 'production', 'test']),
+    'development'
+  )
 })
 
 const parsed = envSchema.safeParse({
   NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL,
-  THIS_WEBSITE_URL: process.env.THIS_WEBSITE_URL
+  THIS_WEBSITE_URL: process.env.THIS_WEBSITE_URL,
+  NODE_ENV: process.env.NODE_ENV
 })
 
 if (!parsed.success) {
