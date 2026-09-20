@@ -1,4 +1,7 @@
-import { SubjectEntityType, SubjectType } from '@/types/entities/subject'
+import {
+  SubjectEntityType,
+  SubjectType
+} from '@/features/schedule/types/subject'
 
 import Card from '.'
 

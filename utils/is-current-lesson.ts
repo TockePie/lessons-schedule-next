@@ -1,7 +1,6 @@
 import { LESSON_NUMBER } from '@/common/constants/lesson-number'
-import { CurrentDay } from '@/features/time'
-import { getTime } from '@/lib/time'
-import { WeekParity } from '@/types/entities/schedule'
+import { WeekParity } from '@/features/schedule/types/schedule'
+import { CurrentDay, getServerTime } from '@/features/time'
 
 const isCurrentLesson = (
   day: number,
@@ -10,7 +9,7 @@ const isCurrentLesson = (
   currentDay: CurrentDay,
   minutesSinceMidnight: number
 ): boolean => {
-  const weekParity = getTime().weekParity
+  const weekParity = getServerTime().weekParity
   if (week.toLowerCase() !== weekParity && week !== 'BOTH') return false
 
   if (currentDay !== day) return false

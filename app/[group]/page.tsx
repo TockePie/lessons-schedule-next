@@ -1,12 +1,12 @@
 import { cookies } from 'next/headers'
 
-import { getGroupSchedule } from '@/api/endpoints/schedule'
 import ParityTabs from '@/components/ParityTabs'
 import LessonsTable from '@/components/Table'
 import RowBlockDesktop from '@/components/Table/Desktop/row-block'
 import DayTabs from '@/components/Table/Mobile/day-tabs'
 import RowBlockMobile from '@/components/Table/Mobile/row-block'
-import { getTime } from '@/lib/time'
+import { divideSchedule, getGroupSchedule } from '@/features/schedule'
+import { getServerTime } from '@/features/time'
 import { parseCookie } from '@/utils/parse-cookie'
 
 interface Props {
@@ -20,21 +20,13 @@ export default async function Page({ params }: Props) {
     cookieStore.get('selected_selectives')?.value
   )
 
-  const scheduleData = await getGroupSchedule(group, undefined, savedSelectives)
+  const { scheduleEven, scheduleOdd } = await getGroupSchedule(
+    group,
+    undefined,
+    savedSelectives
+  ).then((value) => divideSchedule(value))
 
-  const scheduleEven: typeof scheduleData = []
-  const scheduleOdd: typeof scheduleData = []
-
-  for (const item of scheduleData) {
-    if (item.week_parity === 'EVEN' || item.week_parity === 'BOTH') {
-      scheduleEven.push(item)
-    }
-    if (item.week_parity === 'ODD' || item.week_parity === 'BOTH') {
-      scheduleOdd.push(item)
-    }
-  }
-
-  const time = getTime()
+  const time = getServerTime()
 
   return (
     <main className="h-full bg-neutral-50 p-5 dark:bg-black">

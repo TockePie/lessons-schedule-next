@@ -1,5 +1,5 @@
-import { fetchAndValidate } from '@/api/core/fetch-and-validate'
-import { fetchText } from '@/api/core/fetch-text'
+import { fetchAndValidate } from '@/api/fetch-and-validate'
+import { fetchText } from '@/api/fetch-text'
 
 import { groupListSchema } from '../types/group'
 

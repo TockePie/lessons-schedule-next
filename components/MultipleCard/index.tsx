@@ -7,7 +7,7 @@ import {
   DialogTrigger
 } from '@ui/dialog'
 
-import { Schedule } from '@/types/entities/schedule'
+import { Schedule } from '@/features/schedule/types/schedule'
 import openLesson from '@/utils/open-lesson'
 
 import Card from '../Card'

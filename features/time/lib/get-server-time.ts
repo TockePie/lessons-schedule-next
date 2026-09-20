@@ -1,6 +1,6 @@
 import { getISOWeek } from 'date-fns'
 
-export function getTime() {
+export function getServerTime() {
   const date = new Date()
   const currentWeek = getISOWeek(date)
 

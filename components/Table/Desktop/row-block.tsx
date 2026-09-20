@@ -1,7 +1,7 @@
 import { TableCell, TableRow } from '@ui/table'
 
 import { LESSON_NUMBER } from '@/common/constants/lesson-number'
-import { Schedule } from '@/types/entities/schedule'
+import { Schedule } from '@/features/schedule/types/schedule'
 import convertTime from '@/utils/convert-time'
 
 import CellBlock from '../cell-block'

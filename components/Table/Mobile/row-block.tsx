@@ -4,7 +4,7 @@ import { useContext } from 'react'
 
 import { LESSON_NUMBER } from '@/common/constants/lesson-number'
 import { TableCell, TableRow } from '@/components/ui/table'
-import { Schedule } from '@/types/entities/schedule'
+import { Schedule } from '@/features/schedule/types/schedule'
 import convertTime from '@/utils/convert-time'
 
 import CellBlock from '../cell-block'

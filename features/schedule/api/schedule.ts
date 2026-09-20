@@ -1,6 +1,6 @@
-import { scheduleSchema } from '@/types/entities/schedule'
+import { fetchAndValidate } from '@/api/fetch-and-validate'
 
-import { fetchAndValidate } from '../core/fetch-and-validate'
+import { scheduleSchema } from '../types/schedule'
 
 export async function getGroupSchedule(
   id: string,
