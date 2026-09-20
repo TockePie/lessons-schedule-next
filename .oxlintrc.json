@@ -1,0 +1,14 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "plugins": ["react", "nextjs", "typescript", "unicorn"],
+  "env": {
+    "browser": true,
+    "node": true
+  },
+  "ignorePatterns": [".next/**", "node_modules/**", "public/**", "out/**"],
+  "rules": {
+    "no-unused-vars": "error",
+    "react/jsx-key": "error",
+    "react/no-unescaped-entities": "warn"
+  }
+}
