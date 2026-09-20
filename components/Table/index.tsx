@@ -7,13 +7,13 @@ import EmptyState from './empty-state'
 import DayTableHead from './Mobile/day-table-head'
 
 interface Props extends PropsWithChildren {
-  scheduleDataLenght: number
+  scheduleDataLength: number
   isGroup: string
   device: 'desktop' | 'mobile'
 }
 
 export default function LessonsTable({
-  scheduleDataLenght,
+  scheduleDataLength,
   isGroup,
   device,
   children
@@ -48,7 +48,7 @@ export default function LessonsTable({
           message="Оберіть групу, щоб побачити розклад"
           size={device}
         />
-      ) : scheduleDataLenght === 0 ? (
+      ) : scheduleDataLength === 0 ? (
         <EmptyState message="Розклад відсутній для цієї групи" size={device} />
       ) : (
         <TableBody>{children}</TableBody>

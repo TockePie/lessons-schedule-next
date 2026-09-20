@@ -1,9 +1,10 @@
 import React from 'react'
 import { cookies } from 'next/headers'
 
+import { parseCookie } from '@/utils/parse-cookie'
+
 import { getAllSelectives } from './api/selectives'
 import SelectivesDialog from './components/dialog'
-import { parseCookie } from './utils/parse-cookie'
 
 export default async function SelectSelectives({
   children

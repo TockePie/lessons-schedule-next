@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect } from 'react'
-import { useRouter } from 'next/navigation'
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@ui/tabs'
 
 interface Props {
@@ -12,20 +12,24 @@ interface Props {
 
 export default function ParityTabs({ weekParity, evenChild, oddChild }: Props) {
   const router = useRouter()
+  const pathname = usePathname()
+  const searchParams = useSearchParams()
 
   useEffect(() => {
     router.push(`?parity=${weekParity}`)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  const handleChange = (value: string) => {
-    router.push(`?parity=${value}`)
-    router.refresh()
+  const handleValueChange = (value: string) => {
+    const params = new URLSearchParams(searchParams.toString())
+    params.set('parity', value)
+
+    router.replace(`${pathname}?${params.toString()}`, { scroll: false })
   }
 
   return (
     <Tabs
-      onValueChange={handleChange}
+      onValueChange={handleValueChange}
       defaultValue={weekParity}
       className="flex flex-col items-center gap-5 pb-5 select-none"
     >

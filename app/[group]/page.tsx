@@ -1,41 +1,40 @@
 import { cookies } from 'next/headers'
 
-import { getTime } from '@/api/endpoints/get-time'
 import { getGroupSchedule } from '@/api/endpoints/schedule'
 import ParityTabs from '@/components/ParityTabs'
 import LessonsTable from '@/components/Table'
 import RowBlockDesktop from '@/components/Table/Desktop/row-block'
 import DayTabs from '@/components/Table/Mobile/day-tabs'
 import RowBlockMobile from '@/components/Table/Mobile/row-block'
+import { getTime } from '@/lib/time'
+import { parseCookie } from '@/utils/parse-cookie'
 
 interface Props {
   params: Promise<{ group: string }>
 }
 
 export default async function Page({ params }: Props) {
-  const cookieStore = await cookies()
-  const savedSelectivesRaw = cookieStore.get('selected_selectives')?.value
-  const savedSelectives: string[] = savedSelectivesRaw
-    ? JSON.parse(savedSelectivesRaw)
-    : []
+  const [cookieStore, { group }] = await Promise.all([cookies(), params])
 
-  const time = await getTime()
+  const savedSelectives = parseCookie(
+    cookieStore.get('selected_selectives')?.value
+  )
 
-  const { group } = await params
   const scheduleData = await getGroupSchedule(group, undefined, savedSelectives)
 
-  const scheduleEven = scheduleData?.filter(
-    (data) => data.week_parity === 'EVEN' || data.week_parity === 'BOTH'
-  )
+  const scheduleEven: typeof scheduleData = []
+  const scheduleOdd: typeof scheduleData = []
 
-  const scheduleOdd = scheduleData?.filter(
-    (data) => data.week_parity === 'ODD' || data.week_parity === 'BOTH'
-  )
-
-  const scheduleDataLenght = {
-    even: scheduleEven.length,
-    odd: scheduleOdd.length
+  for (const item of scheduleData) {
+    if (item.week_parity === 'EVEN' || item.week_parity === 'BOTH') {
+      scheduleEven.push(item)
+    }
+    if (item.week_parity === 'ODD' || item.week_parity === 'BOTH') {
+      scheduleOdd.push(item)
+    }
   }
+
+  const time = getTime()
 
   return (
     <main className="h-full bg-neutral-50 p-5 dark:bg-black">
@@ -44,7 +43,7 @@ export default async function Page({ params }: Props) {
         evenChild={
           <>
             <LessonsTable
-              scheduleDataLenght={scheduleDataLenght.even}
+              scheduleDataLength={scheduleEven.length}
               isGroup={group}
               device="desktop"
             >
@@ -52,7 +51,7 @@ export default async function Page({ params }: Props) {
             </LessonsTable>
             <DayTabs>
               <LessonsTable
-                scheduleDataLenght={scheduleDataLenght.even}
+                scheduleDataLength={scheduleEven.length}
                 isGroup={group}
                 device="mobile"
               >
@@ -64,7 +63,7 @@ export default async function Page({ params }: Props) {
         oddChild={
           <>
             <LessonsTable
-              scheduleDataLenght={scheduleDataLenght.odd}
+              scheduleDataLength={scheduleOdd.length}
               isGroup={group}
               device="desktop"
             >
@@ -72,7 +71,7 @@ export default async function Page({ params }: Props) {
             </LessonsTable>
             <DayTabs>
               <LessonsTable
-                scheduleDataLenght={scheduleDataLenght.odd}
+                scheduleDataLength={scheduleOdd.length}
                 isGroup={group}
                 device="mobile"
               >
