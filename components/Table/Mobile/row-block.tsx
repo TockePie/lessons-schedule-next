@@ -8,7 +8,6 @@ import { Schedule } from '@/types/entities/schedule'
 import convertTime from '@/utils/convert-time'
 
 import CellBlock from '../cell-block'
-
 import { DayContext } from './day-tabs'
 
 export default function RowBlock({

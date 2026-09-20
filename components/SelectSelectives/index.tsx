@@ -1,4 +1,5 @@
 import React from 'react'
+import { cookies } from 'next/headers'
 import {
   Dialog,
   DialogContent,
@@ -9,7 +10,6 @@ import {
 import { FieldGroup } from '@ui/field'
 import { ScrollArea } from '@ui/scroll-area'
 import { Separator } from '@ui/separator'
-import { cookies } from 'next/headers'
 
 import { getAllSelectives } from '@/api/endpoints/schedule'
 

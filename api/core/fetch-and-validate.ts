@@ -1,7 +1,7 @@
 import { StandardSchemaV1 } from 'ky'
 
-import { handleError } from './handle-error'
 import { api } from '.'
+import { handleError } from './handle-error'
 
 export async function fetchAndValidate<T>(
   endpoint: string,

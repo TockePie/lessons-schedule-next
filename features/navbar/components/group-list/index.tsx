@@ -1,3 +1,5 @@
+import { cookies } from 'next/headers'
+import Link from 'next/link'
 import { DropdownMenuItem } from '@radix-ui/react-dropdown-menu'
 import { Button } from '@ui/button'
 import {
@@ -9,11 +11,8 @@ import {
   DropdownMenuTrigger
 } from '@ui/dropdown-menu'
 import { Plus } from 'lucide-react'
-import { cookies } from 'next/headers'
-import Link from 'next/link'
 
 import { getGroupsList } from '../../api/group'
-
 import GroupSelectItem from './list-item'
 
 export default async function GroupList() {

@@ -1,8 +1,8 @@
 'use client'
 
 import { useEffect } from 'react'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@ui/tabs'
 import { useRouter } from 'next/navigation'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@ui/tabs'
 
 interface Props {
   weekParity: 'even' | 'odd'

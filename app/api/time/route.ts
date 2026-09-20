@@ -1,5 +1,5 @@
-import { getISOWeek } from 'date-fns'
 import { NextResponse } from 'next/server'
+import { getISOWeek } from 'date-fns'
 
 export function GET() {
   const date = new Date()

@@ -3,8 +3,8 @@ import { Table, TableBody, TableHead, TableHeader, TableRow } from '@ui/table'
 import { cx } from 'class-variance-authority'
 
 import DayOfWeekRow from './Desktop/day-of-week-row'
-import DayTableHead from './Mobile/day-table-head'
 import EmptyState from './empty-state'
+import DayTableHead from './Mobile/day-table-head'
 
 interface Props extends PropsWithChildren {
   scheduleDataLenght: number

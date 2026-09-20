@@ -1,8 +1,8 @@
 'use client'
 
+import { useRouter } from 'next/navigation'
 import { DropdownMenuRadioItem } from '@ui/dropdown-menu'
 import Cookies from 'js-cookie'
-import { useRouter } from 'next/navigation'
 
 import { GroupListItem } from '../../types/group'
 
