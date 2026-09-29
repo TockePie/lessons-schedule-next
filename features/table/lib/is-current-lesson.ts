@@ -1,6 +1,7 @@
-import { LESSON_NUMBER } from '@/common/constants/lesson-number'
-import { WeekParity } from '@/features/schedule/types/schedule'
+import { WeekParity } from '@/features/schedule'
 import { CurrentDay, getServerTime } from '@/features/time'
+
+import { LESSON_NUMBER } from '../constants/lesson-number'
 
 const isCurrentLesson = (
   day: number,

@@ -12,7 +12,7 @@ interface Props extends PropsWithChildren {
   device: 'desktop' | 'mobile'
 }
 
-export default function LessonsTable({
+export default function ScheduleTable({
   scheduleDataLength,
   isGroup,
   device,

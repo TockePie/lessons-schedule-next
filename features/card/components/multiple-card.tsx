@@ -9,18 +9,21 @@ import {
 } from '@ui/dialog'
 import { ScrollArea } from '@ui/scroll-area'
 
-import { Card } from './base-card'
+import BaseCard from './base-card'
 
 interface Props extends PropsWithChildren {
   length: number
   isCurrent: boolean
 }
 
-export function MultipleCard({ length, isCurrent, children }: Props) {
+export default function MultipleCard({ length, isCurrent, children }: Props) {
   return (
     <Dialog>
       <DialogTrigger className="w-full">
-        <Card isCurrent={isCurrent} title={`${length} предметів`}></Card>
+        <BaseCard
+          isCurrent={isCurrent}
+          title={`${length} предметів`}
+        ></BaseCard>
       </DialogTrigger>
 
       <DialogContent className="w-[1000px]">

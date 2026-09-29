@@ -1,11 +1,13 @@
 import { cookies } from 'next/headers'
 
-import ParityTabs from '@/components/ParityTabs'
-import LessonsTable from '@/components/Table'
-import RowBlockDesktop from '@/components/Table/Desktop/row-block'
-import DayTabs from '@/components/Table/Mobile/day-tabs'
-import RowBlockMobile from '@/components/Table/Mobile/row-block'
 import { divideSchedule, getGroupSchedule } from '@/features/schedule'
+import {
+  DayTabs,
+  ParityTabs,
+  RowBlockDesktop,
+  RowBlockMobile,
+  ScheduleTable
+} from '@/features/table'
 import { getServerTime } from '@/features/time'
 import { parseCookie } from '@/utils/parse-cookie'
 
@@ -24,7 +26,7 @@ export default async function Page({ params }: Props) {
     group,
     undefined,
     savedSelectives
-  ).then((value) => divideSchedule(value))
+  ).then(divideSchedule)
 
   const time = getServerTime()
 
@@ -34,41 +36,41 @@ export default async function Page({ params }: Props) {
         weekParity={time.weekParity}
         evenChild={
           <>
-            <LessonsTable
+            <ScheduleTable
               scheduleDataLength={scheduleEven.length}
               isGroup={group}
               device="desktop"
             >
               <RowBlockDesktop scheduleData={scheduleEven} />
-            </LessonsTable>
+            </ScheduleTable>
             <DayTabs>
-              <LessonsTable
+              <ScheduleTable
                 scheduleDataLength={scheduleEven.length}
                 isGroup={group}
                 device="mobile"
               >
                 <RowBlockMobile scheduleData={scheduleEven} />
-              </LessonsTable>
+              </ScheduleTable>
             </DayTabs>
           </>
         }
         oddChild={
           <>
-            <LessonsTable
+            <ScheduleTable
               scheduleDataLength={scheduleOdd.length}
               isGroup={group}
               device="desktop"
             >
               <RowBlockDesktop scheduleData={scheduleOdd} />
-            </LessonsTable>
+            </ScheduleTable>
             <DayTabs>
-              <LessonsTable
+              <ScheduleTable
                 scheduleDataLength={scheduleOdd.length}
                 isGroup={group}
                 device="mobile"
               >
                 <RowBlockMobile scheduleData={scheduleOdd} />
-              </LessonsTable>
+              </ScheduleTable>
             </DayTabs>
           </>
         }

@@ -3,8 +3,9 @@
 import { TableHead } from '@ui/table'
 import { cx } from 'class-variance-authority'
 
-import { DAY_OF_WEEK } from '@/common/constants/day-of-the-week'
 import { useCurrent } from '@/features/time'
+
+import { DAY_OF_WEEK } from '../../constants/day-of-the-week'
 
 export default function DayOfWeekRow() {
   const { currentDay } = useCurrent()

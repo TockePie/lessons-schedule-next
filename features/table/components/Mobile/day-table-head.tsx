@@ -3,8 +3,7 @@
 import { useContext } from 'react'
 import { TableHead } from '@ui/table'
 
-import { DAY_OF_WEEK } from '@/common/constants/day-of-the-week'
-
+import { DAY_OF_WEEK } from '../../constants/day-of-the-week'
 import { DayContext } from './day-tabs'
 
 export default function DayTableHead() {

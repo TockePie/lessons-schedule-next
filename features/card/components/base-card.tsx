@@ -10,7 +10,7 @@ interface Props extends PropsWithChildren {
   actionFn?: () => void
 }
 
-export function Card({
+export default function BaseCard({
   children,
   isCurrent,
   title,

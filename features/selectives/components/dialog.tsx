@@ -24,7 +24,7 @@ import { ScrollArea } from '@ui/scroll-area'
 import { Separator } from '@ui/separator'
 import Cookies from 'js-cookie'
 
-import { Schedule } from '@/features/schedule/types/schedule'
+import { Schedule } from '@/features/schedule'
 
 interface Props extends PropsWithChildren {
   initialSelected: string[]

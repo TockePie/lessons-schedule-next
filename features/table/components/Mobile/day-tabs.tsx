@@ -3,8 +3,9 @@
 import React, { createContext, useState } from 'react'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@ui/tabs'
 
-import { DAY_OF_WEEK } from '@/common/constants/day-of-the-week'
 import { CurrentDay, useCurrent } from '@/features/time'
+
+import { DAY_OF_WEEK } from '../../constants/day-of-the-week'
 
 const DayContext = createContext<CurrentDay | null>(null)
 

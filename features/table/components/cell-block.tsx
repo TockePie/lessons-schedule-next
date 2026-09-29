@@ -2,12 +2,13 @@
 
 import { TableCell } from '@ui/table'
 
-import { DAY_OF_WEEK } from '@/common/constants/day-of-the-week'
 import { LessonCard, MultipleCard } from '@/features/card'
 import { Schedule } from '@/features/schedule/types/schedule'
 import { CurrentDay, useCurrent } from '@/features/time'
-import isCurrentLesson from '@/utils/is-current-lesson'
-import openLesson from '@/utils/open-lesson'
+
+import { DAY_OF_WEEK } from '../constants/day-of-the-week'
+import isCurrentLesson from '../lib/is-current-lesson'
+import openLesson from '../lib/open-lesson'
 
 interface Props {
   time: {

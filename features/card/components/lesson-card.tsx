@@ -1,6 +1,6 @@
-import { Subject, SubjectType } from '@/features/schedule/types/subject'
+import { Subject, SubjectType } from '@/features/schedule'
 
-import { Card } from './base-card'
+import BaseCard from './base-card'
 
 const LESSON_COLORS: Record<SubjectType, string> = {
   LECTURE: 'border-indigo-400',
@@ -16,12 +16,12 @@ interface Props extends Omit<
   isCurrent: boolean
 }
 
-export function LessonCard(props: Props) {
+export default function LessonCard(props: Props) {
   const { type, teacher } = props
 
   return (
-    <Card {...props} className={LESSON_COLORS[type]}>
+    <BaseCard {...props} className={LESSON_COLORS[type]}>
       <p className="text-neutral-600 dark:text-neutral-200">{teacher}</p>
-    </Card>
+    </BaseCard>
   )
 }
