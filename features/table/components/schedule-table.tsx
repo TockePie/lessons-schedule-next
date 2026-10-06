@@ -37,9 +37,7 @@ export default function ScheduleTable({
             <DayTableHead />
           ) : device === 'desktop' ? (
             <DayOfWeekRow />
-          ) : (
-            ''
-          )}
+          ) : null}
         </TableRow>
       </TableHeader>
 
