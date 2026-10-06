@@ -75,7 +75,7 @@ export default function SelectivesDialog({
         {children}
       </DialogTrigger>
 
-      <DialogContent className="w-[1000px]">
+      <DialogContent className="w-250">
         <DialogHeader>
           <DialogTitle>Оберіть вибіркові, які ви хочете бачити</DialogTitle>
         </DialogHeader>

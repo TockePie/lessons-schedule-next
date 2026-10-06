@@ -10,15 +10,11 @@ import convertTime from '../../lib/convert-time'
 import CellBlock from '../cell-block'
 import { DayContext } from './day-tabs'
 
-export default function RowBlock({
-  scheduleData
-}: {
-  scheduleData: Schedule | undefined
-}) {
+export default function RowBlock({ scheduleData }: { scheduleData: Schedule }) {
   const manualDay = useContext(DayContext)
   const dayFilter = scheduleData?.filter((item) => item.day === manualDay)
 
-  const allRows = dayFilter?.map((item) => item.row) ?? []
+  const allRows = dayFilter?.map((item) => item.row)
   const maxRowNumber = Math.max(...allRows)
 
   return LESSON_NUMBER.filter((time) => time.row <= maxRowNumber).map(
@@ -33,7 +29,7 @@ export default function RowBlock({
 
         <CellBlock
           time={time}
-          scheduleData={scheduleData ?? []}
+          scheduleData={scheduleData}
           manualDay={manualDay}
         />
       </TableRow>

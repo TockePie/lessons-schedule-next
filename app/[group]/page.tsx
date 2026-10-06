@@ -2,13 +2,15 @@ import { cookies } from 'next/headers'
 
 import { divideSchedule, getGroupSchedule } from '@/features/schedule'
 import {
+  DayOfWeekRow,
+  DayTableHead,
   DayTabs,
   ParityTabs,
   RowBlockDesktop,
   RowBlockMobile,
   ScheduleTable
 } from '@/features/table'
-import { getServerTime } from '@/features/time'
+import { getWeekParity } from '@/features/time'
 import { parseCookie } from '@/utils/parse-cookie'
 
 interface Props {
@@ -22,32 +24,32 @@ export default async function Page({ params }: Props) {
     cookieStore.get('selected_selectives')?.value
   )
 
-  const { scheduleEven, scheduleOdd } = await getGroupSchedule(
-    group,
-    undefined,
-    savedSelectives
-  ).then(divideSchedule)
+  const { scheduleEven, scheduleOdd } = await getGroupSchedule(group, {
+    selectives: savedSelectives
+  }).then(divideSchedule)
 
-  const time = getServerTime()
+  const weekParity = getWeekParity()
 
   return (
     <main className="h-full bg-neutral-50 p-5 dark:bg-black">
       <ParityTabs
-        weekParity={time.weekParity}
+        weekParity={weekParity}
         evenChild={
           <>
             <ScheduleTable
               scheduleDataLength={scheduleEven.length}
-              isGroup={group}
+              groupId={group}
               device="desktop"
+              header={<DayOfWeekRow />}
             >
               <RowBlockDesktop scheduleData={scheduleEven} />
             </ScheduleTable>
             <DayTabs>
               <ScheduleTable
                 scheduleDataLength={scheduleEven.length}
-                isGroup={group}
+                groupId={group}
                 device="mobile"
+                header={<DayTableHead />}
               >
                 <RowBlockMobile scheduleData={scheduleEven} />
               </ScheduleTable>
@@ -58,16 +60,18 @@ export default async function Page({ params }: Props) {
           <>
             <ScheduleTable
               scheduleDataLength={scheduleOdd.length}
-              isGroup={group}
+              groupId={group}
               device="desktop"
+              header={<DayOfWeekRow />}
             >
               <RowBlockDesktop scheduleData={scheduleOdd} />
             </ScheduleTable>
             <DayTabs>
               <ScheduleTable
                 scheduleDataLength={scheduleOdd.length}
-                isGroup={group}
+                groupId={group}
                 device="mobile"
+                header={<DayTableHead />}
               >
                 <RowBlockMobile scheduleData={scheduleOdd} />
               </ScheduleTable>

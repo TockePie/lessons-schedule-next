@@ -2,52 +2,45 @@ import { PropsWithChildren } from 'react'
 import { Table, TableBody, TableHead, TableHeader, TableRow } from '@ui/table'
 import { cx } from 'class-variance-authority'
 
-import DayOfWeekRow from './Desktop/day-of-week-row'
 import EmptyState from './empty-state'
-import DayTableHead from './Mobile/day-table-head'
 
 interface Props extends PropsWithChildren {
   scheduleDataLength: number
-  isGroup: string
+  groupId?: string
   device: 'desktop' | 'mobile'
+  header: React.ReactNode
 }
 
 export default function ScheduleTable({
   scheduleDataLength,
-  isGroup,
+  groupId,
   device,
+  header,
   children
 }: Props) {
+  const emptyMessage = !groupId
+    ? 'Оберіть групу, щоб побачити розклад'
+    : scheduleDataLength === 0
+      ? 'Розклад відсутній для цієї групи'
+      : null
+
   return (
     <Table
       className={cx(
         'mx-auto w-full table-fixed border border-neutral-200 dark:border-neutral-800',
-        device === 'mobile'
-          ? 'max-w-96'
-          : device === 'desktop'
-            ? 'max-w-360 max-lg:hidden'
-            : ''
+        device === 'mobile' ? 'max-w-96' : 'max-w-360 max-lg:hidden'
       )}
     >
       <TableHeader>
         <TableRow>
           <TableHead className="w-1/3 text-center lg:w-1/12">Пара</TableHead>
 
-          {device === 'mobile' ? (
-            <DayTableHead />
-          ) : device === 'desktop' ? (
-            <DayOfWeekRow />
-          ) : null}
+          {header}
         </TableRow>
       </TableHeader>
 
-      {!isGroup ? (
-        <EmptyState
-          message="Оберіть групу, щоб побачити розклад"
-          size={device}
-        />
-      ) : scheduleDataLength === 0 ? (
-        <EmptyState message="Розклад відсутній для цієї групи" size={device} />
+      {emptyMessage ? (
+        <EmptyState message={emptyMessage} size={device} />
       ) : (
         <TableBody>{children}</TableBody>
       )}

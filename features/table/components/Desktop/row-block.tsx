@@ -6,12 +6,8 @@ import { LESSON_NUMBER } from '../../constants/lesson-number'
 import convertTime from '../../lib/convert-time'
 import CellBlock from '../cell-block'
 
-export default function RowBlock({
-  scheduleData
-}: {
-  scheduleData: Schedule | undefined
-}) {
-  const allRows = scheduleData?.map((item) => item.row) ?? []
+export default function RowBlock({ scheduleData }: { scheduleData: Schedule }) {
+  const allRows = scheduleData.map((item) => item.row)
   const maxRowNumber = Math.max(...allRows)
 
   return LESSON_NUMBER.filter((time) => time.row <= maxRowNumber).map(
@@ -24,11 +20,7 @@ export default function RowBlock({
           </div>
         </TableCell>
 
-        <CellBlock
-          time={time}
-          scheduleData={scheduleData ?? []}
-          manualDay={null}
-        />
+        <CellBlock time={time} scheduleData={scheduleData} manualDay={null} />
       </TableRow>
     )
   )

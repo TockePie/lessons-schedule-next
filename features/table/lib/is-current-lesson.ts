@@ -1,5 +1,5 @@
 import { WeekParity } from '@/features/schedule'
-import { CurrentDay, getServerTime } from '@/features/time'
+import { CurrentDay, getWeekParity } from '@/features/time'
 
 import { LESSON_NUMBER } from '../constants/lesson-number'
 
@@ -10,7 +10,7 @@ const isCurrentLesson = (
   currentDay: CurrentDay,
   minutesSinceMidnight: number
 ): boolean => {
-  const weekParity = getServerTime().weekParity
+  const weekParity = getWeekParity()
   if (week.toLowerCase() !== weekParity && week !== 'BOTH') return false
 
   if (currentDay !== day) return false
