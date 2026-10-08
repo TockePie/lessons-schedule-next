@@ -1,14 +1,7 @@
 'use client'
 
-import { useEffect, useMemo, useState } from 'react'
-import {
-  addMinutes,
-  differenceInMilliseconds,
-  getISODay,
-  startOfMinute
-} from 'date-fns'
-
-import { CurrentDay } from '../types/current-day'
+import { useEffect, useState } from 'react'
+import { addMinutes, differenceInMilliseconds, startOfMinute } from 'date-fns'
 
 export function useCurrentDate() {
   const [currentDate, setCurrentDate] = useState(() => new Date())
@@ -29,15 +22,5 @@ export function useCurrentDate() {
     return () => clearTimeout(timeoutId)
   }, [])
 
-  return useMemo(() => {
-    const currentDay = getISODay(currentDate) as CurrentDay
-    const minutesSinceMidnight =
-      currentDate.getHours() * 60 + currentDate.getMinutes()
-
-    return {
-      currentDate,
-      currentDay,
-      minutesSinceMidnight
-    }
-  }, [currentDate])
+  return currentDate
 }

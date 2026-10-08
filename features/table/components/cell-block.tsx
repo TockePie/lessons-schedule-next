@@ -3,8 +3,13 @@
 import { TableCell } from '@ui/table'
 
 import { LessonCard, MultipleCard } from '@/features/card'
-import { Schedule } from '@/features/schedule/types/schedule'
-import { CurrentDay, useCurrent } from '@/features/time'
+import { Schedule } from '@/features/schedule'
+import {
+  DayOfWeek,
+  getCurrentDayOfWeek,
+  getMinutesSinceMidnight,
+  useCurrentDateContext
+} from '@/features/time'
 
 import { DAY_OF_WEEK } from '../constants/day-of-the-week'
 import isCurrentLesson from '../lib/is-current-lesson'
@@ -18,11 +23,13 @@ interface Props {
     name: string
   }
   scheduleData: Schedule
-  manualDay: CurrentDay | null
+  manualDay: DayOfWeek | null
 }
 
 export default function CellBlock({ time, scheduleData, manualDay }: Props) {
-  const { currentDay, minutesSinceMidnight } = useCurrent()
+  const currentDate = useCurrentDateContext()
+  const currentDayOfWeek = getCurrentDayOfWeek(currentDate)
+  const minutesSinceMidnight = getMinutesSinceMidnight(currentDate)
 
   return DAY_OF_WEEK.map((day) => {
     if (day.id === 0) return
@@ -48,7 +55,7 @@ export default function CellBlock({ time, scheduleData, manualDay }: Props) {
               day.id,
               time.row,
               items[0].week_parity,
-              currentDay,
+              currentDayOfWeek,
               minutesSinceMidnight
             )}
           >
@@ -78,7 +85,7 @@ export default function CellBlock({ time, scheduleData, manualDay }: Props) {
               item.day,
               item.row,
               item.week_parity,
-              currentDay,
+              currentDayOfWeek,
               minutesSinceMidnight
             )}
             actionFn={openLesson(item.subject.url)}

@@ -1,3 +1,5 @@
-export { CurrentDateProvider, useCurrent } from './current-date'
-export type { CurrentDay } from './types/current-day'
+export { CurrentDateProvider, useCurrentDateContext } from './current-date'
+export type { DayOfWeek } from './types/current-day'
 export { getWeekParity } from './lib/get-week-parity'
+export { getCurrentDayOfWeek } from './lib/get-current-day-of-week'
+export { getMinutesSinceMidnight } from './lib/get-minutes-since-midnight'

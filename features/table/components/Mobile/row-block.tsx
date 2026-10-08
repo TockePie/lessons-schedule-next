@@ -1,8 +1,8 @@
 'use client'
 
 import { useContext } from 'react'
+import { TableCell, TableRow } from '@ui/table'
 
-import { TableCell, TableRow } from '@/components/ui/table'
 import { Schedule } from '@/features/schedule'
 
 import { LESSON_NUMBER } from '../../constants/lesson-number'

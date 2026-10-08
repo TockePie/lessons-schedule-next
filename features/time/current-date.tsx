@@ -13,17 +13,23 @@ export function CurrentDateProvider({
 }: {
   children: React.ReactNode
 }) {
-  const value = useCurrentDate()
+  const currentDate = useCurrentDate()
 
   return (
-    <CurrentDateContext.Provider value={value}>
+    <CurrentDateContext.Provider value={currentDate}>
       {children}
     </CurrentDateContext.Provider>
   )
 }
 
-export function useCurrent() {
+export function useCurrentDateContext() {
   const context = useContext(CurrentDateContext)
-  if (!context) throw new Error('CurrentDayContext is not provided')
+
+  if (context === undefined) {
+    throw new Error(
+      'useCurrentDateContext must be used within a CurrentDateProvider'
+    )
+  }
+
   return context
 }
