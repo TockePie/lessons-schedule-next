@@ -27,50 +27,68 @@ import Cookies from 'js-cookie'
 import { Schedule } from '@/features/schedule'
 
 interface Props extends PropsWithChildren {
-  initialSelected: string[]
-  selectives: Schedule
+  initialPickedIds: string[]
+  groupSelectives: Schedule
 }
 
 export default function SelectivesDialog({
-  children,
-  initialSelected,
-  selectives
+  initialPickedIds,
+  groupSelectives,
+  children
 }: Props) {
-  const [open, setOpen] = useState(false)
-  const [selected, setSelected] = useState<string[]>(initialSelected)
+  const [isOpen, setIsOpen] = useState(false)
+  const [pickedIds, setPickedIds] = useState(() => new Set(initialPickedIds))
   const router = useRouter()
 
-  const toggle = (id: string) => () => {
-    setSelected((prev) =>
-      prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]
-    )
+  const toggleSubject = (subjectId: string) => {
+    setPickedIds((currentIds) => {
+      const next = new Set(currentIds)
+
+      if (next.has(subjectId)) {
+        next.delete(subjectId)
+      } else {
+        next.add(subjectId)
+      }
+
+      return next
+    })
   }
 
-  const handleApply = () => {
-    Cookies.set('selected_selectives', JSON.stringify(selected), {
+  const handleWriteCookie = () => {
+    Cookies.set('picked-selectives', JSON.stringify([...pickedIds]), {
       expires: 120
     })
-    setOpen(false)
+    setIsOpen(false)
     router.refresh()
   }
 
-  const handleClear = () => {
-    Cookies.remove('selected_selectives')
-    setSelected([])
-    setOpen(false)
+  const handleClearCookie = () => {
+    Cookies.remove('picked-selectives')
+    setPickedIds(new Set())
+    setIsOpen(false)
     router.refresh()
   }
 
-  const [lecSelectives, pracSelectives] = [
-    selectives.filter((value) => value.subject.type === 'LECTURE'),
-    selectives.filter(
-      (value) =>
-        value.subject.type === 'LAB' || value.subject.type === 'PRACTICE'
-    )
-  ]
+  const grouped = Object.groupBy(groupSelectives, (scheduleItem) => {
+    if (scheduleItem.subject.type === 'LECTURE') {
+      return 'lectures'
+    }
+
+    if (
+      scheduleItem.subject.type === 'LAB' ||
+      scheduleItem.subject.type === 'PRACTICE'
+    ) {
+      return 'practicals'
+    }
+
+    return 'other'
+  })
+
+  const lectureSelectives = grouped.lectures ?? []
+  const practiceSelectives = grouped.practicals ?? []
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
+    <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger className="w-full" asChild>
         {children}
       </DialogTrigger>
@@ -84,7 +102,7 @@ export default function SelectivesDialog({
           <div className="flex flex-col gap-3">
             <p className="ml-2 text-xl font-bold">Лекції</p>
             <FieldGroup className="gap-4">
-              {lecSelectives.map((selective) => (
+              {lectureSelectives.map((selective) => (
                 <FieldLabel
                   key={selective.id}
                   className="flex items-center gap-3"
@@ -92,8 +110,10 @@ export default function SelectivesDialog({
                   <Field orientation="horizontal">
                     <Checkbox
                       id={selective.id}
-                      checked={selected.includes(selective.subject.subject_id)}
-                      onCheckedChange={toggle(selective.subject.subject_id)}
+                      checked={pickedIds.has(selective.subject.subject_id)}
+                      onCheckedChange={() =>
+                        toggleSubject(selective.subject.subject_id)
+                      }
                     />
                     <FieldContent>
                       <FieldTitle>{selective.subject.title}</FieldTitle>
@@ -112,7 +132,7 @@ export default function SelectivesDialog({
           <div className="flex flex-col gap-3">
             <p className="ml-2 text-xl font-bold">Практичні</p>
             <FieldGroup className="gap-4">
-              {pracSelectives.map((selective) => (
+              {practiceSelectives.map((selective) => (
                 <FieldLabel
                   key={selective.id}
                   className="flex items-center gap-3"
@@ -120,8 +140,10 @@ export default function SelectivesDialog({
                   <Field orientation="horizontal">
                     <Checkbox
                       id={selective.id}
-                      checked={selected.includes(selective.subject.subject_id)}
-                      onCheckedChange={toggle(selective.subject.subject_id)}
+                      checked={pickedIds.has(selective.subject.subject_id)}
+                      onCheckedChange={() =>
+                        toggleSubject(selective.subject.subject_id)
+                      }
                     />
                     <FieldContent>
                       <FieldTitle>{selective.subject.title}</FieldTitle>
@@ -137,10 +159,10 @@ export default function SelectivesDialog({
         </ScrollArea>
 
         <DialogFooter>
-          <Button variant="outline" onClick={handleClear}>
+          <Button variant="outline" onClick={handleClearCookie}>
             Очистити все
           </Button>
-          <Button onClick={handleApply}>Застосувати</Button>
+          <Button onClick={handleWriteCookie}>Застосувати</Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>

@@ -11,7 +11,7 @@ import {
   ScheduleTable
 } from '@/features/table'
 import { getWeekParity } from '@/features/time'
-import { parseCookie } from '@/utils/parse-cookie'
+import { parseStringArray } from '@/utils/parse-string-array'
 
 interface Props {
   params: Promise<{ group: string }>
@@ -20,8 +20,8 @@ interface Props {
 export default async function Page({ params }: Props) {
   const [cookieStore, { group }] = await Promise.all([cookies(), params])
 
-  const savedSelectives = parseCookie(
-    cookieStore.get('selected_selectives')?.value
+  const savedSelectives = parseStringArray(
+    cookieStore.get('picked-selectives')?.value
   )
 
   const { scheduleEven, scheduleOdd } = await getGroupSchedule(group, {

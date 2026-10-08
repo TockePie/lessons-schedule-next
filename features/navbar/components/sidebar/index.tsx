@@ -14,7 +14,7 @@ import { cx } from 'class-variance-authority'
 import { Menu, Plus } from 'lucide-react'
 
 import ClearCacheBtn from '@/components/clear-cache-btn'
-import SelectSelectives from '@/features/selectives'
+import SelectivesPicker from '@/features/selectives'
 
 import GitHubLogo from './icons/github'
 
@@ -41,11 +41,11 @@ export default function Sidebar() {
 
           <ClearCacheBtn className="h-10" />
 
-          <SelectSelectives>
+          <SelectivesPicker>
             <Button variant="outline" className="h-10">
               Обрати свої вибіркові
             </Button>
-          </SelectSelectives>
+          </SelectivesPicker>
 
           <div className="mx-auto flex w-full max-w-360 flex-col gap-2">
             <p className="text-xl font-semibold">Кольори</p>

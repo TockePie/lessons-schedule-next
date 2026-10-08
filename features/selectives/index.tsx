@@ -1,12 +1,12 @@
 import React from 'react'
 import { cookies } from 'next/headers'
 
-import { parseCookie } from '@/utils/parse-cookie'
+import { parseStringArray } from '@/utils/parse-string-array'
 
-import { getAllSelectives } from './api/selectives'
+import { getGroupSelectives } from './api/selectives'
 import SelectivesDialog from './components/dialog'
 
-export default async function SelectSelectives({
+export default async function SelectivesPicker({
   children
 }: {
   children: React.ReactNode
@@ -15,13 +15,16 @@ export default async function SelectSelectives({
   const groupId = cookieStore.get('groupId')?.value
   if (!groupId) return null
 
-  const savedSelectives = parseCookie(
-    cookieStore.get('selected_selectives')?.value
+  const pickedSelectives = parseStringArray(
+    cookieStore.get('picked-selectives')?.value
   )
-  const selectives = await getAllSelectives(groupId)
+  const availableSelectives = await getGroupSelectives(groupId)
 
   return (
-    <SelectivesDialog initialSelected={savedSelectives} selectives={selectives}>
+    <SelectivesDialog
+      initialPickedIds={pickedSelectives}
+      groupSelectives={availableSelectives}
+    >
       {children}
     </SelectivesDialog>
   )

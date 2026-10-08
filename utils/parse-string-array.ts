@@ -1,4 +1,4 @@
-export function parseCookie(value?: string): string[] {
+export function parseStringArray(value?: string): string[] {
   if (!value) return []
   try {
     return JSON.parse(value)
