@@ -1,10 +1,10 @@
-import { fetchAndValidate } from '@/api/fetch-and-validate'
 import { fetchText } from '@/api/fetch-text'
+import { fetchValidated } from '@/api/fetch-validated'
 
 import { groupListSchema } from '../types/group'
 
 export async function getGroupsList() {
-  return await fetchAndValidate('/group', groupListSchema)
+  return await fetchValidated('/group', groupListSchema)
 }
 
 export async function getGroupPicture(id: string) {

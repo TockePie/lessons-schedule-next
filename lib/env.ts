@@ -13,16 +13,11 @@ const envSchema = z.object({
   )
 })
 
-const parsed = envSchema.safeParse({
-  NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL,
-  THIS_WEBSITE_URL: process.env.THIS_WEBSITE_URL,
-  NODE_ENV: process.env.NODE_ENV
-})
+const parsedSchema = envSchema.safeParse(process.env)
 
-if (!parsed.success) {
-  throw new Error(
-    `Invalid environment variables. Reason: ${JSON.stringify(z.treeifyError(parsed.error), null, 2)}`
-  )
+if (!parsedSchema.success) {
+  const reason = JSON.stringify(z.treeifyError(parsedSchema.error), null, 2)
+  throw new Error(`Invalid environment variables. Reason: ${reason}`)
 }
 
-export const env = parsed.data
+export const env = parsedSchema.data

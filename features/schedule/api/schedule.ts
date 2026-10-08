@@ -1,4 +1,4 @@
-import { fetchAndValidate } from '@/api/fetch-and-validate'
+import { fetchValidated } from '@/api/fetch-validated'
 
 import { scheduleSchema } from '../types/schedule'
 
@@ -13,7 +13,7 @@ export async function getGroupSchedule(
   id: string,
   { week, selectives }: ScheduleOptions = {}
 ) {
-  return fetchAndValidate(`/schedule/${id}`, scheduleSchema, {
+  return fetchValidated(`/schedule/${id}`, scheduleSchema, {
     cache: 'force-cache',
     searchParams: {
       ...(week && { week }),

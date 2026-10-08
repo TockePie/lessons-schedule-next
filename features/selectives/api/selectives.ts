@@ -1,6 +1,6 @@
-import { fetchAndValidate } from '@/api/fetch-and-validate'
+import { fetchValidated } from '@/api/fetch-validated'
 import { scheduleSchema } from '@/features/schedule'
 
 export async function getAllSelectives(id: string) {
-  return await fetchAndValidate(`/schedule/${id}/selectives`, scheduleSchema)
+  return await fetchValidated(`/schedule/${id}/selectives`, scheduleSchema)
 }

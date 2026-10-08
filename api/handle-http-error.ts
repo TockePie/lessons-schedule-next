@@ -1,6 +1,6 @@
 import { isKyError, SchemaValidationError } from 'ky'
 
-export function handleError(error: unknown): never {
+export function handleHttpError(error: unknown): never {
   if (isKyError(error) && error.name === 'NetworkError') {
     throw new Error(
       "Не вдалося отримати дані з серверу. Можливо відсутнє інтернет-з'єднання із сервером."
