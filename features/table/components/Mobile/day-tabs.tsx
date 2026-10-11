@@ -9,44 +9,39 @@ import {
   useCurrentDateContext
 } from '@/features/time'
 
-import { DAY_OF_WEEK } from '../../constants/day-of-the-week'
+import { STUDY_DAYS } from '../../constants/days-of-week'
 
-const DayContext = createContext<DayOfWeek | null>(null)
+export const SelectedDayContext = createContext<DayOfWeek | undefined>(
+  undefined
+)
 
-const DayTabs = ({ children }: { children: React.ReactNode }) => {
+export default function DayTabs({ children }: { children: React.ReactNode }) {
   const currentDate = useCurrentDateContext()
   const currentDayOfWeek = getCurrentDayOfWeek(currentDate)
 
-  const [manualDay, setManualDay] = useState(currentDayOfWeek)
+  const [selectedDay, setSelectedDay] = useState(currentDayOfWeek)
 
-  const DayButtons = [...Array(7).keys()].map((day) => {
-    if (day === 0) return null
-
-    return (
-      <TabsTrigger key={day} value={day.toString()}>
-        {DAY_OF_WEEK[day].shortUa.toUpperCase()}
-      </TabsTrigger>
-    )
-  })
+  const dayTabs = STUDY_DAYS.map((day) => (
+    <TabsTrigger key={day.id} value={day.id.toString()}>
+      {day.shortUk.toUpperCase()}
+    </TabsTrigger>
+  ))
 
   return (
-    <DayContext value={manualDay}>
+    <SelectedDayContext value={selectedDay}>
       <Tabs
-        defaultValue={manualDay.toString()}
-        onValueChange={(value) => setManualDay(Number(value) as DayOfWeek)}
+        defaultValue={selectedDay.toString()}
+        onValueChange={(value) => setSelectedDay(Number(value) as DayOfWeek)}
         className="flex flex-col items-center gap-5 select-none lg:hidden"
       >
         <TabsList className="grid w-83 grid-cols-6 border border-neutral-200 dark:border-neutral-900 dark:bg-neutral-950">
-          {DayButtons}
+          {dayTabs}
         </TabsList>
 
-        <TabsContent value={manualDay.toString()} className="w-full">
+        <TabsContent value={selectedDay.toString()} className="w-full">
           {children}
         </TabsContent>
       </Tabs>
-    </DayContext>
+    </SelectedDayContext>
   )
 }
-
-export { DayContext }
-export default DayTabs

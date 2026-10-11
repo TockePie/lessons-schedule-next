@@ -19,6 +19,7 @@ export default function GroupSelectItem({
 
   const handleSelect = async () => {
     if (group_id === currentGroup) return
+
     Cookies.set('groupId', group_id, {
       expires: 30
     })

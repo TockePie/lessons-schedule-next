@@ -3,7 +3,7 @@
 import { TableCell } from '@ui/table'
 
 import { LessonCard, MultipleCard } from '@/features/card'
-import { Schedule } from '@/features/schedule'
+import { ProcessedSchedule } from '@/features/schedule'
 import {
   DayOfWeek,
   getCurrentDayOfWeek,
@@ -11,7 +11,7 @@ import {
   useCurrentDateContext
 } from '@/features/time'
 
-import { DAY_OF_WEEK } from '../constants/day-of-the-week'
+import { STUDY_DAYS } from '../constants/days-of-week'
 import isCurrentLesson from '../lib/is-current-lesson'
 import openLesson from '../lib/open-lesson'
 
@@ -22,24 +22,19 @@ interface Props {
     endTime: number
     name: string
   }
-  scheduleData: Schedule
-  manualDay: DayOfWeek | null
+  scheduleData: ProcessedSchedule
+  selectedDay?: DayOfWeek
 }
 
-export default function CellBlock({ time, scheduleData, manualDay }: Props) {
+export default function CellBlock({ time, scheduleData, selectedDay }: Props) {
   const currentDate = useCurrentDateContext()
   const currentDayOfWeek = getCurrentDayOfWeek(currentDate)
   const minutesSinceMidnight = getMinutesSinceMidnight(currentDate)
 
-  return DAY_OF_WEEK.map((day) => {
-    if (day.id === 0) return
-    if (manualDay && manualDay !== day.id) return null
+  return STUDY_DAYS.map((day) => {
+    if (selectedDay && selectedDay !== day.id) return null
 
-    const items = Array.isArray(scheduleData)
-      ? scheduleData.filter(
-          (item) => item.row === time.row && item.day === day.id
-        )
-      : []
+    const items = scheduleData.items.get(`${time.row}-${day.id}`) ?? []
 
     if (items.length === 0) {
       return <TableCell key={`day-${day.id}`} className="text-center" />
@@ -63,7 +58,7 @@ export default function CellBlock({ time, scheduleData, manualDay }: Props) {
               <LessonCard
                 {...item.subject}
                 key={item.id}
-                actionFn={openLesson(item.subject.url)}
+                onClick={openLesson(item.subject.url)}
                 isCurrent={false}
               />
             ))}
@@ -88,7 +83,7 @@ export default function CellBlock({ time, scheduleData, manualDay }: Props) {
               currentDayOfWeek,
               minutesSinceMidnight
             )}
-            actionFn={openLesson(item.subject.url)}
+            onClick={openLesson(item.subject.url)}
           />
         ))}
       </TableCell>

@@ -2,15 +2,15 @@ import { TableBody, TableCell, TableRow } from '@ui/table'
 
 interface Props {
   message: string
-  size: 'desktop' | 'mobile'
+  device: 'desktop' | 'mobile'
 }
 
-export default function EmptyState({ message, size }: Props) {
+export default function EmptyState({ message, device }: Props) {
   return (
     <TableBody>
       <TableRow>
         <TableCell
-          colSpan={size === 'desktop' ? 7 : size === 'mobile' ? 2 : 1}
+          colSpan={device === 'desktop' ? 7 : device === 'mobile' ? 2 : 1}
           className="text-muted-foreground py-8 text-center text-xl font-bold"
         >
           <span className="text-wrap">{message}</span>

@@ -1,17 +1,20 @@
 import { Schedule } from '../types/schedule'
 
 export function divideSchedule(scheduleData: Schedule) {
-  const scheduleEven: typeof scheduleData = []
-  const scheduleOdd: typeof scheduleData = []
+  const evenItems: Schedule = []
+  const oddItems: Schedule = []
 
   for (const item of scheduleData) {
     if (item.week_parity === 'EVEN' || item.week_parity === 'BOTH') {
-      scheduleEven.push(item)
+      evenItems.push(item)
     }
     if (item.week_parity === 'ODD' || item.week_parity === 'BOTH') {
-      scheduleOdd.push(item)
+      oddItems.push(item)
     }
   }
 
-  return { scheduleEven, scheduleOdd }
+  return {
+    even: evenItems,
+    odd: oddItems
+  }
 }

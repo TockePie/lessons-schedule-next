@@ -7,15 +7,15 @@ interface Props extends PropsWithChildren {
   isCurrent: boolean
   title: string
   className?: string
-  actionFn?: () => void
+  onClick?: () => void
 }
 
 export default function BaseCard({
-  children,
   isCurrent,
   title,
   className,
-  actionFn
+  onClick,
+  children
 }: Props) {
   return (
     <div
@@ -24,7 +24,7 @@ export default function BaseCard({
         'transform transition duration-150 ease-in-out active:scale-95',
         className
       )}
-      onClick={actionFn}
+      onClick={onClick}
     >
       {isCurrent && (
         <Button
@@ -34,7 +34,7 @@ export default function BaseCard({
           <Clock />
         </Button>
       )}
-      <h2 className="overflow-wrap break-word my-auto w-full text-center text-xl font-bold break-words whitespace-normal">
+      <h2 className="overflow-wrap break-word my-auto w-full text-center text-xl font-bold wrap-break-word whitespace-normal">
         {title}
       </h2>
       {children}

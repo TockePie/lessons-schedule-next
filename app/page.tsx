@@ -3,7 +3,7 @@ import { redirect } from 'next/navigation'
 
 import Navbar from '@/features/navbar'
 import {
-  DayOfWeekRow,
+  DaysHeaderCells,
   DayTableHead,
   DayTabs,
   ScheduleTable
@@ -22,14 +22,14 @@ export default async function Home() {
       <Navbar />
       <main className="h-full bg-neutral-50 p-5 dark:bg-black">
         <ScheduleTable
-          scheduleDataLength={0}
+          isScheduleEmpty
           groupId=""
           device="desktop"
-          header={<DayOfWeekRow />}
+          header={<DaysHeaderCells />}
         />
         <DayTabs>
           <ScheduleTable
-            scheduleDataLength={0}
+            isScheduleEmpty
             groupId=""
             device="mobile"
             header={<DayTableHead />}

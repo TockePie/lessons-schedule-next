@@ -1,12 +1,12 @@
-import { WeekParity } from '@/features/schedule'
+import { SubjectWeekParity } from '@/features/schedule'
 import { DayOfWeek, getWeekParity } from '@/features/time'
 
-import { LESSON_NUMBER } from '../constants/lesson-number'
+import { LESSON_SLOTS } from '../constants/lesson-number'
 
 const isCurrentLesson = (
   day: number,
   row: number,
-  week: WeekParity,
+  week: SubjectWeekParity,
   currentDay: DayOfWeek,
   minutesSinceMidnight: number
 ): boolean => {
@@ -15,7 +15,7 @@ const isCurrentLesson = (
 
   if (currentDay !== day) return false
 
-  const lessonTiming = LESSON_NUMBER.find((lesson) => lesson.row === row)
+  const lessonTiming = LESSON_SLOTS.find((lesson) => lesson.row === row)
   if (!lessonTiming) return false
 
   return (

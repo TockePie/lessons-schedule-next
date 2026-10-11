@@ -5,14 +5,14 @@ import { cx } from 'class-variance-authority'
 import EmptyState from './empty-state'
 
 interface Props extends PropsWithChildren {
-  scheduleDataLength: number
+  isScheduleEmpty: boolean
   groupId?: string
   device: 'desktop' | 'mobile'
   header: React.ReactNode
 }
 
 export default function ScheduleTable({
-  scheduleDataLength,
+  isScheduleEmpty,
   groupId,
   device,
   header,
@@ -20,7 +20,7 @@ export default function ScheduleTable({
 }: Props) {
   const emptyMessage = !groupId
     ? 'Оберіть групу, щоб побачити розклад'
-    : scheduleDataLength === 0
+    : isScheduleEmpty
       ? 'Розклад відсутній для цієї групи'
       : null
 
@@ -40,7 +40,7 @@ export default function ScheduleTable({
       </TableHeader>
 
       {emptyMessage ? (
-        <EmptyState message={emptyMessage} size={device} />
+        <EmptyState message={emptyMessage} device={device} />
       ) : (
         <TableBody>{children}</TableBody>
       )}

@@ -1,13 +1,17 @@
 import { cookies } from 'next/headers'
 
-import { divideSchedule, getGroupSchedule } from '@/features/schedule'
 import {
-  DayOfWeekRow,
+  divideSchedule,
+  getGroupSchedule,
+  scheduleToMap
+} from '@/features/schedule'
+import {
+  DaysHeaderCells,
   DayTableHead,
   DayTabs,
   ParityTabs,
-  RowBlockDesktop,
-  RowBlockMobile,
+  ScheduleRowsDesktop,
+  ScheduleRowsMobile,
   ScheduleTable
 } from '@/features/table'
 import { getWeekParity } from '@/features/time'
@@ -20,13 +24,18 @@ interface Props {
 export default async function Page({ params }: Props) {
   const [cookieStore, { group }] = await Promise.all([cookies(), params])
 
-  const savedSelectives = parseStringArray(
+  const pickedSelectives = parseStringArray(
     cookieStore.get('picked-selectives')?.value
   )
 
-  const { scheduleEven, scheduleOdd } = await getGroupSchedule(group, {
-    selectives: savedSelectives
-  }).then(divideSchedule)
+  const schedule = await getGroupSchedule(group, {
+    selectives: pickedSelectives
+  })
+    .then(divideSchedule)
+    .then(({ even, odd }) => ({
+      even: scheduleToMap(even),
+      odd: scheduleToMap(odd)
+    }))
 
   const weekParity = getWeekParity()
 
@@ -37,21 +46,21 @@ export default async function Page({ params }: Props) {
         evenChild={
           <>
             <ScheduleTable
-              scheduleDataLength={scheduleEven.length}
+              isScheduleEmpty={schedule.even.items.size === 0}
               groupId={group}
               device="desktop"
-              header={<DayOfWeekRow />}
+              header={<DaysHeaderCells />}
             >
-              <RowBlockDesktop scheduleData={scheduleEven} />
+              <ScheduleRowsDesktop schedule={schedule.even} />
             </ScheduleTable>
             <DayTabs>
               <ScheduleTable
-                scheduleDataLength={scheduleEven.length}
+                isScheduleEmpty={schedule.even.items.size === 0}
                 groupId={group}
                 device="mobile"
                 header={<DayTableHead />}
               >
-                <RowBlockMobile scheduleData={scheduleEven} />
+                <ScheduleRowsMobile schedule={schedule.even} />
               </ScheduleTable>
             </DayTabs>
           </>
@@ -59,21 +68,21 @@ export default async function Page({ params }: Props) {
         oddChild={
           <>
             <ScheduleTable
-              scheduleDataLength={scheduleOdd.length}
+              isScheduleEmpty={schedule.odd.items.size === 0}
               groupId={group}
               device="desktop"
-              header={<DayOfWeekRow />}
+              header={<DaysHeaderCells />}
             >
-              <RowBlockDesktop scheduleData={scheduleOdd} />
+              <ScheduleRowsDesktop schedule={schedule.odd} />
             </ScheduleTable>
             <DayTabs>
               <ScheduleTable
-                scheduleDataLength={scheduleOdd.length}
+                isScheduleEmpty={schedule.odd.items.size === 0}
                 groupId={group}
                 device="mobile"
                 header={<DayTableHead />}
               >
-                <RowBlockMobile scheduleData={scheduleOdd} />
+                <ScheduleRowsMobile schedule={schedule.odd} />
               </ScheduleTable>
             </DayTabs>
           </>

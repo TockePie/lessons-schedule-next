@@ -1,19 +1,18 @@
 import { fetchValidated } from '@/api/fetch-validated'
+import { WeekParity } from '@/features/time'
 
 import { scheduleSchema } from '../types/schedule'
 
-type WeekType = 'even' | 'odd'
-
 interface ScheduleOptions {
-  week?: WeekType
+  week?: WeekParity
   selectives?: string[]
 }
 
 export async function getGroupSchedule(
-  id: string,
+  groupId: string,
   { week, selectives }: ScheduleOptions = {}
 ) {
-  return fetchValidated(`/schedule/${id}`, scheduleSchema, {
+  return fetchValidated(`/schedule/${groupId}`, scheduleSchema, {
     cache: 'force-cache',
     searchParams: {
       ...(week && { week }),

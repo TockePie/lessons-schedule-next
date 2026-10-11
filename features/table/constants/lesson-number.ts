@@ -1,4 +1,4 @@
-export const LESSON_NUMBER = [
+export const LESSON_SLOTS = [
   {
     row: 1,
     beginTime: 510,

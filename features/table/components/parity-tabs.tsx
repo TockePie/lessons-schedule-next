@@ -4,8 +4,10 @@ import { useEffect } from 'react'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@ui/tabs'
 
+import { WeekParity } from '@/features/time'
+
 interface Props {
-  weekParity: 'even' | 'odd'
+  weekParity: WeekParity
   evenChild: React.ReactNode
   oddChild: React.ReactNode
 }

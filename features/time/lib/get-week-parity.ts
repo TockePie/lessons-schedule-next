@@ -1,8 +1,7 @@
 import { getISOWeek } from 'date-fns'
 
-export function getWeekParity() {
-  const date = new Date()
-  const currentWeek = getISOWeek(date)
+import { WeekParity } from '../types/week-parity'
 
-  return currentWeek % 2 === 0 ? 'even' : 'odd'
+export function getWeekParity(date: Date = new Date()) {
+  return (getISOWeek(date) % 2 === 0 ? 'even' : 'odd') satisfies WeekParity
 }
