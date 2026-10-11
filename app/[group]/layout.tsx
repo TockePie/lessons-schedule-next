@@ -9,15 +9,15 @@ export const metadata: Metadata = {
 }
 
 interface Props extends PropsWithChildren {
-  params: Promise<{ groupId: string }>
+  params: Promise<{ group: string }>
 }
 
 export default async function PageLayout({ children, params }: Props) {
-  const { groupId } = await params
+  const { group } = await params
 
   return (
     <>
-      <Navbar groupId={groupId} />
+      <Navbar groupId={group} />
       {children}
     </>
   )
