@@ -1,0 +1,43 @@
+import { PropsWithChildren } from 'react'
+import { Button } from '@ui/button'
+import { cx } from 'class-variance-authority'
+import { Clock } from 'lucide-react'
+
+interface Props extends PropsWithChildren {
+  isCurrent: boolean
+  title: string
+  className?: string
+  onClick?: () => void
+}
+
+export default function BaseCard({
+  isCurrent,
+  title,
+  className,
+  onClick,
+  children
+}: Props) {
+  return (
+    <div
+      className={cx(
+        'flex min-h-32 cursor-pointer flex-col items-center justify-between gap-1 rounded-xl border-2 bg-white p-2 transition-all hover:bg-neutral-200 dark:bg-neutral-950 hover:dark:bg-neutral-800',
+        'transform transition duration-150 ease-in-out active:scale-95',
+        className
+      )}
+      onClick={onClick}
+    >
+      {isCurrent && (
+        <Button
+          size="icon"
+          className="absolute top-1 right-1 bg-emerald-500 py-0 hover:bg-emerald-500 dark:bg-emerald-300 dark:hover:bg-emerald-300"
+        >
+          <Clock />
+        </Button>
+      )}
+      <h2 className="overflow-wrap break-word my-auto w-full text-center text-xl font-bold wrap-break-word whitespace-normal">
+        {title}
+      </h2>
+      {children}
+    </div>
+  )
+}

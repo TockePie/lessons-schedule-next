@@ -1,83 +1,89 @@
 import { cookies } from 'next/headers'
 
-import ParityTabs from '@/components/ParityTabs'
-import LessonsTable from '@/components/Table'
-import RowBlockDesktop from '@/components/Table/Desktop/row-block'
-import DayTabs from '@/components/Table/Mobile/day-tabs'
-import RowBlockMobile from '@/components/Table/Mobile/row-block'
-import { getGroupSchedule } from '@/lib/api'
-import { getTime } from '@/lib/get-time'
+import {
+  divideSchedule,
+  getGroupSchedule,
+  scheduleToMap
+} from '@/features/schedule'
+import {
+  DaysHeaderCells,
+  DayTableHead,
+  DayTabs,
+  ParityTabs,
+  ScheduleRowsDesktop,
+  ScheduleRowsMobile,
+  ScheduleTable
+} from '@/features/table'
+import { getWeekParity } from '@/features/time'
+import { parseStringArray } from '@/utils/parse-string-array'
 
 interface Props {
   params: Promise<{ group: string }>
 }
 
 export default async function Page({ params }: Props) {
-  const cookieStore = await cookies()
-  const savedSelectivesRaw = cookieStore.get('selected_selectives')?.value
-  const savedSelectives: string[] = savedSelectivesRaw
-    ? JSON.parse(savedSelectivesRaw)
-    : []
+  const [cookieStore, { group }] = await Promise.all([cookies(), params])
 
-  const time = await getTime()
-
-  const { group } = await params
-  const scheduleData = await getGroupSchedule(group, undefined, savedSelectives)
-
-  const scheduleEven = scheduleData?.filter(
-    (data) => data.week_parity === 'EVEN' || data.week_parity === 'BOTH'
+  const pickedSelectives = parseStringArray(
+    cookieStore.get('picked-selectives')?.value
   )
 
-  const scheduleOdd = scheduleData?.filter(
-    (data) => data.week_parity === 'ODD' || data.week_parity === 'BOTH'
-  )
+  const schedule = await getGroupSchedule(group, {
+    selectives: pickedSelectives
+  })
+    .then(divideSchedule)
+    .then(({ even, odd }) => ({
+      even: scheduleToMap(even),
+      odd: scheduleToMap(odd)
+    }))
 
-  const scheduleDataLenght = {
-    even: scheduleEven.length,
-    odd: scheduleOdd.length
-  }
+  const weekParity = getWeekParity()
 
   return (
     <main className="h-full bg-neutral-50 p-5 dark:bg-black">
       <ParityTabs
-        weekParity={time.weekParity}
+        weekParity={weekParity}
         evenChild={
           <>
-            <LessonsTable
-              scheduleDataLenght={scheduleDataLenght.even}
-              isGroup={group}
+            <ScheduleTable
+              isScheduleEmpty={schedule.even.items.size === 0}
+              groupId={group}
               device="desktop"
+              header={<DaysHeaderCells />}
             >
-              <RowBlockDesktop scheduleData={scheduleEven} />
-            </LessonsTable>
+              <ScheduleRowsDesktop schedule={schedule.even} />
+            </ScheduleTable>
             <DayTabs>
-              <LessonsTable
-                scheduleDataLenght={scheduleDataLenght.even}
-                isGroup={group}
+              <ScheduleTable
+                isScheduleEmpty={schedule.even.items.size === 0}
+                groupId={group}
                 device="mobile"
+                header={<DayTableHead />}
               >
-                <RowBlockMobile scheduleData={scheduleEven} />
-              </LessonsTable>
+                <ScheduleRowsMobile schedule={schedule.even} />
+              </ScheduleTable>
             </DayTabs>
           </>
         }
         oddChild={
           <>
-            <LessonsTable
-              scheduleDataLenght={scheduleDataLenght.odd}
-              isGroup={group}
+            <ScheduleTable
+              isScheduleEmpty={schedule.odd.items.size === 0}
+              groupId={group}
               device="desktop"
+              header={<DaysHeaderCells />}
             >
-              <RowBlockDesktop scheduleData={scheduleOdd} />
-            </LessonsTable>
+              <ScheduleRowsDesktop schedule={schedule.odd} />
+            </ScheduleTable>
             <DayTabs>
-              <LessonsTable
-                scheduleDataLenght={scheduleDataLenght.odd}
-                isGroup={group}
+              <ScheduleTable
+                isScheduleEmpty={schedule.odd.items.size === 0}
+                groupId={group}
                 device="mobile"
+                header={<DayTableHead />}
               >
-                <RowBlockMobile scheduleData={scheduleOdd} />
-              </LessonsTable>
+                <ScheduleRowsMobile schedule={schedule.odd} />
+              </ScheduleTable>
             </DayTabs>
           </>
         }

@@ -1,7 +1,7 @@
 import { PropsWithChildren } from 'react'
 import { Metadata } from 'next'
 
-import Navbar from '@/components/Navbar'
+import Navbar from '@/features/navbar'
 
 export const metadata: Metadata = {
   title: 'Lessons Schedule',

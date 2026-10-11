@@ -1,0 +1,51 @@
+'use client'
+
+import { useEffect } from 'react'
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@ui/tabs'
+
+import { WeekParity } from '@/features/time'
+
+interface Props {
+  weekParity: WeekParity
+  evenChild: React.ReactNode
+  oddChild: React.ReactNode
+}
+
+export default function ParityTabs({ weekParity, evenChild, oddChild }: Props) {
+  const router = useRouter()
+  const pathname = usePathname()
+  const searchParams = useSearchParams()
+
+  useEffect(() => {
+    router.push(`?parity=${weekParity}`)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  const handleValueChange = (value: string) => {
+    const params = new URLSearchParams(searchParams.toString())
+    params.set('parity', value)
+
+    router.replace(`${pathname}?${params.toString()}`, { scroll: false })
+  }
+
+  return (
+    <Tabs
+      onValueChange={handleValueChange}
+      defaultValue={weekParity}
+      className="flex flex-col items-center gap-5 pb-5 select-none"
+    >
+      <TabsList className="grid grid-cols-2 border border-neutral-200 dark:border-neutral-900 dark:bg-neutral-950">
+        <TabsTrigger value="even">Парний тиждень</TabsTrigger>
+        <TabsTrigger value="odd">Непарний тиждень</TabsTrigger>
+      </TabsList>
+
+      <TabsContent value="even" className="w-full">
+        {evenChild}
+      </TabsContent>
+      <TabsContent value="odd" className="w-full">
+        {oddChild}
+      </TabsContent>
+    </Tabs>
+  )
+}

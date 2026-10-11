@@ -1,12 +1,14 @@
-import { disableReactDevTools } from '@fvilers/disable-react-devtools'
-import { Toaster } from '@ui/sonner'
-import clsx from 'clsx'
 import type { Metadata } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
+import { disableReactDevTools } from '@fvilers/disable-react-devtools'
+import { Toaster } from '@ui/sonner'
+import { cx } from 'class-variance-authority'
 
 import Providers from './providers'
 
 import './globals.css'
+
+import { env } from '@/lib/env'
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -28,14 +30,14 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  if (process.env.NODE_ENV === 'production') {
+  if (env.NODE_ENV === 'production') {
     disableReactDevTools()
   }
 
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={clsx(
+        className={cx(
           geistSans.variable,
           geistMono.variable,
           'h-screen antialiased dark:bg-black'

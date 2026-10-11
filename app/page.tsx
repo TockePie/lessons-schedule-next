@@ -1,9 +1,13 @@
 import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
 
-import Navbar from '@/components/Navbar'
-import LessonsTable from '@/components/Table'
-import DayTabs from '@/components/Table/Mobile/day-tabs'
+import Navbar from '@/features/navbar'
+import {
+  DaysHeaderCells,
+  DayTableHead,
+  DayTabs,
+  ScheduleTable
+} from '@/features/table'
 
 export default async function Home() {
   const cookieStore = await cookies()
@@ -17,9 +21,19 @@ export default async function Home() {
     <>
       <Navbar />
       <main className="h-full bg-neutral-50 p-5 dark:bg-black">
-        <LessonsTable scheduleDataLenght={0} isGroup="" device="desktop" />
+        <ScheduleTable
+          isScheduleEmpty
+          groupId=""
+          device="desktop"
+          header={<DaysHeaderCells />}
+        />
         <DayTabs>
-          <LessonsTable scheduleDataLenght={0} isGroup="" device="mobile" />
+          <ScheduleTable
+            isScheduleEmpty
+            groupId=""
+            device="mobile"
+            header={<DayTableHead />}
+          />
         </DayTabs>
       </main>
     </>
